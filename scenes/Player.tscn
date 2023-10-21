@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmuromivlwhnq"]
+
+[ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/Weapon/shotgun.obj" id="1"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_obko2"]
+
+[sub_resource type="CapsuleShape3D" id="1"]
+height = 1.5
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_obko2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.25, 0)
+shape = SubResource("1")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+current = true
+
+[node name="GunModel" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(-10, 0, -3.25841e-06, 0, 10, 0, 3.25841e-06, 0, -10, 0.2, -0.2, -0.6)
+mesh = ExtResource("1")
+
+[node name="Muzzle" type="Node3D" parent="Camera3D"]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0.201164, -0.128434, -1.0804)

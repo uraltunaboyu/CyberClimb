@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmofkfxmt23j6"]
+
+[sub_resource type="GDScript" id="GDScript_srvup"]
+script/source = "extends Area3D
+
+enum PickupType {
+	Health,
+	Ammo
+}
+
+# stats
+@export var type: PickupType = PickupType.Health
+@export var amount : int = 10
+
+# bobbing
+@onready var startYPos : float = position.y
+var bobHeight : float = 1.0
+var bobSpeed : float = 1.0
+var bobbingUp : bool = true
+
+func _process(delta):
+	
+	# move us up or down
+	position.y += (bobSpeed if bobbingUp == true else -bobSpeed) * delta
+	
+	# if we're at the top, start moving down
+	if bobbingUp and position.y > startYPos + bobHeight:
+		bobbingUp = false
+	# if we're at the bottom, start moving up
+	elif !bobbingUp and position.y < startYPos:
+		bobbingUp = true
+
+# called when another body enters our collider
+func _on_Pickup_body_entered(body):
+	
+	# did the player enter our collider?
+	# if so give the stats and destroy the pickup
+	if body.name == \"Player\":
+		pickup(body)
+		queue_free()
+
+# called when the player enters the pickup
+# give them the appropriate stat
+func pickup (player):
+	
+	if type == PickupType.Health:
+		player.add_health(amount)
+	elif type == PickupType.Ammo:
+		player.add_ammo(amount)
+"
+
+[sub_resource type="SphereShape3D" id="1"]
+
+[node name="Pickup" type="Area3D"]
+script = SubResource("GDScript_srvup")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("1")
+
+[connection signal="body_entered" from="." to="." method="_on_Pickup_body_entered"]

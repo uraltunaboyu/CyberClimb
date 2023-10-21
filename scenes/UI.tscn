@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://cem0yrawhwf00"]
+
+[ext_resource type="Script" path="res://scripts/UI.gd" id="1_juo5s"]
+[ext_resource type="Texture2D" uid="uid://dmqgjb33c3675" path="res://ui/UI_Square.png" id="2_bnrwh"]
+[ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="3_5lwx4"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_juo5s")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.2455
+offset_top = -48.8815
+offset_right = 219.245
+offset_bottom = -16.8815
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_bnrwh")
+texture_progress = ExtResource("2_bnrwh")
+tint_under = Color(0.211765, 0.211765, 0.211765, 1)
+tint_progress = Color(1, 0, 0, 1)
+
+[node name="AmmoText" type="Label" parent="."]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.3643
+offset_top = -99.9153
+offset_right = 188.364
+offset_bottom = -58.9153
+theme_override_fonts/font = ExtResource("3_5lwx4")
+text = "Ammo: 50"
+
+[node name="ScoreText" type="Label" parent="."]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.3643
+offset_top = -140.234
+offset_right = 188.364
+offset_bottom = -99.2339
+theme_override_fonts/font = ExtResource("3_5lwx4")
+text = "Score: 500"
