@@ -37,6 +37,10 @@ func _ready ():
 
 # called 60 times a second
 func _physics_process(delta):
+	# exit if esc pressed
+	if Input.is_action_pressed("exit"):
+		get_tree().quit()
+	
 	# reset the x and z velocity
 	vel.x = 0
 	vel.z = 0
