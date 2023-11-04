@@ -4,14 +4,16 @@ extends CharacterBody3D
 var curHp : int = 10
 var maxHp : int = 10
 var ammo : int = 25
-var score: int = 0
 
 # physics
 var moveSpeed : float = 5.0
 var dashSpeed: float = 10.0
 var jumpForce : float = 5.0
-#slow decent for glide
-var glideGravity: float = 3.0
+
+#slow descent for glide
+var glideGravity: float = 1.0
+var glideSpeedMult: float = 1.5
+
 var gravity : float = 12.0
 var jumpCount: int = 0
 var glide = false
@@ -91,6 +93,9 @@ func _physics_process(delta):
 	if !Input.is_action_pressed("dash"):
 		dashing = false
 		
+		
+	if glide:
+		vel.x = vel.x * glideSpeedMult
 	
 	# move the player
 	set_velocity(vel)
@@ -104,7 +109,7 @@ func _physics_process(delta):
 			jumpCount += 1
 			
 	#handles glide.
-	if Input.is_action_pressed("jump") and !is_on_floor():
+	if Input.is_action_pressed("jump") and !is_on_floor() and vel.y < 0:
 		glide = true
 	
 	
