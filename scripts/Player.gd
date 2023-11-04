@@ -39,7 +39,6 @@ func _ready ():
 	# set the UI
 	ui.update_health_bar(curHp, maxHp)
 	ui.update_ammo_text(ammo)
-	ui.update_score_text(score)
 
 # called 60 times a second
 func _physics_process(delta):
@@ -165,10 +164,6 @@ func take_damage (damage):
 # called when our health reaches 0	
 func die ():
 	get_tree().reload_current_scene()
-	
-func add_score (amount):
-	score += amount
-	ui.update_score_text(score)
 	
 func add_health (amount):
 	curHp += amount

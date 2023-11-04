@@ -37,7 +37,6 @@ func take_damage (damage):
 		die()
 
 func die ():
-	player.add_score(scoreToGive)
 	queue_free()
 
 # deals damage to the player
