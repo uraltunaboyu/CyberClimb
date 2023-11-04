@@ -8,8 +8,14 @@ var score: int = 0
 
 # physics
 var moveSpeed : float = 5.0
+var dashSpeed: float = 10.0
 var jumpForce : float = 5.0
+#slow decent for glide
+var glideGravity: float = 3.0
 var gravity : float = 12.0
+var jumpCount: int = 0
+var glide = false
+var dashing = false
 
 # cam look
 var minLookAngle : float = -90.0
@@ -69,8 +75,23 @@ func _physics_process(delta):
 	vel.x = relativeDir.x * moveSpeed
 	vel.z = relativeDir.z * moveSpeed
 	
-	# apply gravity
-	vel.y -= gravity * delta
+	# apply gravity. handles wether it is glideGravity or regular
+	if !glide:
+		vel.y -= gravity * delta
+	else:
+		vel.y -= glideGravity * delta
+		
+	#handles dash. dash when you hold shift. Incomplete want to make it a burst of speed not an infinite dash.
+	if Input.is_action_pressed("dash"):
+		dashing = true
+	
+	if dashing:
+		var dashDirection = (right * input.x + forward * input.y).normalized()
+		vel += dashDirection * dashSpeed
+		
+	if !Input.is_action_pressed("dash"):
+		dashing = false
+		
 	
 	# move the player
 	set_velocity(vel)
@@ -78,10 +99,27 @@ func _physics_process(delta):
 	vel = velocity
 	
 	# jumping
-	if Input.is_action_pressed("jump") and is_on_floor():
-		vel.y = jumpForce
+	if Input.is_action_just_pressed("jump"):
+		if is_on_floor() or jumpCount < 1:
+			vel.y = jumpForce
+			jumpCount += 1
+			
+	#handles glide.
+	if Input.is_action_pressed("jump") and !is_on_floor():
+		glide = true
+	
+	
+	# Reset jumpCount and glide when on the ground
+	if is_on_floor():
+		jumpCount = 0  
+		glide = false
+		
+	
+	
+	
 
 # called every frame	
+
 func _process(delta):
 	# rotate the camera along the x axis
 	camera.rotation_degrees.x -= mouseDelta.y * lookSensitivity * delta
