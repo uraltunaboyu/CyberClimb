@@ -3,7 +3,8 @@ extends CharacterBody3D
 # stats
 var curHp : int = 10
 var maxHp : int = 10
-var ammo : int = 25
+var ammo : int = 30
+var score: int = 0
 
 # physics
 var moveSpeed : float = 5.0
