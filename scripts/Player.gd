@@ -3,11 +3,11 @@ extends CharacterBody3D
 # stats
 var curHp : int = 10
 var maxHp : int = 10
+var ammo : int = 30
 var score: int = 0
 
 # physics
 var moveSpeed : float = 5.0
-var dashSpeed: float = 10.0
 var jumpForce : float = 5.0
 
 #slow descent for glide
@@ -17,7 +17,12 @@ var glideSpeedMult: float = 1.5
 var gravity : float = 12.0
 var jumpCount: int = 0
 var glide = false
-var dashing = false
+
+# dash
+var dashSpeedMult: float = 20.0
+var dashCooldown: float = 2.0
+var dashTimer: float = 0.0
+var isDashing: bool = false
 
 # cam look
 var minLookAngle : float = -90.0
@@ -83,19 +88,10 @@ func _physics_process(delta):
 	else:
 		vel.y -= glideGravity * delta
 		
-	#handles dash. dash when you hold shift. Incomplete want to make it a burst of speed not an infinite dash.
-	if Input.is_action_pressed("dash"):
-		dashing = true
-	
-	if dashing:
-		var dashDirection = (right * input.x + forward * input.y).normalized()
-		vel += dashDirection * dashSpeed
-		
-	if !Input.is_action_pressed("dash"):
-		dashing = false
-		
-		
 	if glide:
+		vel.x = vel.x * glideSpeedMult
+		
+if glide:
 		vel.x = vel.x * glideSpeedMult
 	
 	# move the player
@@ -119,9 +115,13 @@ func _physics_process(delta):
 		jumpCount = 0  
 		glide = false
 		
-	
-	
-	
+	# decrease dash timer
+	if isDashing:
+		dashTimer -= delta
+		#print(dashTimer)
+		if dashTimer <= 0.0:
+			#print(dashTimer, "B")
+			isDashing = false
 
 # called every frame	
 
