@@ -3,19 +3,26 @@ extends CharacterBody3D
 # stats
 var curHp : int = 10
 var maxHp : int = 10
-var ammo : int = 25
+var ammo : int = 30
 var score: int = 0
 
 # physics
 var moveSpeed : float = 5.0
-var dashSpeed: float = 10.0
 var jumpForce : float = 5.0
-#slow decent for glide
-var glideGravity: float = 3.0
+
+#slow descent for glide
+var glideGravity: float = 1.0
+var glideSpeedMult: float = 1.5
+
 var gravity : float = 12.0
 var jumpCount: int = 0
 var glide = false
-var dashing = false
+
+# dash
+var dashSpeedMult: float = 20.0
+var dashCooldown: float = 2.0
+var dashTimer: float = 0.0
+var isDashing: bool = false
 
 # cam look
 var minLookAngle : float = -90.0
@@ -39,7 +46,6 @@ func _ready ():
 	# set the UI
 	ui.update_health_bar(curHp, maxHp)
 	ui.update_ammo_text(ammo)
-	ui.update_score_text(score)
 
 # called 60 times a second
 func _physics_process(delta):
@@ -81,17 +87,16 @@ func _physics_process(delta):
 	else:
 		vel.y -= glideGravity * delta
 		
-	#handles dash. dash when you hold shift. Incomplete want to make it a burst of speed not an infinite dash.
-	if Input.is_action_pressed("dash"):
-		dashing = true
-	
-	if dashing:
-		var dashDirection = (right * input.x + forward * input.y).normalized()
-		vel += dashDirection * dashSpeed
+	if glide:
+		vel.x = vel.x * glideSpeedMult
 		
-	if !Input.is_action_pressed("dash"):
-		dashing = false
-		
+	#handles dashing. Still incomplete kinda teleport around not smooth or gradual.
+	if Input.is_action_pressed("dash") and !isDashing and dashTimer <= 0.0:
+		isDashing = true
+		dashTimer = dashCooldown
+		vel.x *= dashSpeedMult
+		vel.z *= dashSpeedMult
+		print("dash is pressed \n", isDashing, "\n", dashTimer, "\n", vel.x)
 	
 	# move the player
 	set_velocity(vel)
@@ -105,7 +110,7 @@ func _physics_process(delta):
 			jumpCount += 1
 			
 	#handles glide.
-	if Input.is_action_pressed("jump") and !is_on_floor():
+	if Input.is_action_pressed("jump") and !is_on_floor() and vel.y < 0:
 		glide = true
 	
 	
@@ -114,9 +119,13 @@ func _physics_process(delta):
 		jumpCount = 0  
 		glide = false
 		
-	
-	
-	
+	# decrease dash timer
+	if isDashing:
+		dashTimer -= delta
+		#print(dashTimer)
+		if dashTimer <= 0.0:
+			#print(dashTimer, "B")
+			isDashing = false
 
 # called every frame	
 
@@ -166,10 +175,6 @@ func take_damage (damage):
 func die ():
 	get_tree().reload_current_scene()
 	
-func add_score (amount):
-	score += amount
-	ui.update_score_text(score)
-	
 func add_health (amount):
 	curHp += amount
 	
@@ -181,3 +186,6 @@ func add_health (amount):
 func add_ammo (amount):
 	ammo += amount
 	ui.update_ammo_text(ammo)
+	
+
+	
