@@ -11,14 +11,13 @@ height = 0.0629902
 script = ExtResource("2")
 
 [node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, -1.62921e-06, -10, 0, 10, -1.62921e-06, 0, 0, 0)
+transform = Transform3D(16.821, 0, 0, 0, -2.74049e-06, -16.821, 0, 16.821, -2.74049e-06, 0, 0, 0)
 mesh = ExtResource("1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("1")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
 autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_Bullet_body_entered"]
