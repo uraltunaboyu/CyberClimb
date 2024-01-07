@@ -19,10 +19,11 @@ var jumpCount: int = 0
 var glide = false
 
 # dash
-var dashSpeedMult: float = 20.0
+var dash: bool = false
+var dashSpeed: float = 20.0
 var dashCooldown: float = 2.0
 var dashTimer: float = 0.0
-var isDashing: bool = false
+var dashDuration: float = 2.0
 
 # cam look
 var minLookAngle : float = -90.0
@@ -32,6 +33,7 @@ var lookSensitivity : float = 10.0
 # vectors
 var vel : Vector3 = Vector3()
 var mouseDelta : Vector2 = Vector2()
+var fall: Vector3 = Vector3()
 
 # components
 @onready var camera : Camera3D = get_node("Camera3D")
@@ -78,9 +80,13 @@ func _physics_process(delta):
 	
 	var relativeDir = (forward * input.y + right * input.x)
 	
-	# set the velocity
-	vel.x = relativeDir.x * moveSpeed
-	vel.z = relativeDir.z * moveSpeed
+	# set the velocity for regular and dash movements
+	if !dash:
+		vel.x = relativeDir.x * moveSpeed
+		vel.z = relativeDir.z * moveSpeed
+	else:
+		vel.x = relativeDir.x * dashSpeed
+		vel.z = relativeDir.z * dashSpeed
 	
 	# apply gravity. handles wether it is glideGravity or regular
 	if !glide:
@@ -90,39 +96,13 @@ func _physics_process(delta):
 		
 	if glide:
 		vel.x = vel.x * glideSpeedMult
+		vel.z = vel.z * glideSpeedMult
 		
 if glide:
 		vel.x = vel.x * glideSpeedMult
 	
-	# move the player
-	set_velocity(vel)
-	move_and_slide()
-	vel = velocity
-	
-	# jumping
-	if Input.is_action_just_pressed("jump"):
-		if is_on_floor() or jumpCount < 1:
-			vel.y = jumpForce
-			jumpCount += 1
-			
-	#handles glide.
-	if Input.is_action_pressed("jump") and !is_on_floor() and vel.y < 0:
-		glide = true
-	
-	
-	# Reset jumpCount and glide when on the ground
-	if is_on_floor():
-		jumpCount = 0  
-		glide = false
-		
-	# decrease dash timer
-	if isDashing:
-		dashTimer -= delta
-		#print(dashTimer)
-		if dashTimer <= 0.0:
-			#print(dashTimer, "B")
-			isDashing = false
 
+					
 # called every frame	
 
 func _process(delta):
@@ -141,6 +121,21 @@ func _process(delta):
 	# check to see if we have shot
 	if Input.is_action_just_pressed("shoot"):
 		shoot()
+	#check for dash
+	if Input.is_action_just_pressed("dash") and !dash and dashTimer <= 0:
+		dash = true
+		dashTimer = dashCooldown
+	
+	#handles dash
+	if dash:
+		dashDuration -= delta
+		if dashDuration <= 0:
+			dash = false
+			dashDuration = dashCooldown
+	else:
+		dashTimer = max(0, dashTimer - delta)
+		
+		
 		
 # called when an input is detected
 func _input(event):
@@ -175,3 +170,4 @@ func add_health (amount):
 	
 func add_ammo (amount):
 	primarySlot.add_ammo_count(amount)
+
