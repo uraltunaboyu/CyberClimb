@@ -8,7 +8,6 @@ var score: int = 0
 
 # physics
 var moveSpeed : float = 5.0
-var dashSpeed: float = 10.0
 var jumpForce : float = 5.0
 
 #slow descent for glide
@@ -18,7 +17,13 @@ var glideSpeedMult: float = 1.5
 var gravity : float = 12.0
 var jumpCount: int = 0
 var glide = false
-var dashing = false
+
+# dash
+var dash: bool = false
+var dashSpeed: float = 20.0
+var dashCooldown: float = 2.0
+var dashTimer: float = 0.0
+var dashDuration: float = 2.0
 
 # cam look
 var minLookAngle : float = -90.0
@@ -28,6 +33,7 @@ var lookSensitivity : float = 10.0
 # vectors
 var vel : Vector3 = Vector3()
 var mouseDelta : Vector2 = Vector2()
+var fall: Vector3 = Vector3()
 
 # components
 @onready var camera : Camera3D = get_node("Camera3D")
@@ -73,9 +79,13 @@ func _physics_process(delta):
 	
 	var relativeDir = (forward * input.y + right * input.x)
 	
-	# set the velocity
-	vel.x = relativeDir.x * moveSpeed
-	vel.z = relativeDir.z * moveSpeed
+	# set the velocity for regular and dash movements
+	if !dash:
+		vel.x = relativeDir.x * moveSpeed
+		vel.z = relativeDir.z * moveSpeed
+	else:
+		vel.x = relativeDir.x * dashSpeed
+		vel.z = relativeDir.z * dashSpeed
 	
 	# apply gravity. handles wether it is glideGravity or regular
 	if !glide:
@@ -83,16 +93,9 @@ func _physics_process(delta):
 	else:
 		vel.y -= glideGravity * delta
 		
-	#handles dash. dash when you hold shift. Incomplete want to make it a burst of speed not an infinite dash.
-	if Input.is_action_pressed("dash"):
-		dashing = true
-	
-	if dashing:
-		var dashDirection = (right * input.x + forward * input.y).normalized()
-		vel += dashDirection * dashSpeed
-		
-	if !Input.is_action_pressed("dash"):
-		dashing = false
+	if glide:
+		vel.x = vel.x * glideSpeedMult
+		vel.z = vel.z * glideSpeedMult
 		
 		
 	if glide:
@@ -113,16 +116,19 @@ func _physics_process(delta):
 	if Input.is_action_pressed("jump") and !is_on_floor() and vel.y < 0:
 		glide = true
 	
-	
 	# Reset jumpCount and glide when on the ground
 	if is_on_floor():
 		jumpCount = 0  
 		glide = false
-		
 	
-	
+	#kinda wall run currently buggyssssss
+	if !is_on_floor():
+			if Input.is_action_pressed("move_forward"):
+				if is_on_wall():
+					vel.y = 0  # Disable gravity while on the wall
 	
 
+					
 # called every frame	
 
 func _process(delta):
@@ -141,6 +147,21 @@ func _process(delta):
 	# check to see if we have shot
 	if Input.is_action_just_pressed("shoot") and ammo > 0:
 		shoot()
+	#check for dash
+	if Input.is_action_just_pressed("dash") and !dash and dashTimer <= 0:
+		dash = true
+		dashTimer = dashCooldown
+	
+	#handles dash
+	if dash:
+		dashDuration -= delta
+		if dashDuration <= 0:
+			dash = false
+			dashDuration = dashCooldown
+	else:
+		dashTimer = max(0, dashTimer - delta)
+		
+		
 		
 # called when an input is detected
 func _input(event):
@@ -182,3 +203,10 @@ func add_health (amount):
 func add_ammo (amount):
 	ammo += amount
 	ui.update_ammo_text(ammo)
+
+
+	
+		
+				
+
+	
