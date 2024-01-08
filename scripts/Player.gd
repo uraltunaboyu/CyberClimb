@@ -120,9 +120,9 @@ func _physics_process(delta):
 	
 	#kinda wall run currently buggyssssss
 	if !is_on_floor():
-			if Input.is_action_pressed("move_forward"):
-				if is_on_wall():
-					vel.y = 0  # Disable gravity while on the wall
+		if Input.is_action_pressed("move_forward"):
+			if is_on_wall():
+				vel.y = 0  # Disable gravity while on the wall
 	
 
 					
@@ -152,7 +152,7 @@ func _process(delta):
 	#handles dash
 	if dash:
 		dashDuration -= delta
-		if dashDuration <= 0:
+		if dashDuration <= 0 or !is_player_moving():
 			dash = false
 			dashDuration = dashCooldown
 	else:
@@ -201,9 +201,5 @@ func add_ammo (amount):
 	ammo += amount
 	ui.update_ammo_text(ammo)
 
-
-	
-		
-				
-
-	
+func is_player_moving():
+	return vel.x != 0
