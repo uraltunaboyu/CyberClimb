@@ -25,6 +25,8 @@ var dashCooldown: float = 2.0
 var dashTimer: float = 0.0
 var dashDuration: float = 2.0
 
+#wallrun
+var wallNormal
 # cam look
 var minLookAngle : float = -90.0
 var maxLookAngle : float = 90.0
@@ -173,3 +175,5 @@ func add_ammo (amount):
 
 func is_player_moving():
 	return vel.x != 0
+	
+
