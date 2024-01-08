@@ -25,6 +25,8 @@ var dashCooldown: float = 2.0
 var dashTimer: float = 0.0
 var dashDuration: float = 2.0
 
+#wallrun
+var wallNormal
 # cam look
 var minLookAngle : float = -90.0
 var maxLookAngle : float = 90.0
@@ -122,6 +124,9 @@ func _physics_process(delta):
 	if !is_on_floor():
 		if Input.is_action_pressed("move_forward"):
 			if is_on_wall():
+				wallNormal = get_slide_collision(0)
+				vel.x = -wallNormal.get_normal().x * moveSpeed
+				vel.z = -wallNormal.get_normal().z * moveSpeed
 				vel.y = 0  # Disable gravity while on the wall
 	
 
@@ -203,3 +208,5 @@ func add_ammo (amount):
 
 func is_player_moving():
 	return vel.x != 0
+	
+
