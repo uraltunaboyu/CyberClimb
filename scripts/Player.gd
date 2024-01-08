@@ -129,7 +129,7 @@ func _process(delta):
 	#handles dash
 	if dash:
 		dashDuration -= delta
-		if dashDuration <= 0:
+		if dashDuration <= 0 or !is_player_moving():
 			dash = false
 			dashDuration = dashCooldown
 	else:
@@ -171,3 +171,5 @@ func add_health (amount):
 func add_ammo (amount):
 	primarySlot.add_ammo_count(amount)
 
+func is_player_moving():
+	return vel.x != 0
