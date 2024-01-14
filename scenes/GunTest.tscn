@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cufjjnu6rkig"]
+
+[ext_resource type="Script" path="res://scripts/GunTest.gd" id="1_tjncs"]
+[ext_resource type="PackedScene" uid="uid://bh6p37s7abwdg" path="res://Game Dev/Pink_Pistol.glb" id="2_mgdmj"]
+
+[node name="GunTest" type="Node3D"]
+script = ExtResource("1_tjncs")
+
+[node name="Pink_Pistol" parent="." instance=ExtResource("2_mgdmj")]
