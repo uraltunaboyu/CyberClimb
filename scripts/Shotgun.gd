@@ -8,6 +8,8 @@ func _ready():
 	print("Sun's out guns out")
 	
 func attack():
+	if ammoCount == 0: return
+	
 	var bullet = bulletScene.instantiate()
 	get_node("/root/MainScene").add_child(bullet)
 	

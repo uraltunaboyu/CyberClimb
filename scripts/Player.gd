@@ -139,7 +139,7 @@ func _process(delta):
 	mouseDelta = Vector2()
 	
 	# check to see if we have shot
-	if Input.is_action_just_pressed("shoot") and primarySlot.get_ammo_count() > 0:
+	if Input.is_action_just_pressed("shoot"):
 		shoot()
 		
 # called when an input is detected
