@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8fvpv5g7f360"]
+
+[ext_resource type="Script" path="res://scripts/Shotgun.gd" id="1_sb7nr"]
+[ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/Weapon/shotgun.obj" id="2_qudby"]
+
+[node name="Shotgun" type="Node3D"]
+script = ExtResource("1_sb7nr")
+
+[node name="GunModel" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10, 0, -3.25841e-06, 0, 10, 0, 3.25841e-06, 0, -10, 0.2, -0.2, -0.6)
+mesh = ExtResource("2_qudby")
+skeleton = NodePath("../..")
+
+[node name="Muzzle" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0.201164, -0.128434, -1.0804)
