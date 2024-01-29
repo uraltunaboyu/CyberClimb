@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmuromivlwhnq"]
+[gd_scene load_steps=8 format=3 uid="uid://cmuromivlwhnq"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_obko2"]
 [ext_resource type="Script" path="res://scripts/GunSlot.gd" id="2_vdmnf"]
-[ext_resource type="PackedScene" uid="uid://c8fvpv5g7f360" path="res://scenes/Shotgun.tscn" id="3_ekknl"]
+[ext_resource type="Script" path="res://scenes/interactRay.gd" id="3_3xwub"]
+[ext_resource type="PackedScene" uid="uid://c5k07xy7x12rv" path="res://scenes/Shotgun.tscn" id="3_ekknl"]
+[ext_resource type="Texture2D" path="res://images/CrosshairTemp.png" id="4_f6o23"]
+[ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="4_w7asp"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 height = 1.5
@@ -14,6 +17,23 @@ script = ExtResource("1_obko2")
 transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.25, 0)
 shape = SubResource("1")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -95.0
+offset_right = 259.0
+offset_bottom = 257.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.52, 0.52)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_f6o23")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 current = true
@@ -21,3 +41,25 @@ current = true
 [node name="GunSlotPrimary" type="Node3D" parent="Camera3D"]
 script = ExtResource("2_vdmnf")
 target_scene = ExtResource("3_ekknl")
+
+[node name="InteractRay" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -4)
+script = ExtResource("3_3xwub")
+
+[node name="Prompt" type="Label" parent="Camera3D/InteractRay"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = -26.0
+offset_right = 33.5
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_w7asp")
+theme_override_font_sizes/font_size = 80
+text = "Message
+[Key]"
+horizontal_alignment = 1
