@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8fvpv5g7f360"]
+[gd_scene load_steps=3 format=3 uid="uid://c5k07xy7x12rv"]
 
 [ext_resource type="Script" path="res://scripts/Shotgun.gd" id="1_sb7nr"]
 [ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/Weapon/shotgun.obj" id="2_qudby"]
