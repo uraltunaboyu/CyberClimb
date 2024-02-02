@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmuromivlwhnq"]
+[gd_scene load_steps=5 format=3 uid="uid://cmuromivlwhnq"]
 
-[ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/Weapon/shotgun.obj" id="1"]
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_obko2"]
+[ext_resource type="Script" path="res://scripts/GunSlot.gd" id="2_vdmnf"]
+[ext_resource type="PackedScene" uid="uid://c8fvpv5g7f360" path="res://scenes/Shotgun.tscn" id="3_ekknl"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 height = 1.5
@@ -17,9 +18,6 @@ shape = SubResource("1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 current = true
 
-[node name="GunModel" type="MeshInstance3D" parent="Camera3D"]
-transform = Transform3D(-10, 0, -3.25841e-06, 0, 10, 0, 3.25841e-06, 0, -10, 0.2, -0.2, -0.6)
-mesh = ExtResource("1")
-
-[node name="Muzzle" type="Node3D" parent="Camera3D"]
-transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0.201164, -0.128434, -1.0804)
+[node name="GunSlotPrimary" type="Node3D" parent="Camera3D"]
+script = ExtResource("2_vdmnf")
+target_scene = ExtResource("3_ekknl")

@@ -3,7 +3,6 @@ extends CharacterBody3D
 # stats
 var curHp : int = 10
 var maxHp : int = 10
-var ammo : int = 30
 var score: int = 0
 
 # physics
@@ -31,9 +30,10 @@ var mouseDelta : Vector2 = Vector2()
 
 # components
 @onready var camera : Camera3D = get_node("Camera3D")
-@onready var muzzle : Node3D = get_node("Camera3D/Muzzle")
-@onready var bulletScene = load("res://Scenes/Bullet.tscn")
 @onready var ui : Node = get_node("/root/MainScene/CanvasLayer/UI")
+
+@onready var primarySlot: Node3D = get_node("Camera3D/GunSlotPrimary")
+#@onready var secondarySlot: Node = get_node("Camera3D/GunSlotSecondary") TODO
 
 func _ready ():
 	# hide and lock the mouse cursor
@@ -41,7 +41,7 @@ func _ready ():
 	
 	# set the UI
 	ui.update_health_bar(curHp, maxHp)
-	ui.update_ammo_text(ammo)
+	ui.update_ammo_text(primarySlot.get_ammo_count())
 
 # called 60 times a second
 func _physics_process(delta):
@@ -139,7 +139,7 @@ func _process(delta):
 	mouseDelta = Vector2()
 	
 	# check to see if we have shot
-	if Input.is_action_just_pressed("shoot") and ammo > 0:
+	if Input.is_action_just_pressed("shoot"):
 		shoot()
 		
 # called when an input is detected
@@ -149,14 +149,8 @@ func _input(event):
 
 # called when we press the shoot button - spawn a new bullet	
 func shoot ():
-	var bullet = bulletScene.instantiate()
-	get_node("/root/MainScene").add_child(bullet)
-	
-	bullet.global_transform = muzzle.global_transform
-	
-	ammo -= 1
-	
-	ui.update_ammo_text(ammo)
+	primarySlot.attack()
+	ui.update_ammo_text(primarySlot.get_ammo_count())
 
 # called when an enemy damages us
 func take_damage (damage):
@@ -180,5 +174,4 @@ func add_health (amount):
 	ui.update_health_bar(curHp, maxHp)
 	
 func add_ammo (amount):
-	ammo += amount
-	ui.update_ammo_text(ammo)
+	primarySlot.add_ammo_count(amount)
