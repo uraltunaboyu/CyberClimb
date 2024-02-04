@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cmuromivlwhnq"]
+[gd_scene load_steps=7 format=3 uid="uid://cmuromivlwhnq"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_obko2"]
 [ext_resource type="Script" path="res://scripts/GunSlot.gd" id="2_vdmnf"]
+<<<<<<< HEAD
 [ext_resource type="Script" path="res://scripts/InteractRay.gd" id="3_3xwub"]
 [ext_resource type="PackedScene" uid="uid://c5k07xy7x12rv" path="res://scenes/Shotgun.tscn" id="3_ekknl"]
 [ext_resource type="Texture2D" path="res://images/CrosshairTemp.png" id="4_f6o23"]
@@ -40,7 +41,6 @@ current = true
 
 [node name="GunSlotPrimary" type="Node3D" parent="Camera3D"]
 script = ExtResource("2_vdmnf")
-target_scene = ExtResource("3_ekknl")
 
 [node name="InteractRay" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -4)

@@ -1,4 +1,4 @@
-class_name auto_gun extends Node3D
+class_name AutoGun extends Node3D
 
 @onready var muzzle : Node3D = $Muzzle
 @onready var bulletScene = preload("res://scenes/Bullet.tscn")
@@ -6,15 +6,15 @@ class_name auto_gun extends Node3D
 
 var ammoCount = 100
 var bullet_speed = 10
-var bullet_damage_min = 3
-var bullet_damage_max = 6
+var bullet_damage_min = 4
+var bullet_damage_max = 7
 var spread_angle:float = 0.08 # Cone with this angle (radians)
 var bullet_life = 2
 var shots_per_sec = 10.0
 
 func _ready():
 	shot_timer.wait_time = 1/shots_per_sec
-	shot_timer.autostart = true
+	shot_timer.one_shot = true
 	return
 	
 func attack():
