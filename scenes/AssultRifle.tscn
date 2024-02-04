@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bju2yq142gd7k"]
+
+[ext_resource type="Script" path="res://scripts/AssultRifle.gd" id="1_hd54v"]
+[ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/Weapon/shotgun.obj" id="2_g60rg"]
+
+[node name="AssultRifle" type="Node3D"]
+script = ExtResource("1_hd54v")
+
+[node name="GunModel" type="MeshInstance3D" parent="."]
+transform = Transform3D(-10, 0, -5.64493e-06, 0, 7.03215, 0, 3.25841e-06, 0, -17.3242, 0.2, -0.2, -0.6)
+mesh = ExtResource("2_g60rg")
+skeleton = NodePath("../..")
+
+[node name="Muzzle" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0.201164, -0.14452, -1.34012)
+
+[node name="Timer" type="Timer" parent="."]
+editor_description = "Time is set dynamically in the _ready() function of the parentn node script.
+
+One Shot should be TRUE to prevent the timer from automatically repeating."
+one_shot = true

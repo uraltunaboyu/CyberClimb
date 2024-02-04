@@ -34,7 +34,9 @@ func _physics_process(delta):
 
 func take_damage (damage):
 	cur_health -= damage
-	# 
+	# This instantiates the DamageVis scene to display damage dealt to an enemy
+	# The % HP loss is calculated (has to be float division) and is sent along
+	# The scene is a child of main so it can remain after the enemy dies
 	var hp_chunk = float(damage)/max_health
 	var dmgTxt = dmgScene.instantiate()
 	get_node("/root/MainScene").add_child(dmgTxt)
