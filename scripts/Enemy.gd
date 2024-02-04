@@ -35,9 +35,10 @@ func _physics_process(delta):
 func take_damage (damage):
 	cur_health -= damage
 	# 
+	var hp_chunk = float(damage)/max_health
 	var dmgTxt = dmgScene.instantiate()
 	get_node("/root/MainScene").add_child(dmgTxt)
-	dmgTxt.set_and_animate(damage, global_position)
+	dmgTxt.set_and_animate(damage, hp_chunk, global_position)
 	
 	
 	if cur_health <= 0:

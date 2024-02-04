@@ -11,9 +11,9 @@ var min_font_size = 400
 func _ready():
 	pass # Replace with function body.
 
-func set_and_animate(value:float, start_pos:Vector3,height:float = 0.5, spread:float = 2.0):
+func set_and_animate(value:float, chunk:float, start_pos:Vector3,height:float = 0.5, spread:float = 1.5):
 	label.text = str(value)
-	var f_size = min(max((2*value)**2*10, min_font_size), max_font_size)
+	var f_size = chunk*3*max_font_size + min_font_size
 	label.font_size = f_size
 	label.outline_size = f_size/10
 	ap.play("DamagePopUp")
