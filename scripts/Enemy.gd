@@ -1,19 +1,21 @@
 extends CharacterBody3D
 
 # stats
-var health : int = 5
+var max_health : int = 70
+var cur_health = max_health
 var moveSpeed : float = 2.0
 
 # attacking
-var damage : int = 1
+var atk_damage : int = 1
 var attackRate : float = 1.0
-var attackDist : float = 2.0
+var attackDist : float = 3.0
 
 var scoreToGive : int = 10
 
 # components
 @onready var player : Node = get_node("/root/MainScene/Player")
 @onready var timer : Timer = get_node("Timer")
+@onready var dmgScene = preload("res://scenes/DamageVis.tscn")
 
 func _ready():
 	# setup the timer
@@ -31,9 +33,14 @@ func _physics_process(delta):
 		move_and_slide()
 
 func take_damage (damage):
-	health -= damage
+	cur_health -= damage
+	# 
+	var dmgTxt = dmgScene.instantiate()
+	get_node("/root/MainScene").add_child(dmgTxt)
+	dmgTxt.set_and_animate(damage, global_position)
 	
-	if health <= 0:
+	
+	if cur_health <= 0:
 		die()
 
 func die ():
@@ -41,7 +48,7 @@ func die ():
 
 # deals damage to the player
 func attack ():
-	player.take_damage(damage)
+	player.take_damage(atk_damage)
 
 # called every 'attackRate' seconds
 func _on_Timer_timeout():
