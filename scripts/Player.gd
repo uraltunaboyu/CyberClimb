@@ -138,19 +138,10 @@ func _process(delta):
 	# reset the mouse delta vector
 	mouseDelta = Vector2()
 	
-	# check to see if we have shot
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
-		
 # called when an input is detected
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouseDelta = event.relative
-
-# called when we press the shoot button - spawn a new bullet	
-func shoot ():
-	primarySlot.attack()
-	ui.update_ammo_text(primarySlot.get_ammo_count())
 
 # called when an enemy damages us
 func take_damage (damage):
