@@ -12,7 +12,7 @@ var min_font_size = 400
 func _ready():
 	pass # Replace with function body.
 
-func set_and_animate(value:float, chunk:float, start_pos:Vector3,height:float = 0.5, spread:float = 1.5):
+func set_and_animate(value:float, chunk:float, start_pos:Vector3, height:float = 0.5, spread:float = 1.5):
 	# Set the DamageLabel text to the damage.
 	label.text = str(value)
 	# Calculate the text size based on the % hp loss. Assumed this usually won't
