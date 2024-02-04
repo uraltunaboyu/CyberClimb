@@ -1,6 +1,6 @@
 extends Node
 
-@export var target_scene = load("res://scenes/AssultRifle.tscn")
+@onready var target_scene = load("res://scenes/AssultRifle.tscn")
 @onready var ui : Node = get_node("/root/MainScene/CanvasLayer/UI")
 var equipped_gun
 
@@ -10,9 +10,9 @@ func _ready():
 	equipped_gun.global_transform = self.global_transform
 	
 func _process(delta):
-	if Input.is_action_pressed("shoot") and equipped_gun is auto_gun:
+	if Input.is_action_pressed("shoot") and equipped_gun is AutoGun:
 		attack()
-	if Input.is_action_just_pressed("shoot"):
+	elif Input.is_action_just_pressed("shoot"):
 		attack()
 		
 func attack():

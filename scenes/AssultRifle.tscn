@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bju2yq142gd7k"]
+[gd_scene load_steps=3 format=3 uid="uid://c7apugth03ui8"]
 
 [ext_resource type="Script" path="res://scripts/AssultRifle.gd" id="1_hd54v"]
 [ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/Weapon/shotgun.obj" id="2_g60rg"]
@@ -17,5 +17,4 @@ transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0.2011
 [node name="Timer" type="Timer" parent="."]
 editor_description = "Time is set dynamically in the _ready() function of the parentn node script.
 
-One Shot should be TRUE to prevent the timer from automatically repeating."
-one_shot = true
+One Shot should be TRUE to prevent the timer from automatically repeating (done in code)."
