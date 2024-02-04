@@ -1,0 +1,244 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0dsbn7faoc7a"]
+
+[ext_resource type="Script" path="res://scripts/Shop.gd" id="1_kvagp"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_00q40"]
+size = Vector2(128, 128)
+
+[node name="Shop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kvagp")
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 9.0
+offset_bottom = 31.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer2"]
+layout_mode = 2
+columns = 6
+
+[node name="Exit" type="Button" parent="MarginContainer2/GridContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="EmptyVbox" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="EmptyVbox2" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="EmptyVbox3" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="EmptyVbox4" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="EmptyVbox5" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="EmptyVbox6" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer2/GridContainer/VBoxContainer1"]
+layout_mode = 2
+text = "Placeholder text"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/GridContainer/VBoxContainer1"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_00q40")
+
+[node name="Button1" type="Button" parent="MarginContainer2/GridContainer/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Buy"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer2/GridContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Placeholder text"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/GridContainer/VBoxContainer2"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_00q40")
+
+[node name="Button2" type="Button" parent="MarginContainer2/GridContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Buy"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer2/GridContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Placeholder text"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/GridContainer/VBoxContainer3"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_00q40")
+
+[node name="Button3" type="Button" parent="MarginContainer2/GridContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Buy"
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer2/GridContainer/VBoxContainer4"]
+layout_mode = 2
+text = "Placeholder text"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/GridContainer/VBoxContainer4"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_00q40")
+
+[node name="Button4" type="Button" parent="MarginContainer2/GridContainer/VBoxContainer4"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Buy"
+
+[node name="EmptyVbox7" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="EmptyVbox8" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer2/GridContainer/VBoxContainer5"]
+layout_mode = 2
+text = "Placeholder text"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/GridContainer/VBoxContainer5"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_00q40")
+
+[node name="Button5" type="Button" parent="MarginContainer2/GridContainer/VBoxContainer5"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Buy"
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer2/GridContainer/VBoxContainer6"]
+layout_mode = 2
+text = "Placeholder text"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/GridContainer/VBoxContainer6"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_00q40")
+
+[node name="Button6" type="Button" parent="MarginContainer2/GridContainer/VBoxContainer6"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Buy"
+
+[node name="VBoxContainer7" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer2/GridContainer/VBoxContainer7"]
+layout_mode = 2
+text = "Placeholder text"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/GridContainer/VBoxContainer7"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_00q40")
+
+[node name="Button7" type="Button" parent="MarginContainer2/GridContainer/VBoxContainer7"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Buy"
+
+[node name="VBoxContainer8" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="QuantityLabel" type="Label" parent="MarginContainer2/GridContainer/VBoxContainer8"]
+layout_mode = 2
+text = "Placeholder text"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer2/GridContainer/VBoxContainer8"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_00q40")
+
+[node name="Button8" type="Button" parent="MarginContainer2/GridContainer/VBoxContainer8"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Buy"
+
+[node name="EmptyVbox9" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Previous" type="Button" parent="MarginContainer2/GridContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_stretch_ratio = 0.14
+text = "Previous Page"
+
+[node name="EmptyVbox10" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="EmptyVbox11" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="EmptyVbox12" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="EmptyVbox13" type="VBoxContainer" parent="MarginContainer2/GridContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Next" type="Button" parent="MarginContainer2/GridContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_stretch_ratio = 0.14
+text = "Next Page"
+
+[connection signal="pressed" from="MarginContainer2/GridContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer2/GridContainer/VBoxContainer1/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="MarginContainer2/GridContainer/VBoxContainer2/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="MarginContainer2/GridContainer/VBoxContainer3/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="MarginContainer2/GridContainer/VBoxContainer4/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="MarginContainer2/GridContainer/VBoxContainer5/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="MarginContainer2/GridContainer/VBoxContainer6/Button6" to="." method="_on_button_6_pressed"]
+[connection signal="pressed" from="MarginContainer2/GridContainer/VBoxContainer7/Button7" to="." method="_on_button_7_pressed"]
+[connection signal="pressed" from="MarginContainer2/GridContainer/VBoxContainer8/Button8" to="." method="_on_button_8_pressed"]
+[connection signal="pressed" from="MarginContainer2/GridContainer/Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="MarginContainer2/GridContainer/Next" to="." method="_on_next_pressed"]
