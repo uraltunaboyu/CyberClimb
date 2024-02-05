@@ -1,25 +1,121 @@
-[gd_scene load_steps=4 format=3 uid="uid://5lsom54eu8p2"]
+[gd_scene load_steps=9 format=3 uid="uid://5lsom54eu8p2"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cm3bma26av86i" path="res://icon.png" id="2_jily3"]
 
-[sub_resource type="CapsuleMesh" id="1"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2cwxk"]
 height = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jx8x7"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = ExtResource("2_jily3")
 
 [sub_resource type="CapsuleShape3D" id="3"]
 height = 1.5
 
+[sub_resource type="Animation" id="Animation_drdx3"]
+resource_name = "Death"
+length = 3.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 0, 1.3, 0, 2, 1, 0, -0.25, 0, 3, 1, 0, -0.5, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 2, 1, 0.5, 0.5, -0.5, 0.5)
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"remove"
+}]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:surface_material_override/0:albedo_color:r")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:surface_material_override/0:albedo_color:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2, 3)
+}
+
+[sub_resource type="Animation" id="Animation_48wbi"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:surface_material_override/0:albedo_color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:surface_material_override/0:albedo_color:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t4kvd"]
+_data = {
+"Death": SubResource("Animation_drdx3"),
+"RESET": SubResource("Animation_48wbi")
+}
+
 [node name="Enemy" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58581, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 script = ExtResource("1")
 
 [node name="Model" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.798192, 0)
-mesh = SubResource("1")
+mesh = SubResource("CapsuleMesh_2cwxk")
+surface_material_override/0 = SubResource("StandardMaterial3D_jx8x7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.798192, 0)
 shape = SubResource("3")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Model")
+libraries = {
+"": SubResource("AnimationLibrary_t4kvd")
+}
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

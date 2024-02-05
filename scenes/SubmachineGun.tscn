@@ -4,16 +4,16 @@
 [ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/Weapon/shotgun.obj" id="2_ofh04"]
 
 [node name="SubmachineGun" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.29894)
+transform = Transform3D(0.99863, 0.0018265, 0.0523041, 0, 0.999391, -0.0348995, -0.052336, 0.0348517, 0.998021, 0, 0, -0.29894)
 script = ExtResource("1_7euw2")
 
 [node name="GunModel" type="MeshInstance3D" parent="."]
-transform = Transform3D(-10, 0, -3.89414e-06, 0, 10, 0, 3.89414e-06, 0, -10, 0, 0, 0)
+transform = Transform3D(-10, 0, -3.89414e-06, 0, 10, 0, 3.89414e-06, 0, -10, 0, 0, -0.104309)
 mesh = ExtResource("2_ofh04")
 skeleton = NodePath("../..")
 
 [node name="Muzzle" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.00261469, 0.0674481, -0.431245)
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.00261469, 0.0674481, -0.522463)
 
 [node name="Timer" type="Timer" parent="."]
 editor_description = "Time is set dynamically in the _ready() function of the parentn node script.
