@@ -107,7 +107,7 @@ script = ExtResource("1")
 mesh = SubResource("CapsuleMesh_2cwxk")
 surface_material_override/0 = SubResource("StandardMaterial3D_jx8x7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="EnemyCollider" type="CollisionShape3D" parent="."]
 shape = SubResource("3")
 
 [node name="Timer" type="Timer" parent="."]
