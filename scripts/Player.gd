@@ -31,7 +31,6 @@ var mouseDelta : Vector2 = Vector2()
 # components
 @onready var camera : Camera3D = get_node("Camera3D")
 @onready var ui : Node = get_node("/root/MainScene/CanvasLayer/UI")
-
 @onready var primarySlot: Node3D = get_node("Camera3D/GunSlotPrimary")
 #@onready var secondarySlot: Node = get_node("Camera3D/GunSlotSecondary") TODO
 
@@ -166,3 +165,6 @@ func add_health (amount):
 	
 func add_ammo (amount):
 	primarySlot.add_ammo_count(amount)
+	
+func _on_button_interacted(target_scene):
+	primarySlot.set_equipped_gun(target_scene)
