@@ -40,7 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 current = true
 
 [node name="GunSlotPrimary" type="Node3D" parent="Camera3D"]
-transform = Transform3D(0.998629, 0.0018265, 0.0523041, 0, 0.999391, -0.0348995, -0.0523359, 0.0348517, 0.998021, 0.4, -0.25, -0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.25, -0.4)
 script = ExtResource("2_vdmnf")
 
 [node name="InteractRay" type="RayCast3D" parent="Camera3D"]

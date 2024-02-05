@@ -57,16 +57,16 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("3_yr7vg")]
 
 [node name="Enemy" parent="." instance=ExtResource("4_pujfl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58581, 10.2246)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.820966, 10.2246)
 
 [node name="Enemy2" parent="." instance=ExtResource("4_pujfl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.67521, 1.58581, -4.32718)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.67521, 0.820966, -4.32718)
 
 [node name="Enemy3" parent="." instance=ExtResource("4_pujfl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.16246, 1.58581, -5.07514)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.16246, 0.820966, -5.07514)
 
 [node name="Enemy4" parent="." instance=ExtResource("4_pujfl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58581, -9.37493)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.820966, -9.37493)
 
 [node name="Button" parent="." instance=ExtResource("5_6v2ur")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.164, 0.489933, -1.60738)
