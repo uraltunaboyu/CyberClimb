@@ -30,7 +30,7 @@ func set_and_animate(value:float, chunk:float, start_pos:Vector3, height:float =
 	var tween_length = ap.get_animation("DamagePopUp").length
 	
 	# "Play" the tween.
-	tween.tween_property(labcon, "position", end_pos, tween_length).from(start_pos - Vector3(0, 0.5, 0))
+	tween.tween_property(labcon, "position", end_pos, tween_length).from(start_pos + Vector3(0, 0.5, 0))
 	
 func remove():
 	# Called in the animation to remove it from existence.
