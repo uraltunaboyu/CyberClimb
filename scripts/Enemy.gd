@@ -12,6 +12,8 @@ var attackDist : float = 3
 
 var scoreToGive : int = 10
 
+var alive = true
+
 # components
 @onready var player : Node = get_node("/root/MainScene/Player")
 @onready var timer : Timer = get_node("Timer")
@@ -48,7 +50,9 @@ func take_damage (damage):
 		die()
 
 func die ():
+	alive = false
 	set_physics_process(false)
+	find_child("EnemyCollider").queue_free()
 	ap.play("Death")
 	
 func remove():
@@ -56,7 +60,9 @@ func remove():
 
 # deals damage to the player
 func attack ():
-	player.take_damage(atk_damage)
+	print(str(alive))
+	if alive:
+		player.take_damage(atk_damage)
 
 # called every 'attackRate' seconds
 func _on_Timer_timeout():
