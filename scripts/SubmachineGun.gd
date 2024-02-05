@@ -1,18 +1,13 @@
-class_name AutoGun extends Node3D
-
-@onready var muzzle : Node3D = $Muzzle
-@onready var bulletScene = preload("res://scenes/Bullet.tscn")
-@onready var shot_timer : Timer = $Timer
-
-var ammoCount = 40
-var bullet_speed = 15
-var bullet_damage_min = 7
-var bullet_damage_max = 11
-var spread_angle:float = 0.06 # Cone with this angle (radians)
-var bullet_life = 2
-var shots_per_sec:float = 20
+extends AutoGun
 
 func _ready():
+	ammoCount = 50
+	bullet_speed = 10
+	bullet_damage_min = 4
+	bullet_damage_max = 7
+	spread_angle = 0.11 # Cone with this angle (radians)
+	bullet_life = 1.5
+	shots_per_sec = 30
 	shot_timer.wait_time = 1/shots_per_sec
 	shot_timer.one_shot = true
 	return
