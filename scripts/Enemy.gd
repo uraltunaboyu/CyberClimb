@@ -8,7 +8,7 @@ var moveSpeed : float = 2.0
 # attacking
 var atk_damage : int = 1
 var attackRate : float = 1.0
-var attackDist : float = 3.0
+var attackDist : float = 2.5
 
 var scoreToGive : int = 10
 
@@ -22,7 +22,7 @@ func _ready():
 	timer.set_wait_time(attackRate)
 	timer.start()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# calculate the direction to the player
 	var dir = (player.position - position).normalized()
 	dir.y = 0

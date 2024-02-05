@@ -15,5 +15,5 @@ func _physics_process(_delta):
 			prompt.text = detected.get_prompt()
 			
 			if Input.is_action_just_pressed(detected.prompt_action):
-				detected.interact(owner)
+				detected.interact()
 

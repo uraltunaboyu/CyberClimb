@@ -11,7 +11,7 @@ var bullet_damage_max = 5
 var pellet_count = 25
 var spread_angle:float = 0.25 # Cone with this angle (radians)
 var bullet_life = 1
-var rpm = 50
+var rpm = 50.0
 
 func _ready():
 	shot_timer.wait_time = 60/rpm
