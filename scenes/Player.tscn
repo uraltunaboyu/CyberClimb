@@ -13,7 +13,7 @@ height = 1.5
 script = ExtResource("1_obko2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 1.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 shape = SubResource("1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -38,6 +38,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 current = true
 
 [node name="GunSlotPrimary" type="Node3D" parent="Camera3D"]
+transform = Transform3D(0.998629, 0.0018265, 0.0523041, 0, 0.999391, -0.0348995, -0.0523359, 0.0348517, 0.998021, 0.4, -0.25, -0.4)
 script = ExtResource("2_vdmnf")
 
 [node name="InteractRay" type="RayCast3D" parent="Camera3D"]

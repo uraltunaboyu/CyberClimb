@@ -1,14 +1,14 @@
 extends CharacterBody3D
 
 # stats
-var max_health : int = 70
+var max_health : int = 120
 var cur_health = max_health
 var moveSpeed : float = 2.0
 
 # attacking
 var atk_damage : int = 1
 var attackRate : float = 1.0
-var attackDist : float = 2.5
+var attackDist : float = 3
 
 var scoreToGive : int = 10
 

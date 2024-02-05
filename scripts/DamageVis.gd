@@ -18,7 +18,7 @@ func set_and_animate(value:float, chunk:float, start_pos:Vector3, height:float =
 	# Calculate the text size based on the % hp loss. Assumed this usually won't
 	# surpass 30%
 	var f_size = chunk*3*max_font_size + min_font_size
-	label.font_size = int(f_size)
+	label.font_size = f_size
 	label.outline_size = f_size/10
 	
 	# Play the animation (grows/shrinks text + alpha modulation)
