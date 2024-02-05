@@ -11,8 +11,6 @@ func _ready():
 func _process(_delta):
 	if Input.is_action_pressed("shoot") and (equipped_gun is AutoGun or equipped_gun is BurstGun):
 		attack()
-#	elif Input.is_action_pressed("shoot") and equipped_gun is BurstGun:
-#		attack()
 	elif Input.is_action_just_pressed("shoot"):
 		attack()
 		

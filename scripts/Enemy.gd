@@ -16,6 +16,7 @@ var scoreToGive : int = 10
 @onready var player : Node = get_node("/root/MainScene/Player")
 @onready var timer : Timer = get_node("Timer")
 @onready var dmgScene = preload("res://scenes/DamageVis.tscn")
+@onready var ap : AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	# setup the timer
@@ -47,6 +48,10 @@ func take_damage (damage):
 		die()
 
 func die ():
+	set_physics_process(false)
+	ap.play("Death")
+	
+func remove():
 	queue_free()
 
 # deals damage to the player
