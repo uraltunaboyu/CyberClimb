@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [gd_scene load_steps=9 format=3 uid="uid://ygq2q8lm2ubk"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_obko2"]
@@ -43,7 +44,7 @@ script = ExtResource("2_vdmnf")
 
 [node name="InteractRay" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -4)
-script = ExtResource("3_3xwub")
+script = ExtResource("4_k452p")
 
 [node name="Prompt" type="Label" parent="Camera3D/InteractRay"]
 anchors_preset = 8
