@@ -9,8 +9,10 @@ func _ready():
 		equipped_gun.global_transform = self.global_transform
 	
 func _process(_delta):
-	if Input.is_action_pressed("shoot") and equipped_gun is AutoGun:
+	if Input.is_action_pressed("shoot") and (equipped_gun is AutoGun or equipped_gun is BurstGun):
 		attack()
+#	elif Input.is_action_pressed("shoot") and equipped_gun is BurstGun:
+#		attack()
 	elif Input.is_action_just_pressed("shoot"):
 		attack()
 		
@@ -25,7 +27,8 @@ func get_ammo_count():
 	
 func add_ammo(amount):
 	if equipped_gun:
-		equipped_gun.add_ammo(amount)
+		equipped_gun.add_ammo_count(amount)
+		ui.update_ammo_text(equipped_gun.get_ammo_count())
 
 func set_equipped_gun(new_gun):
 	# TODO

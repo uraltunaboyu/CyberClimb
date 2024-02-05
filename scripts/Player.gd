@@ -85,7 +85,8 @@ func add_health (amount):
 	ui.update_health_bar(curHp, maxHp)
 	
 func add_ammo (amount):
-	primarySlot.add_ammo_count(amount)
+	if primarySlot.equipped_gun:
+		primarySlot.add_ammo(int(amount))
 	
 func _on_button_interacted(target_scene):
 	primarySlot.set_equipped_gun(target_scene)
