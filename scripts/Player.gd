@@ -3,6 +3,7 @@ extends CharacterBody3D
 var rng = RandomNumberGenerator.new()
 
 const Upgrades = preload("GameUpgrades.gd")
+# @onready var shop_scene = preload("res://scenes/Shop_Scene.tscn")
 var upgrades = Upgrades.new()
 
 # stats
@@ -53,9 +54,6 @@ func _physics_process(delta):
 	# exit if esc pressed
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
-		
-	if Input.is_action_pressed("open_shop"):
-		get_tree().change_scene_to_file("res://ui/Shop.tscn")
 	
 	# reset the x and z velocity
 	vel.x = 0
@@ -149,6 +147,12 @@ func _process(delta):
 	# check to see if we have shot
 	if Input.is_action_just_pressed("shoot") and ammo > 0:
 		shoot()
+		
+	if Input.is_action_just_pressed("open_shop"):
+		var shop_scene = load("res://scenes/Shop_Scene.tscn")
+		var shop = shop_scene.instantiate()
+		# shop.initialize() # If necessary to set things up
+		get_node("/root/MainScene").add_child(shop)
 		
 # called when an input is detected
 func _input(event):

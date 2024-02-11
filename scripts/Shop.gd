@@ -1,11 +1,13 @@
 extends Node
 
-@onready var player : Node = get_tree().current_scene.get_node("/root/MainScene/Player")
+#@onready var player = get_node("res://scripts/Player.gd")
+@onready var player : Node = get_node("/root/MainScene/Player")
 var upgrade;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	upgrade = player.get_upgrade()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
