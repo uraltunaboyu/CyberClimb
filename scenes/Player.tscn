@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 [gd_scene load_steps=8 format=3 uid="uid://cmuromivlwhnq"]
+=======
+[gd_scene load_steps=5 format=3 uid="uid://cmuromivlwhnq"]
+>>>>>>> 1b446dc (Moved movement to its own script)
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_obko2"]
+<<<<<<< HEAD
 [ext_resource type="Script" path="res://scripts/GunSlot.gd" id="2_vdmnf"]
 [ext_resource type="Script" path="res://scripts/InteractRay.gd" id="3_3xwub"]
 [ext_resource type="PackedScene" uid="uid://c5k07xy7x12rv" path="res://scenes/Shotgun.tscn" id="3_ekknl"]
 [ext_resource type="Texture2D" path="res://images/CrosshairTemp.png" id="4_f6o23"]
 [ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="4_w7asp"]
+=======
+[ext_resource type="Script" path="res://scripts/MovementController.gd" id="3_md0ua"]
+>>>>>>> 1b446dc (Moved movement to its own script)
 
 [sub_resource type="CapsuleShape3D" id="1"]
 height = 1.5
@@ -42,6 +50,7 @@ current = true
 script = ExtResource("2_vdmnf")
 target_scene = ExtResource("3_ekknl")
 
+<<<<<<< HEAD
 [node name="InteractRay" type="RayCast3D" parent="Camera3D"]
 target_position = Vector3(0, 0, -4)
 script = ExtResource("3_3xwub")
@@ -63,3 +72,10 @@ theme_override_font_sizes/font_size = 80
 text = "Message
 [Key]"
 horizontal_alignment = 1
+=======
+[node name="Muzzle" type="Node3D" parent="Camera3D"]
+transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0.201164, -0.128434, -1.0804)
+
+[node name="MovementController" type="Node" parent="."]
+script = ExtResource("3_md0ua")
+>>>>>>> 1b446dc (Moved movement to its own script)
