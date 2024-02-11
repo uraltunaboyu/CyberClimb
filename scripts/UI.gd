@@ -8,5 +8,9 @@ func update_health_bar (curHp, maxHp):
 	healthBar.value = curHp
 	
 func update_ammo_text (ammo):
-	ammoText.text = "Ammo: " + str(ammo)
+	if ammo != null:
+		ammoText.visible = true
+		ammoText.text = "Ammo: " + str(ammo)
+	else:
+		ammoText.visible = false
 	

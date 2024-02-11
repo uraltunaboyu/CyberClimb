@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddse5xgoim84j"]
+[gd_scene load_steps=3 format=3 uid="uid://dn50txa15t6cc"]
 
 [ext_resource type="Script" path="res://scripts/SubmachineGun.gd" id="1_7euw2"]
 [ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/Weapon/shotgun.obj" id="2_ofh04"]
