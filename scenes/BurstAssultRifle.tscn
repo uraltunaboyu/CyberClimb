@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://ikg565xwwqgu"]
+[gd_scene load_steps=3 format=3 uid="uid://c2vne33xec5ir"]
 
 [ext_resource type="Script" path="res://scripts/BurstAssultRifle.gd" id="1_jrhwh"]
 [ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/Weapon/shotgun.obj" id="2_layn3"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://1s2omqo82c1a"]
+[gd_scene load_steps=5 format=3 uid="uid://bym5poej7eto5"]
 
 [ext_resource type="Script" path="res://scripts/DamageVis.gd" id="1_wwvna"]
 
