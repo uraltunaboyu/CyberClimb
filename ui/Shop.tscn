@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0dsbn7faoc7a"]
 
-[ext_resource type="Script" path="res://scripts/Shop.gd" id="1_kvagp"]
+[ext_resource type="Script" path="res://scripts/Shop.gd" id="1_tgrg3"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_00q40"]
 size = Vector2(128, 128)
@@ -12,7 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_kvagp")
+script = ExtResource("1_tgrg3")
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
 layout_mode = 1

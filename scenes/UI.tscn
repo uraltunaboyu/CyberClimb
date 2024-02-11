@@ -28,6 +28,22 @@ texture_progress = ExtResource("2_bnrwh")
 tint_under = Color(0.211765, 0.211765, 0.211765, 1)
 tint_progress = Color(1, 0, 0, 1)
 
+[node name="HealthBar" type="TextureProgressBar" parent="HealthBar"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.2455
+offset_top = -48.8815
+offset_right = 219.245
+offset_bottom = -16.8815
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_bnrwh")
+texture_progress = ExtResource("2_bnrwh")
+tint_under = Color(0.211765, 0.211765, 0.211765, 1)
+tint_progress = Color(1, 0, 0, 1)
+
 [node name="AmmoText" type="Label" parent="."]
 layout_mode = 0
 anchor_top = 1.0

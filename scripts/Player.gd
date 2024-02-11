@@ -1,15 +1,20 @@
 extends CharacterBody3D
 
+var rng = RandomNumberGenerator.new()
+
+const Upgrades = preload("GameUpgrades.gd")
+var upgrades = Upgrades.new()
+
 # stats
-var curHp : int = 10
-var maxHp : int = 10
-var ammo : int = 30
+var curHp : int = 10 + upgrades.get_upgrade("max_hp")
+var maxHp : int = 10 + upgrades.get_upgrade("max_hp")
+var ammo : int = 30 + upgrades.get_upgrade("start_ammo")
 var score: int = 0
 
 # physics
-var moveSpeed : float = 5.0
-var dashSpeed: float = 10.0
-var jumpForce : float = 5.0
+var moveSpeed : float = 5.0 + upgrades.get_upgrade("move_speed")
+var dashSpeed: float = 10.0 + upgrades.get_upgrade("move_speed")
+var jumpForce : float = 5.0 + upgrades.get_upgrade("jump_force")
 
 #slow descent for glide
 var glideGravity: float = 1.0
@@ -48,6 +53,9 @@ func _physics_process(delta):
 	# exit if esc pressed
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
+		
+	if Input.is_action_pressed("open_shop"):
+		get_tree().change_scene_to_file("res://ui/Shop.tscn")
 	
 	# reset the x and z velocity
 	vel.x = 0
@@ -155,6 +163,9 @@ func shoot ():
 	bullet.global_transform = muzzle.global_transform
 	
 	ammo -= 1
+	# there is a 30% chance of the ammo not getting consumed if the player has magic reload
+	if (upgrades.get_upgrade("magic_reload") and rng.randi_range(1, 10) < 4):
+		ammo += 1
 	
 	ui.update_ammo_text(ammo)
 
@@ -169,12 +180,18 @@ func take_damage (damage):
 
 # called when our health reaches 0	
 func die ():
-	get_tree().reload_current_scene()
+	if upgrades.get_upgrade("cheat_death"):
+		upgrades.set_value("cheat_death", false)
+		var revival_health: int = maxHp / 2
+		add_health(revival_health)
+		ammo = 15
+	else:
+		get_tree().reload_current_scene()
 	
 func add_health (amount):
 	curHp += amount
 	
-	if curHp > maxHp:
+	if (curHp > maxHp):
 		curHp = maxHp
 		
 	ui.update_health_bar(curHp, maxHp)
@@ -182,3 +199,6 @@ func add_health (amount):
 func add_ammo (amount):
 	ammo += amount
 	ui.update_ammo_text(ammo)
+	
+func get_upgrade ():
+	return upgrades

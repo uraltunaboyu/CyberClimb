@@ -9,4 +9,3 @@ func update_health_bar (curHp, maxHp):
 	
 func update_ammo_text (ammo):
 	ammoText.text = "Ammo: " + str(ammo)
-	
