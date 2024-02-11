@@ -1,7 +1,7 @@
 extends Node
 
 @onready var ui : Node = get_node("/root/MainScene/CanvasLayer/UI")
-var equipped_gun
+var equipped_gun = null
 
 func _ready():
 	if equipped_gun:
@@ -20,6 +20,10 @@ func attack():
 		ui.update_ammo_text(equipped_gun.get_ammo_count())
 
 func get_ammo_count():
+	# Known bug, for burst weapons, only gets ammo when click is held.
+	# The logic is easy to understand why, but I can't think of a solution
+	# when the UI call is within this script. Could be solved by moving it
+	# to the weapon itself.
 	if equipped_gun:
 		return equipped_gun.get_ammo_count()
 	
@@ -37,4 +41,10 @@ func set_equipped_gun(new_gun):
 	add_child(equipped_gun)
 	equipped_gun.global_transform = self.global_transform
 	ui.update_ammo_text(equipped_gun.get_ammo_count())
+	
+func remove_weapon():
+	if equipped_gun:
+		get_child(0).queue_free()
+		ui.update_ammo_text(null)
+	equipped_gun = null
 	

@@ -60,7 +60,6 @@ func remove():
 
 # deals damage to the player
 func attack ():
-	print(str(alive))
 	if alive:
 		player.take_damage(atk_damage)
 

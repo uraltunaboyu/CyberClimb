@@ -8,10 +8,6 @@ extends Node3D
 var max_font_size = 3000
 var min_font_size = 400
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 func set_and_animate(value:float, chunk:float, start_pos:Vector3, height:float = 0.5, spread:float = 1.5):
 	# Set the DamageLabel text to the damage.
 	label.text = str(value)
