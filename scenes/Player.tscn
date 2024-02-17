@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_obko2"]
 [ext_resource type="Script" path="res://scripts/GunSlot.gd" id="2_vdmnf"]
 [ext_resource type="Script" path="res://scripts/InteractRay.gd" id="3_3xwub"]
-[ext_resource type="PackedScene" uid="uid://c5k07xy7x12rv" path="res://scenes/Shotgun.tscn" id="3_ekknl"]
+[ext_resource type="PackedScene" path="res://scenes/Shotgun.tscn" id="3_ekknl"]
 [ext_resource type="Texture2D" path="res://images/CrosshairTemp.png" id="4_f6o23"]
 [ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="4_w7asp"]
 
