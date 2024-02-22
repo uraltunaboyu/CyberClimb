@@ -170,5 +170,5 @@ func add_ammo (amount):
 func _on_button_interacted(target_scene):
 	primarySlot.set_equipped_gun(target_scene)
 	
-func remove_weapon(nothing):
+func remove_weapon(_nothing):
 	primarySlot.remove_weapon()

@@ -27,7 +27,7 @@ func _ready():
 
 func _physics_process(_delta):
 	# calculate the direction to the player
-	var dir = (player.position - position).normalized()
+	var dir : Vector3 = (player.position - position).normalized()
 	dir.y = 0
 	
 	# move the enemy towards the player
@@ -35,13 +35,13 @@ func _physics_process(_delta):
 		set_velocity(dir * moveSpeed)
 		move_and_slide()
 
-func take_damage (damage):
+func take_damage (damage:int):
 	cur_health -= damage
 	# This instantiates the DamageVis scene to display damage dealt to an enemy
 	# The % HP loss is calculated (has to be float division) and is sent along
 	# The scene is a child of main so it can remain after the enemy dies
-	var hp_chunk = float(damage)/max_health
-	var dmgTxt = dmgScene.instantiate()
+	var hp_chunk:float = float(damage)/max_health
+	var dmgTxt:Node3D = dmgScene.instantiate()
 	get_node("/root/MainScene").add_child(dmgTxt)
 	dmgTxt.set_and_animate(damage, hp_chunk, global_position)
 	
