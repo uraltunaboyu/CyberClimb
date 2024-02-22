@@ -40,6 +40,7 @@ func take_damage (damage:int):
 	# This instantiates the DamageVis scene to display damage dealt to an enemy
 	# The % HP loss is calculated (has to be float division) and is sent along
 	# The scene is a child of main so it can remain after the enemy dies
+<<<<<<< HEAD
 	var hp_chunk:float = float(damage)/max_health
 	var dmgTxt:Node3D = dmgScene.instantiate()
 	get_node("/root/MainScene").add_child(dmgTxt)

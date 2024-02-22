@@ -13,7 +13,11 @@ func set_and_animate(value:float, chunk:float, start_pos:Vector3, height:float =
 	label.text = str(value)
 	# Calculate the text size based on the % hp loss. Assumed this usually won't
 	# surpass 30%
+<<<<<<< HEAD
 	var f_size : float = chunk*3*max_font_size + min_font_size
+=======
+	var f_size = chunk*3*max_font_size + min_font_size
+>>>>>>> 6b692ee91e579c332a409eea22ee9e6837e30091
 	label.font_size = f_size
 	label.outline_size = f_size/10
 	
@@ -21,9 +25,15 @@ func set_and_animate(value:float, chunk:float, start_pos:Vector3, height:float =
 	ap.play("DamagePopUp")
 	
 	# Create a tween and its inputs based on the function inputs.
+<<<<<<< HEAD
 	var tween : Tween = create_tween()
 	var end_pos : Vector3 = Vector3(randf_range(-spread, spread), height, randf_range(-spread,spread)) + start_pos
 	var tween_length : float = ap.get_animation("DamagePopUp").length
+=======
+	var tween = create_tween()
+	var end_pos = Vector3(randf_range(-spread, spread), height, randf_range(-spread,spread)) + start_pos
+	var tween_length = ap.get_animation("DamagePopUp").length
+>>>>>>> 6b692ee91e579c332a409eea22ee9e6837e30091
 	
 	# "Play" the tween.
 	tween.tween_property(labcon, "position", end_pos, tween_length).from(start_pos + Vector3(0, 0.5, 0))
