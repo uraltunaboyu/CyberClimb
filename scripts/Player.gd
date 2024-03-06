@@ -13,6 +13,7 @@ var lookSensitivity : float = 10.0
 
 # vectors
 var mouseDelta : Vector2 = Vector2()
+var fall: Vector3 = Vector3()
 
 # components
 @onready var camera : Camera3D = get_node("Camera3D")
