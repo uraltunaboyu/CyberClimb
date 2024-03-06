@@ -1,5 +1,7 @@
 extends Area3D
 
+class_name Bullet
+
 var speed : float = 30.0
 var damage : int = 1
 

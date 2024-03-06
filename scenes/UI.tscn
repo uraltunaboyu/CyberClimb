@@ -39,13 +39,10 @@ offset_bottom = -58.9153
 theme_override_fonts/font = ExtResource("3_5lwx4")
 text = "Ammo: 50"
 
-[node name="ScoreText" type="Label" parent="."]
-layout_mode = 0
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 20.3643
-offset_top = -140.234
-offset_right = 188.364
-offset_bottom = -99.2339
-theme_override_fonts/font = ExtResource("3_5lwx4")
-text = "Score: 500"
+[node name="DebugInfo" type="Node" parent="."]
+
+[node name="MovementState" type="Label" parent="DebugInfo"]
+offset_left = 1034.0
+offset_top = 3.0
+offset_right = 1275.0
+offset_bottom = 67.0
