@@ -18,7 +18,6 @@ var fall: Vector3 = Vector3()
 # components
 @onready var camera : Camera3D = get_node("Camera3D")
 @onready var ui : Node = get_node("/root/MainScene/CanvasLayer/UI")
-
 @onready var primarySlot: Node3D = get_node("Camera3D/GunSlotPrimary")
 #@onready var secondarySlot: Node = get_node("Camera3D/GunSlotSecondary") TODO
 @onready var movementController = get_node("MovementController")
@@ -58,20 +57,11 @@ func _process(delta):
 	
 	# reset the mouse delta vector
 	mouseDelta = Vector2()
-	
-	# check to see if we have shot
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
 
 # called when an input is detected
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouseDelta = event.relative
-
-# called when we press the shoot button - spawn a new bullet	
-func shoot ():
-	primarySlot.attack()
-	ui.update_ammo_text(primarySlot.get_ammo_count())
 
 # called when an enemy damages us
 func take_damage (damage):
@@ -95,4 +85,11 @@ func add_health (amount):
 	ui.update_health_bar(curHp, maxHp)
 	
 func add_ammo (amount):
-	primarySlot.add_ammo_count(amount)
+	if primarySlot.equipped_gun:
+		primarySlot.add_ammo(int(amount))
+	
+func _on_button_interacted(target_scene):
+	primarySlot.set_equipped_gun(target_scene)
+	
+func remove_weapon(_nothing):
+	primarySlot.remove_weapon()
