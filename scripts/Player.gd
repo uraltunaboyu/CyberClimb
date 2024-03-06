@@ -95,6 +95,3 @@ func add_health (amount):
 	
 func add_ammo (amount):
 	primarySlot.add_ammo_count(amount)
-
-func is_player_moving():
-	return vel.x != 0
