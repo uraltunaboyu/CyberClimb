@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://d02juuvp2nwss"]
+[gd_scene load_steps=8 format=3 uid="uid://d02juuvp2nwss"]
 
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="1_n14xd"]
 [ext_resource type="ArrayMesh" uid="uid://b7c8862iey7nc" path="res://models/Environment/Ground.obj" id="2_n8vim"]
-[ext_resource type="PackedScene" uid="uid://cq4tdha21pe7j" path="res://scenes/Player.tscn" id="3_yr7vg"]
+[ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="3_yr7vg"]
 [ext_resource type="PackedScene" uid="uid://5lsom54eu8p2" path="res://scenes/Enemy.tscn" id="4_pujfl"]
 [ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="5_6v2ur"]
-[ext_resource type="PackedScene" path="res://scenes/SpawnPoint.tscn" id="6_8bh3o"]
-[ext_resource type="PackedScene" uid="uid://bh7bq05xf4ew5" path="res://scenes/levels/TestLevel.tscn" id="7_nrium"]
+[ext_resource type="PackedScene" uid="uid://c6eb8ep24xyjx" path="res://scenes/SpawnPoint.tscn" id="6_8bh3o"]
 
 [sub_resource type="ConcavePolygonShape3D" id="2"]
 data = PackedVector3Array(0, 0, 0, 3, 0.3, 0, 3, 0, 0, 3, 0.3, 0, 0, 0, 0, 0, 0.3, 0, 0, 0.3, -3, 3, 0.3, 0, 0, 0.3, 0, 3, 0.3, 0, 0, 0.3, -3, 3, 0.3, -3, 3, 0, -3, 3, 0.3, 0, 3, 0.3, -3, 3, 0.3, 0, 3, 0, -3, 3, 0, 0, 3, 0, -3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, -3, 0, 0, -3, 0, 0.3, -3, 0, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0.3, -3, 0, 0.3, 0, 3, 0, -3, 0, 0.3, -3, 0, 0, -3, 0, 0.3, -3, 3, 0, -3, 3, 0.3, -3)
@@ -32,15 +31,8 @@ shape = SubResource("2")
 transform = Transform3D(0.707107, -0.612373, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 7.42838, 10.9564, 0)
 shadow_enabled = true
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.347326, -0.736318, -0.580689, 0.615926, -0.287811, 0.733348, -0.707107, -0.612372, 0.353553, -8.76597, 10.9564, 0)
-shadow_enabled = true
-
 [node name="Player" parent="." instance=ExtResource("3_yr7vg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.7335, 3.8147e-06, 7.68096)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15932, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16221, 2.20622, 1.4299)
 
 [node name="Enemy" parent="." instance=ExtResource("4_pujfl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.820966, 10.2246)
@@ -94,9 +86,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.81039, 0.670884, 0.780014)
 prompt_message = "Remove Weapon"
 
 [node name="SpawnPoint" parent="." instance=ExtResource("6_8bh3o")]
-
-[node name="TestLevel" parent="." instance=ExtResource("7_nrium")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.9546, 0, 0.408608)
 
 [connection signal="interacted" from="Button" to="Player" method="_on_button_interacted"]
 [connection signal="interacted" from="Button8" to="Player" method="_on_button_interacted"]
