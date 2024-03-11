@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 # stats
-var curHp : int = 10
-var maxHp : int = 10
+var curHp : int = 100
+var maxHp : int = 100
 var ammo : int = 30
 var score: int = 0
 

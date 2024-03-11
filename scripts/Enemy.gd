@@ -12,6 +12,8 @@ var attackRange : float
 
 var alive = true
 
+var collider_name = "EnemyCollider"
+
 # components
 @onready var player : Node = get_node("/root/MainScene/Player")
 @onready var dmgScene = preload("res://scenes/DamageVis.tscn")
@@ -31,9 +33,10 @@ func take_damage (damage:int):
 		die()
 
 func die ():
+	ap.stop()
 	alive = false
 	set_physics_process(false)
-	find_child("EnemyCollider").queue_free()
+	find_child(collider_name).queue_free()
 	ap.play("Death")
 	
 func remove():
