@@ -24,7 +24,7 @@ var fall: Vector3 = Vector3()
 
 func _ready ():
 	# hide and lock the mouse cursor
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	GameState.set_state_playing()
 	
 	# set the UI
 	ui.update_health_bar(curHp, maxHp)
@@ -34,10 +34,6 @@ func _ready ():
 
 # called 60 times a second
 func _physics_process(delta):
-	# exit if esc pressed
-	if Input.is_action_pressed("exit"):
-		get_tree().quit()
-	
 	movementController.poll(velocity)
 	ui.update_movement_state(movementController.get_current_state())
 	
