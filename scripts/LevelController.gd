@@ -1,28 +1,46 @@
 class_name LevelController extends Node
 
-var room_levels = ['level1', 'level2', 'level3', 'level4', 'level5']
+var all_rooms = {'theme 1' : ['1', 2, 3, 4, 5, 'boss'], 'theme2' : [1, 2, 3, 4, 5, 'boss']}
 var room_order
-var boss_room
-var room_index = 0
-var curr_room
-var curr_level
-var level_index
-var story_levels
-var current_stage = 0
-var current_level = 0
-
+var diff = 1
 
 func set_room_order()->void:
 	randomize()
-	room_order = room_levels
-	room_order.shuffle()
-	room_order.append(boss_room)
+	for level in all_rooms.keys():
+		var room_levels
+		var boss_index = all_rooms[level].size() - 1
+		room_levels = all_rooms[level].slice(0,boss_index - 1)
+		room_levels.shuffle()
+		room_levels = room_levels.slice(0,2)
+		room_levels.append(all_rooms[level][boss_index])
+		room_order.append(room_levels)
+		
+func get_room_json(room:String)->String:
+	var name = get_tree().get_current_scene().get_name()
+	var file = "res://room_info/" + name + ".json"
+	var json_content = FileAccess.get_file_as_string(file)
+	print('parsing')
+	# change extension
+	return json_content
+	
 
-func go_next_room()->void:
-	curr_room = room_order[room_index]
-	curr_room.generate()
-	if room_index == 6:
-		room_index = 0 #maybe should be done after the room is completed in case of failure
-		level_index += 1
+func go_next_room(reward:String)->void:
+	#something to black out the screen HERE change game state
+	var curr_room = room_order[0] #scene path
+	var loaded_room = load(curr_room)
+	loaded_room.instantiate()
+	get_node('/root/MainScene').add_child(loaded_room) # check how to change scenes more optimally
+	var room_json = get_room_json(curr_room)
+	loaded_room.load_info(room_json)
+	var status = loaded_room.generate(reward, diff)
+	if status:
+		print('generated')
+		# make the game state playable again
+		diff += 1
+		room_order.remove_at(0)
 	else:
-		room_index += 1
+		print('crash')
+
+# 'rooms/room1.json' --> {info}
+# curr_room = new Room()
+#
