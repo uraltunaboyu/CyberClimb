@@ -1,16 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://d02juuvp2nwss"]
+[gd_scene load_steps=9 format=3 uid="uid://d02juuvp2nwss"]
 
+[ext_resource type="Script" path="res://Room Generation/Room.gd" id="1_5jyis"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="1_n14xd"]
 [ext_resource type="ArrayMesh" uid="uid://b7c8862iey7nc" path="res://models/Environment/Ground.obj" id="2_n8vim"]
 [ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="3_yr7vg"]
 [ext_resource type="PackedScene" uid="uid://5lsom54eu8p2" path="res://scenes/Enemy.tscn" id="4_pujfl"]
-[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="5_6v2ur"]
+[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="5_6v2ur"]
 [ext_resource type="PackedScene" uid="uid://c6eb8ep24xyjx" path="res://scenes/SpawnPoint.tscn" id="6_8bh3o"]
 
 [sub_resource type="ConcavePolygonShape3D" id="2"]
 data = PackedVector3Array(0, 0, 0, 3, 0.3, 0, 3, 0, 0, 3, 0.3, 0, 0, 0, 0, 0, 0.3, 0, 0, 0.3, -3, 3, 0.3, 0, 0, 0.3, 0, 3, 0.3, 0, 0, 0.3, -3, 3, 0.3, -3, 3, 0, -3, 3, 0.3, 0, 3, 0.3, -3, 3, 0.3, 0, 3, 0, -3, 3, 0, 0, 3, 0, -3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, -3, 0, 0, -3, 0, 0.3, -3, 0, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0.3, -3, 0, 0.3, 0, 3, 0, -3, 0, 0.3, -3, 0, 0, -3, 0, 0.3, -3, 3, 0, -3, 3, 0.3, -3)
 
 [node name="MainScene" type="Node3D"]
+script = ExtResource("1_5jyis")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -87,6 +89,16 @@ prompt_message = "Remove Weapon"
 
 [node name="SpawnPoint" parent="." instance=ExtResource("6_8bh3o")]
 
+[node name="Next_Room" parent="." instance=ExtResource("5_6v2ur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3551, 0.489933, -1.60738)
+prompt_message = "Go Next Room"
+target_scene = "money"
+
+[node name="Next_Room2" parent="." instance=ExtResource("5_6v2ur")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.65784, 1.24521, 0.548128)
+prompt_message = "Go Next Room 2"
+target_scene = "gaga"
+
 [connection signal="interacted" from="Button" to="Player" method="_on_button_interacted"]
 [connection signal="interacted" from="Button8" to="Player" method="_on_button_interacted"]
 [connection signal="interacted" from="Button6" to="Player" method="_on_button_interacted"]
@@ -95,3 +107,5 @@ prompt_message = "Remove Weapon"
 [connection signal="interacted" from="Button3" to="SpawnPoint" method="_on_button_interacted"]
 [connection signal="interacted" from="Button5" to="Player" method="add_ammo"]
 [connection signal="interacted" from="Button7" to="Player" method="remove_weapon"]
+[connection signal="interacted" from="Next_Room" to="Player" method="send_gamestate_signal"]
+[connection signal="interacted" from="Next_Room2" to="." method="change_scene"]

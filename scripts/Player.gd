@@ -17,7 +17,7 @@ var fall: Vector3 = Vector3()
 
 # components
 @onready var camera : Camera3D = get_node("Camera3D")
-@onready var ui : Node = get_node("/root/MainScene/CanvasLayer/UI")
+@onready var ui : Node = get_node("../CanvasLayer/UI")
 @onready var primarySlot: Node3D = get_node("Camera3D/GunSlotPrimary")
 #@onready var secondarySlot: Node = get_node("Camera3D/GunSlotSecondary") TODO
 @onready var movementController = get_node("MovementController")
@@ -27,8 +27,8 @@ func _ready ():
 	GameState.set_state_playing()
 	
 	# set the UI
-	ui.update_health_bar(curHp, maxHp)
-	ui.update_ammo_text(primarySlot.get_ammo_count())
+	#ui.update_health_bar(curHp, maxHp)
+	#ui.update_ammo_text(primarySlot.get_ammo_count())
 	
 	movementController.set_player_ref(self)
 
@@ -88,3 +88,6 @@ func _on_button_interacted(target_scene):
 	
 func remove_weapon(_nothing):
 	primarySlot.remove_weapon()
+
+func send_gamestate_signal(sgnl:String):
+	GameState.level_controller_signal_receiver(sgnl)

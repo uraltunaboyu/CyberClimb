@@ -44,6 +44,10 @@ var player_vitals = {}
 
 var level_controller = LevelController.new()
 
+func level_controller_signal_receiver(sgnl:String):
+	level_controller.go_next_room(sgnl)
+	print('gugu gaga')
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -74,3 +78,6 @@ func latest_flag() -> ProgressionFlag:
 func load_scene_by_path(target_path: String):
 	next_scene_path = target_path
 	current_state = GameStates.LOADING
+
+func return_tree():
+	return get_tree()
