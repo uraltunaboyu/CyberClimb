@@ -1,6 +1,6 @@
 extends Node
 
-@onready var ui : Node = get_node("/root/MainScene/CanvasLayer/UI")
+@onready var ui : Node = get_node("../../../CanvasLayer/UI")
 var equipped_gun = null
 
 func _ready():

@@ -44,6 +44,9 @@ var player_vitals = {}
 
 var level_controller = LevelController.new()
 
+var diff : int
+var reward : String
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -78,6 +81,8 @@ func load_scene_by_path(target_path: String):
 func return_tree():
 	return get_tree()
 
-func room_transition(reward: String):
-	level_controller.go_next_room(reward)
-	print('gugu gaga')
+func room_transition(reward_signal: String):
+	reward = reward_signal
+	level_controller.set_room_order()
+	diff = level_controller.go_next_room(reward)
+	print(diff)

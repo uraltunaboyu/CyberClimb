@@ -1,7 +1,7 @@
 class_name LevelController extends Node
 
-var all_rooms = {'theme 1' : ['1', 2, 3, 4, 5, 'boss'], 'theme2' : [1, 2, 3, 4, 5, 'boss']}
-var room_order
+var all_rooms = {'theme 1' : ["res://Rooms/TestLevel.tscn", "res://Rooms/TestLevel.tscn", "res://Rooms/TestLevel.tscn", "res://Rooms/TestLevel.tscn", "res://Rooms/TestLevel.tscn", 'boss'], 'theme2' : [1, 2, 3, 4, 5, 'boss']}
+var room_order : Array
 var diff = 1
 
 func set_room_order()->void:
@@ -9,7 +9,7 @@ func set_room_order()->void:
 	for level in all_rooms.keys():
 		var room_levels
 		var boss_index = all_rooms[level].size() - 1
-		room_levels = all_rooms[level].slice(0,boss_index - 1)
+		room_levels = all_rooms[level].slice(0,boss_index)
 		room_levels.shuffle()
 		room_levels = room_levels.slice(0,2)
 		room_levels.append(all_rooms[level][boss_index])
@@ -21,31 +21,13 @@ func get_room_json(room:String)->String:
 	var json_content = FileAccess.get_file_as_string(file)
 	return json_content
 	
-
-func go_next_room(reward:String)->void:
-	var level = load("res://Rooms/TestLevel.tscn")
-	var room = GameState.return_tree().current_scene
-	#GameState.load_scene_by_path("res://Rooms/TestLevel.tscn")
-	#var curr_room = load('res://Rooms/TestLevel.tscn')
-	#var tree = get_tree()
-	#get_tree().change_scene_to_file.bind("res://Rooms/TestLevel.tscn").call_deferred()
-	#get_tree().change_scene_to_file(curr_room)
-	#var curr_room = room_order[0] #scene path
-	#var loaded_room = load(curr_room)
-	#loaded_room.instantiate()
-	#get_node('/root/MainScene').add_child(loaded_room) # check how to change scenes more optimally
-	#var room_json = get_room_json(curr_room)
-	#loaded_room.load_info(room_json)
-	#var status = loaded_room.generate(reward, diff)
-	GameState.return_tree().change_scene_to_file.bind("res://Rooms/TestLevel.tscn").call_deferred()
-	var status = room.generate(reward, diff)
-	if status:
-		print('generated')
-		# make the game state playable again
-		diff += 1
-		room_order.remove_at(0)
-	else:
-		print('crash')
+func go_next_room(reward:String)->int:
+	print(reward)
+	GameState.load_scene_by_path(room_order[0][0])
+	print('generated')
+	diff += 1
+	room_order.remove_at(0)
+	return(diff)
 
 # 'rooms/room1.json' --> {info}
 # curr_room = new Room()

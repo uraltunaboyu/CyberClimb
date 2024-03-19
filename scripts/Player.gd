@@ -88,6 +88,3 @@ func _on_button_interacted(target_scene):
 	
 func remove_weapon(_nothing):
 	primarySlot.remove_weapon()
-
-func send_gamestate_signal(sgnl:String):
-	GameState.level_controller_signal_receiver(sgnl)
