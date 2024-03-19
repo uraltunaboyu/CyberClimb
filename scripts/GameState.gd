@@ -1,7 +1,7 @@
 extends Node
 
 const LevelController = preload("res://scripts/LevelController.gd")
-const LOADING_SCREEN_PATH = "res://scenes/LoadingScene.tscn"
+const LOADING_SCREEN_PATH = "res://scenes/LoadingScreen.tscn"
 
 enum ProgressionFlag {
 	NONE,
@@ -44,10 +44,6 @@ var player_vitals = {}
 
 var level_controller = LevelController.new()
 
-func level_controller_signal_receiver(sgnl:String):
-	level_controller.go_next_room(sgnl)
-	print('gugu gaga')
-
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
@@ -81,3 +77,7 @@ func load_scene_by_path(target_path: String):
 
 func return_tree():
 	return get_tree()
+
+func room_transition(reward: String):
+	level_controller.go_next_room(reward)
+	print('gugu gaga')
