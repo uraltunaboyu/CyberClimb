@@ -1,6 +1,6 @@
 class_name Room extends Node
 
-var enemies
+var enemies = {}
 var info # holds the values for above vars
 
 var rewards = {'power' : 0, 'money' : 0}
@@ -42,7 +42,7 @@ func set_rewards(reward, diff)->void:
 	
 func load_player()->void:
 	player.instantiate()
-	get_tree().add_child(player)
+	#get_tree().add_child(player)
 	
 func generate(reward:String, diff:int)->int:
 	load_player()
@@ -51,6 +51,3 @@ func generate(reward:String, diff:int)->int:
 	#spawn_enemies()
 	# stop execution let the game play
 	return 1
-
-func change_scene(_gugu: String):
-	get_tree().change_scene_to_file("res://Rooms/TestLevel.tscn")
