@@ -14,25 +14,17 @@ func _ready():
 func load_info(json_content:String)->void:
 	info = JSON.parse_string(json_content)
 	enemies = info[enemies]
-
-func set_enemies(diff)->void:
-	for enemy in enemies:
-		enemies[enemy] = round(enemies[enemy] * diff)
-	# multiply each enemies weight by difficulty and round.
 	
-func spawn_enemies()->void:
+func spawn_enemies(diff: int)->void:
 	# Iterate through spawn areas
 	# For an area:
 	## Calculate number of enemies based on round(average(min_enemies, max_enemies) * difficulty)
 	## 
-	for enemy in enemies:
-		for n in enemies[enemy]:
-			enemy.instantiate()
-			get_node('/root/MainScene').add_child(enemy) # to be updated
-			
-func position_enemy(enemy:Object):
-	print('position')
-	
+	for spawn_point in get_tree().get_nodes_in_group("spawn_area"):
+		var enemy_count = (randi() % spawn_point.max_enemies) + spawn_point.min_enemies
+		Log.Info("Trying to spawn %s enemies" % enemy_count)
+		for i in range(enemy_count):
+			spawn_point.spawn_appropriate_enemy(diff)
 
 func set_rewards(reward, diff)->void:
 	if reward == 'money':
@@ -45,10 +37,9 @@ func load_player()->void:
 	get_tree().add_child(player)
 	
 func generate(reward:String, diff:int)->int:
-	load_player()
+	#load_player()
 	set_rewards(reward, diff)
-	set_enemies(diff)
-	#spawn_enemies()
+	spawn_enemies(diff)
 	# stop execution let the game play
 	return 1
 

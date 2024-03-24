@@ -13,7 +13,7 @@ enum EnemyName {
 }
 
 const ENEMY_SCENE_PATH = {
-	EnemyName.TURRET : "<TODO>"
+	EnemyName.TURRET : "res://scenes/enemies/Turret.tscn"
 }
 
 const ENEMY_BY_TAG = {
@@ -30,10 +30,21 @@ const ENEMY_BY_DIFFICULTY = {
 	3 : [EnemyName.TURRET]
 }
 
-static func intersect(a1: Array, a2: Array) -> Array:
-	var result: Array = []
+static func intersect(a1, a2):
+	var result = []
 	for obj in a1:
 		if a2.has(obj):
 			result.append(obj)
 			
+	return result
+	
+static func union(a1, a2):
+	var result = []
+	for obj in a1:
+		if !a2.has(obj):
+			result.append(obj)
+			
+	for obj in a2:
+		result.append(obj)
+		
 	return result

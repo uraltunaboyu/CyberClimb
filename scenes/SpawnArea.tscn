@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://scripts/SpawnArea.gd" id="1_oygrd"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_spqys"]
+size = Vector3(5, 1, 5)
 
-[node name="SpawnArea" type="Area3D"]
+[node name="SpawnArea" type="Area3D" groups=["spawn_area"]]
 script = ExtResource("1_oygrd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

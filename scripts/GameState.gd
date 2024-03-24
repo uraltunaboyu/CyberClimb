@@ -44,7 +44,7 @@ var player_vitals = {}
 
 var level_controller = LevelController.new()
 
-var diff : int
+var diff: int = 1
 var reward : String
 
 func _ready():
