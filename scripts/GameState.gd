@@ -83,6 +83,5 @@ func return_tree():
 
 func room_transition(reward_signal: String):
 	reward = reward_signal
-	level_controller.set_room_order()
 	diff = level_controller.go_next_room(reward)
 	print(diff)

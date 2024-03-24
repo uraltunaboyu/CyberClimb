@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bh7bq05xf4ew5"]
+[gd_scene load_steps=7 format=3 uid="uid://bh7bq05xf4ew5"]
 
 [ext_resource type="Script" path="res://Room Generation/Room.gd" id="1_3xsf0"]
 [ext_resource type="MeshLibrary" uid="uid://3vo1kmb7uncb" path="res://maps/ZoneMeshMap.tres" id="1_tugkq"]
 [ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="2_bqiq1"]
+[ext_resource type="Script" path="res://scripts/Door.gd" id="4_du6mi"]
 [ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="4_mpye5"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="5_1cjen"]
 
@@ -20,6 +21,16 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Player_Spawn" type="Node3D" parent="Flat Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.20674, 1.97853, 7.9209)
+
+[node name="Money" parent="Flat Level" instance=ExtResource("2_bqiq1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.08272, 2.06474, 3.40232)
+script = ExtResource("4_du6mi")
+prompt_message = "money"
+
+[node name="Power" parent="Flat Level" instance=ExtResource("2_bqiq1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.77643, 1.55917, 0.78895)
+script = ExtResource("4_du6mi")
+prompt_message = "power"
 
 [node name="Flat Level2" type="GridMap" parent="."]
 mesh_library = ExtResource("1_tugkq")
