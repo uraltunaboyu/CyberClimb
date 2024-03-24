@@ -17,27 +17,23 @@ var fall: Vector3 = Vector3()
 
 # components
 @onready var camera : Camera3D = get_node("Camera3D")
-@onready var ui : Node = get_node("/root/MainScene/CanvasLayer/UI")
+@onready var ui : Node = get_node("../CanvasLayer/UI")
 @onready var primarySlot: Node3D = get_node("Camera3D/GunSlotPrimary")
 #@onready var secondarySlot: Node = get_node("Camera3D/GunSlotSecondary") TODO
 @onready var movementController = get_node("MovementController")
 
 func _ready ():
 	# hide and lock the mouse cursor
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	GameState.set_state_playing()
 	
 	# set the UI
-	ui.update_health_bar(curHp, maxHp)
-	ui.update_ammo_text(primarySlot.get_ammo_count())
+	#ui.update_health_bar(curHp, maxHp)
+	#ui.update_ammo_text(primarySlot.get_ammo_count())
 	
 	movementController.set_player_ref(self)
 
 # called 60 times a second
 func _physics_process(delta):
-	# exit if esc pressed
-	if Input.is_action_pressed("exit"):
-		get_tree().quit()
-	
 	movementController.poll(velocity)
 	ui.update_movement_state(movementController.get_current_state())
 	
@@ -57,7 +53,6 @@ func _process(delta):
 	
 	# reset the mouse delta vector
 	mouseDelta = Vector2()
-
 # called when an input is detected
 func _input(event):
 	if event is InputEventMouseMotion:
