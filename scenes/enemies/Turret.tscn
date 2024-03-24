@@ -1,6 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://66gabooesopv"]
+[gd_scene load_steps=21 format=3 uid="uid://66gabooesopv"]
 
-[ext_resource type="Script" path="res://Turret.gd" id="2_s7hgm"]
+[ext_resource type="Script" path="res://scripts/Turret.gd" id="2_s7hgm"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jf1kl"]
 resource_name = "MetalBody"
@@ -20,7 +20,7 @@ albedo_color = Color(0.488418, 0.488418, 0.488418, 1)
 roughness = 0.5
 emission_enabled = true
 emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 1.19175
+emission_energy_multiplier = 8.62
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfw75"]
 resource_name = "MetalBarrel"
@@ -172,6 +172,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ba0jg")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_01k3l"]
+height = 1.50649
+radius = 9.0
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dwd5d"]
 resource_name = "BlackRubber"
 transparency = 1
@@ -269,6 +273,179 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_joa6s")
 
+[sub_resource type="Animation" id="Animation_tk4h2"]
+resource_name = "Death"
+length = 4.0
+step = 0.05
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head_Rot/Head")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.927032, 0, 1.1, 1, 0.833, 1.75, 0, 3, 1, 2, 0.2, 0, 4, 1, 2, -0.05, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head_Rot/Head")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1.1, 1, 0.5, 0.5, -0.5, 0.5, 3, 1, 0, 0, -1, 0)
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Disk:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0.723, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 0.05, -0.25, 0, 0.25, 0, -0.05, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2.2, 3, 4)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Disk:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -0.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.2, 3)
+}
+tracks/4/type = "rotation_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Disk")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(2.05, 1, 0, 0, 0, 1, 2.4, 1, -0.174, 0, 0, 0.985, 2.8, 1, -0.174, 0, 0, 0.985, 3, 1, 0, 0, 0, 1)
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Legs:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0.753, -0.25, 0, 0.25, 0, 0.8, -0.25, 0, 0.25, 0, 0.3, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 3, 4)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Legs:position:z")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 3)
+}
+tracks/7/type = "rotation_3d"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Legs")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 3, 1, 0.707, 0, 0, 0.707)
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"remove"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_yt1a6"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head_Rot/Head")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.927032, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head_Rot/Head")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Disk:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.723, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Disk:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "rotation_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Disk")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Legs:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.753, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Legs:position:z")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "rotation_3d"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Legs")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gfc33"]
+_data = {
+"Death": SubResource("Animation_tk4h2"),
+"RESET": SubResource("Animation_yt1a6")
+}
+
 [sub_resource type="Animation" id="Animation_ofg66"]
 resource_name = "Idle"
 length = 1.5
@@ -277,537 +454,106 @@ step = 0.05
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Head")
+tracks/0/path = NodePath("Head_Rot/Head")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.927032, 0, 0.75, 1, 0, 0.9, 0, 1.5, 1, 0, 0.927032, 0)
 
-[sub_resource type="Animation" id="Animation_q625m"]
-resource_name = "Death"
-length = 4.0
-step = 0.05
+[sub_resource type="Animation" id="Animation_ux1ke"]
+resource_name = "RESET"
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Head")
+tracks/0/path = NodePath("Head_Rot/Head")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.927032, 0, 1.1, 1, 0.833, 1.75, 0, 3, 1, 2, 0.2, 0, 4, 1, 2, -0.05, 0)
-tracks/1/type = "rotation_3d"
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.927032, 0)
+tracks/1/type = "position_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Head")
+tracks/1/path = NodePath("Disk")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1.1, 1, 0.5, 0.5, -0.5, 0.5, 3, 1, 0, 0, -1, 0)
-tracks/2/type = "rotation_3d"
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.723, 0)
+tracks/2/type = "position_3d"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("Legs")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 3, 1, 0.707, 0, 0, 0.707)
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0.753, 0)
 tracks/3/type = "rotation_3d"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Disk")
+tracks/3/path = NodePath("Head_Rot/Head")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/keys = PackedFloat32Array(2.05, 1, 0, 0, 0, 1, 2.4, 1, -0.174, 0, 0, 0.985, 2.8, 1, -0.174, 0, 0, 0.985, 3, 1, 0, 0, 0, 1)
-tracks/4/type = "method"
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/4/type = "rotation_3d"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath(".")
+tracks/4/path = NodePath("Disk")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(4),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"remove"
-}]
-}
-tracks/5/type = "bezier"
+tracks/4/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/5/type = "rotation_3d"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Head:mesh:surface_0/material:albedo_color:r")
+tracks/5/path = NodePath("Legs")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.490542, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/6/type = "bezier"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Head:mesh:surface_0/material:albedo_color:g")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.457003, -0.25, 0, 0.25, 0, 0.2, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/7/type = "bezier"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Head:mesh:surface_0/material:albedo_color:b")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.0709699, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/8/type = "bezier"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Head:mesh:surface_0/material:albedo_color:a")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/9/type = "bezier"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Head:mesh:surface_1/material:albedo_color:r")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.488418, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/10/type = "bezier"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Head:mesh:surface_1/material:albedo_color:a")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/11/type = "bezier"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("Head:mesh:surface_2/material:albedo_color:r")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.277282, -0.25, 0, 0.25, 0, 0.8, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/12/type = "bezier"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Head:mesh:surface_2/material:albedo_color:g")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.277282, -0.25, 0, 0.25, 0, 0.05, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/13/type = "bezier"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Head:mesh:surface_2/material:albedo_color:b")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.277282, -0.25, 0, 0.25, 0, 0.05, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/14/type = "bezier"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Head:mesh:surface_2/material:albedo_color:a")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/15/type = "bezier"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("Head:mesh:surface_3/material:albedo_color:r")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/16/type = "bezier"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("Head:mesh:surface_3/material:albedo_color:a")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/17/type = "bezier"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("Head:mesh:surface_4/material:albedo_color:r")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.108214, -0.25, 0, 0.25, 0, 0.8, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/18/type = "bezier"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("Head:mesh:surface_4/material:albedo_color:g")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.265374, -0.25, 0, 0.25, 0, 0.05, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/19/type = "bezier"
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/path = NodePath("Head:mesh:surface_4/material:albedo_color:b")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.094394, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/20/type = "bezier"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("Head:mesh:surface_4/material:albedo_color:a")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/21/type = "bezier"
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/path = NodePath("Disk:mesh:surface_0/material:albedo_color:r")
-tracks/21/interp = 1
-tracks/21/loop_wrap = true
-tracks/21/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.6, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/22/type = "bezier"
-tracks/22/imported = false
-tracks/22/enabled = true
-tracks/22/path = NodePath("Disk:mesh:surface_0/material:albedo_color:a")
-tracks/22/interp = 1
-tracks/22/loop_wrap = true
-tracks/22/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(3, 4)
-}
-tracks/23/type = "bezier"
-tracks/23/imported = false
-tracks/23/enabled = true
-tracks/23/path = NodePath("Disk:position:y")
-tracks/23/interp = 1
-tracks/23/loop_wrap = true
-tracks/23/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
-"points": PackedFloat32Array(0.723, -0.25, 0, 0.25, 0, 2.5, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 0.05, -0.25, 0, 0.25, 0, -0.05, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1, 2.15, 3, 4)
-}
-tracks/24/type = "bezier"
-tracks/24/imported = false
-tracks/24/enabled = true
-tracks/24/path = NodePath("Disk:position:z")
-tracks/24/interp = 1
-tracks/24/loop_wrap = true
-tracks/24/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -0.5, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 2.15, 3)
-}
-tracks/25/type = "bezier"
-tracks/25/imported = false
-tracks/25/enabled = true
-tracks/25/path = NodePath("Legs:position:y")
-tracks/25/interp = 1
-tracks/25/loop_wrap = true
-tracks/25/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0.753, -0.25, 0, 0.25, 0, 0.8, -0.25, 0, 0.25, 0, 0.3, -0.25, 0, 0.25, 0, -0.1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1, 3, 4)
-}
-tracks/26/type = "bezier"
-tracks/26/imported = false
-tracks/26/enabled = true
-tracks/26/path = NodePath("Legs:position:z")
-tracks/26/interp = 1
-tracks/26/loop_wrap = true
-tracks/26/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 3)
-}
-
-[sub_resource type="Animation" id="Animation_34myi"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Head:mesh:surface_0/material:albedo_color:r")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.490542, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Head:mesh:surface_0/material:albedo_color:g")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.457003, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Head:mesh:surface_0/material:albedo_color:b")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.0709699, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Head:mesh:surface_0/material:albedo_color:a")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Head:mesh:surface_1/material:albedo_color:r")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.488418, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Head:mesh:surface_1/material:albedo_color:a")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/6/type = "bezier"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Head:mesh:surface_2/material:albedo_color:r")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.277282, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/7/type = "bezier"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Head:mesh:surface_2/material:albedo_color:g")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.277282, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/8/type = "bezier"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Head:mesh:surface_2/material:albedo_color:b")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.277282, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/9/type = "bezier"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Head:mesh:surface_2/material:albedo_color:a")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/10/type = "bezier"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Head:mesh:surface_3/material:albedo_color:r")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/11/type = "bezier"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("Head:mesh:surface_3/material:albedo_color:a")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/12/type = "bezier"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Head:mesh:surface_4/material:albedo_color:r")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.108214, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/13/type = "bezier"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Head:mesh:surface_4/material:albedo_color:g")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.265374, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/14/type = "bezier"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Head:mesh:surface_4/material:albedo_color:b")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.094394, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/15/type = "bezier"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("Head:mesh:surface_4/material:albedo_color:a")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/16/type = "bezier"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("Disk:mesh:surface_0/material:albedo_color:r")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/17/type = "bezier"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("Disk:mesh:surface_0/material:albedo_color:a")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
+tracks/5/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8i0v6"]
 _data = {
-"Death": SubResource("Animation_q625m"),
 "Idle": SubResource("Animation_ofg66"),
-"RESET": SubResource("Animation_34myi")
+"RESET": SubResource("Animation_ux1ke")
 }
 
 [node name="Turret" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("2_s7hgm")
 
-[node name="TurretCollider" type="CollisionPolygon3D" parent="."]
+[node name="EnemyCollider" type="CollisionPolygon3D" parent="."]
 depth = 0.65
 polygon = PackedVector2Array(-1, 1.15, 0.39, 1.15, 0.393, 0, -1, 0)
 
-[node name="Head" type="MeshInstance3D" parent="."]
+[node name="Head_Rot" type="Node3D" parent="."]
+
+[node name="Head" type="MeshInstance3D" parent="Head_Rot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.927032, 0)
 mesh = SubResource("ArrayMesh_dii27")
 skeleton = NodePath("")
 
-[node name="Sights" type="Area3D" parent="Head"]
+[node name="OmniLight" type="OmniLight3D" parent="Head_Rot/Head"]
+transform = Transform3D(-4.37114e-08, 0, 1, 1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 1, 1.91069e-15, -0.000299247, 0.730007, 3.19096e-08)
+visible = false
+light_color = Color(0.943534, 0.0999238, 0.182911, 1)
+light_energy = 7.35
+light_indirect_energy = 0.0
+light_negative = true
+omni_range = 9.0
+
+[node name="Sights" type="Area3D" parent="Head_Rot/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000299215, 0, 0)
 
-[node name="Sight" type="CollisionPolygon3D" parent="Head/Sights"]
+[node name="Sight3" type="CollisionPolygon3D" parent="Head_Rot/Head/Sights"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
 depth = 1.5
 polygon = PackedVector2Array(0, 0, -8, 4, -10, 0, -8, -4)
 
-[node name="Shoots" type="Area3D" parent="Head"]
+[node name="Sight" type="CollisionShape3D" parent="Head_Rot/Head/Sights"]
+shape = SubResource("CylinderShape3D_01k3l")
+
+[node name="Shoots" type="Area3D" parent="Head_Rot/Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000299215, 0, 0)
 
-[node name="Shoot" type="CollisionPolygon3D" parent="Head/Shoots"]
+[node name="Shoot" type="CollisionPolygon3D" parent="Head_Rot/Head/Shoots"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 depth = 1.5
-polygon = PackedVector2Array(0, 0, -9.5, 1, -10, 0, -9.5, -1)
+polygon = PackedVector2Array(0, 0, -8.8, 1, -9, 0, -8.8, -1)
 
-[node name="Barrel" type="Node3D" parent="Head"]
+[node name="Barrel" type="Node3D" parent="Head_Rot/Head"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.29633, 0, 0)
 
 [node name="Disk" type="MeshInstance3D" parent="."]
@@ -822,10 +568,17 @@ skeleton = NodePath("")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
+"": SubResource("AnimationLibrary_gfc33")
+}
+
+[node name="AnimationPlayer22" type="AnimationPlayer" parent="."]
+libraries = {
 "": SubResource("AnimationLibrary_8i0v6")
 }
 
-[connection signal="body_entered" from="Head/Sights" to="." method="_on_sights_body_entered"]
-[connection signal="body_exited" from="Head/Sights" to="." method="_on_sights_body_exited"]
-[connection signal="body_entered" from="Head/Shoots" to="." method="_on_shoots_body_entered"]
-[connection signal="body_exited" from="Head/Shoots" to="." method="_on_shoots_body_exited"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="body_entered" from="Head_Rot/Head/Sights" to="." method="_on_sights_body_entered"]
+[connection signal="body_exited" from="Head_Rot/Head/Sights" to="." method="_on_sights_body_exited"]
+[connection signal="body_entered" from="Head_Rot/Head/Shoots" to="." method="_on_shoots_body_entered"]
+[connection signal="body_exited" from="Head_Rot/Head/Shoots" to="." method="_on_shoots_body_exited"]

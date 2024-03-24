@@ -8,8 +8,12 @@ enum LogLevel {
 }
 
 @onready var _instance: Logger = Logger.new()
+const LOG_LEVEL = LogLevel.INFO
 
 func _log(level: LogLevel, message: String):
+	if level < LOG_LEVEL:
+		return
+	
 	match level:
 		LogLevel.DEBUG:
 			print("DEBUG: " + message)

@@ -11,6 +11,7 @@ func initialize(bullet_speed, bullet_damage, lifetime):
 	life.wait_time = lifetime
 	life.autostart = true
 	life.timeout.connect(destroy)
+
 	
 # called every frame
 func _process(delta):
@@ -26,5 +27,8 @@ func _on_Bullet_body_entered(body):
 	# does this body have a 'take_damage' function?
 	# if so, deal damage and destroy the bullet
 	if body.has_method("take_damage"):
-		body.take_damage(damage)
+		if body.is_in_group("Enemy"):
+			body.take_damage(damage, position)
+		else:
+			body.take_damage(damage)
 		destroy()

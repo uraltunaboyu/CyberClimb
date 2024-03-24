@@ -17,9 +17,9 @@ var collider_name = "EnemyCollider"
 # components
 @onready var player : Node = get_node("/root/MainScene/Player")
 @onready var dmgScene = preload("res://scenes/DamageVis.tscn")
-@onready var ap : AnimationPlayer = $AnimationPlayer
+@onready var death_ap = $AnimationPlayer
 
-func take_damage (damage:int):
+func take_damage (damage:int, pos):
 	cur_health -= damage
 	# This instantiates the DamageVis scene to display damage dealt to an enemy
 	# The % HP loss is calculated (has to be float division) and is sent along
@@ -27,17 +27,16 @@ func take_damage (damage:int):
 	var hp_chunk:float = float(damage)/max_health
 	var dmgTxt:Node3D = dmgScene.instantiate()
 	get_node("/root/MainScene").add_child(dmgTxt)
-	dmgTxt.set_and_animate(damage, hp_chunk, global_position)
+	dmgTxt.set_and_animate(damage, hp_chunk, pos)
 	
 	if cur_health <= 0:
 		die()
 
 func die ():
-	ap.stop()
 	alive = false
 	set_physics_process(false)
 	find_child(collider_name).queue_free()
-	ap.play("Death")
+	death_ap.play("Death")
 	
 func remove():
 	queue_free()

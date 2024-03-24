@@ -88,7 +88,7 @@ func _calculate_radius(collider: Node) -> float:
 		var points = collider.polygon
 		var aabb = AABB()
 		for point in points:
-			aabb.expand(point)
+			aabb.expand(Vector3(point.x, point.y, 0))
 		
 		return aabb.get_longest_axis_size() / 2.0
 		
