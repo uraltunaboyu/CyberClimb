@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 # stats
-var curHp : int = 10
-var maxHp : int = 10
+var curHp : int = 100
+var maxHp : int = 100
 var ammo : int = 30
 var score: int = 0
 
@@ -17,27 +17,23 @@ var fall: Vector3 = Vector3()
 
 # components
 @onready var camera : Camera3D = get_node("Camera3D")
-@onready var ui : Node = get_node("/root/MainScene/CanvasLayer/UI")
+@onready var ui : Node = get_node("../CanvasLayer/UI")
 @onready var primarySlot: Node3D = get_node("Camera3D/GunSlotPrimary")
 #@onready var secondarySlot: Node = get_node("Camera3D/GunSlotSecondary") TODO
 @onready var movementController = get_node("MovementController")
 
 func _ready ():
 	# hide and lock the mouse cursor
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	GameState.set_state_playing()
 	
 	# set the UI
-	ui.update_health_bar(curHp, maxHp)
-	ui.update_ammo_text(primarySlot.get_ammo_count())
+	#ui.update_health_bar(curHp, maxHp)
+	#ui.update_ammo_text(primarySlot.get_ammo_count())
 	
 	movementController.set_player_ref(self)
 
 # called 60 times a second
 func _physics_process(delta):
-	# exit if esc pressed
-	if Input.is_action_pressed("exit"):
-		get_tree().quit()
-	
 	movementController.poll(velocity)
 	ui.update_movement_state(movementController.get_current_state())
 	
@@ -46,19 +42,11 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _process(delta):
-	# rotate the camera along the x axis
 	camera.rotation_degrees.x -= mouseDelta.y * lookSensitivity * delta
-	
-	# clamp camera x rotation axis
 	camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, minLookAngle, maxLookAngle)
-	
-	# rotate the player along their y axis
 	rotation_degrees.y -= mouseDelta.x * lookSensitivity * delta
-	
-	# reset the mouse delta vector
 	mouseDelta = Vector2()
-
-# called when an input is detected
+	
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouseDelta = event.relative

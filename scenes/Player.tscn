@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_obko2"]
 [ext_resource type="Script" path="res://scripts/GunSlot.gd" id="2_vdmnf"]
 [ext_resource type="Script" path="res://scripts/MovementController.gd" id="3_md0ua"]
-[ext_resource type="Texture2D" uid="uid://dw062mp25x44g" path="res://images/CrosshairTemp.png" id="4_f6o23"]
+[ext_resource type="Texture2D" uid="uid://bi86aqmnxm84f" path="res://images/CrosshairTemp.png" id="4_f6o23"]
 [ext_resource type="Script" path="res://scripts/InteractRay.gd" id="4_k452p"]
 [ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="4_w7asp"]
 
@@ -11,12 +11,11 @@
 radius = 0.489975
 height = 1.77068
 
-[node name="Player" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0978546, -0.0139799)
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
 script = ExtResource("1_obko2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.810241, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.893577, 0)
 shape = SubResource("1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -37,7 +36,7 @@ size_flags_vertical = 4
 texture = ExtResource("4_f6o23")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36932, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43342, 0)
 current = true
 
 [node name="GunSlotPrimary" type="Node3D" parent="Camera3D"]
