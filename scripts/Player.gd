@@ -26,16 +26,13 @@ func _ready ():
 	# hide and lock the mouse cursor
 	GameState.set_state_playing()
 	
-	# set the UI
-	#ui.update_health_bar(curHp, maxHp)
-	#ui.update_ammo_text(primarySlot.get_ammo_count())
+	PlayerState.ammo = primarySlot.get_ammo_count()
 	
 	movementController.set_player_ref(self)
 
 # called 60 times a second
 func _physics_process(delta):
 	movementController.poll(velocity)
-	ui.update_movement_state(movementController.get_current_state())
 	
 	# move the player
 	set_velocity(movementController.calculate_movement_vector(delta))
@@ -55,7 +52,7 @@ func _input(event):
 func take_damage (damage):
 	curHp -= damage
 	
-	ui.update_health_bar(curHp, maxHp)
+	PlayerState.hp = curHp
 	
 	if curHp <= 0:
 		die()
@@ -70,7 +67,7 @@ func add_health (amount):
 	if curHp > maxHp:
 		curHp = maxHp
 		
-	ui.update_health_bar(curHp, maxHp)
+	PlayerState.hp = curHp
 	
 func add_ammo (amount):
 	if primarySlot.equipped_gun:

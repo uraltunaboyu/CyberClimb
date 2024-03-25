@@ -28,35 +28,33 @@ var vel: Vector3
 var wallNormal
 
 var jumpTimer: Timer
-var jumpCooldown = 1.0
-var jumpForce : float = 12
-var canJump = true
+var jumpReady = true
 
 # dash
-var canDash = true
-var dashSpeed: float = 20.0
-var dashDuration: float = 2.0
+var dashReady = true
 var dashCooldown: Timer
-var dashCooldownDuration = 3.0
 var dashTimer: Timer
+
+# stamina
+var isRecovering = false
+var recoveryTimer: Timer
 
 var currentState: MovementState
 var prevState: MovementState
 var playerRef: CharacterBody3D
 
-# physics
-var moveSpeed : float = 5.0
-
-#slow descent for glide
-var glideGravity: float = 1.0
-var glideSpeedMult: float = 1.5
-
 var gravity : float = 12
-
 
 func _ready():
 	currentState = MovementState.STOPPED
 	vel = Vector3(0, 0, 0)
+	
+	recoveryTimer = Timer.new()
+	add_child(recoveryTimer)
+	
+	recoveryTimer.wait_time = PlayerState.recoveryDelay
+	recoveryTimer.one_shot = true
+	recoveryTimer.timeout.connect(func(): isRecovering = true)
 	
 	dashTimer = Timer.new()
 	add_child(dashTimer)
@@ -65,17 +63,25 @@ func _ready():
 	jumpTimer = Timer.new()
 	add_child(jumpTimer)
 	
-	jumpTimer.wait_time = jumpCooldown
+	jumpTimer.wait_time = PlayerState.jumpCooldown
 	jumpTimer.one_shot = true
-	jumpTimer.timeout.connect(func(): canJump = true)
+	jumpTimer.timeout.connect(post_jump_recovery)
 	
-	dashTimer.wait_time = dashDuration
+	dashTimer.wait_time = PlayerState.dashDuration
 	dashTimer.one_shot = true
 	dashTimer.timeout.connect(start_dash_cooldown)
 	
-	dashCooldown.wait_time = dashCooldownDuration
+	dashCooldown.wait_time = PlayerState.dashCooldownDuration
 	dashCooldown.one_shot = true
-	dashCooldown.timeout.connect(func(): canDash = true)
+	dashCooldown.timeout.connect(post_dash_recovery)
+	
+func _process(_delta):
+	if currentState == MovementState.WALLRUNNING:
+		PlayerState.stamina -= PlayerState.wallrunCost
+	if isRecovering:
+		PlayerState.stamina += PlayerState.recoveryRate
+		PlayerState.stamina = min(PlayerState.stamina, PlayerState.maxStamina)
+		isRecovering = PlayerState.stamina != PlayerState.maxStamina
 	
 func set_player_ref(player: CharacterBody3D):
 	playerRef = player
@@ -100,11 +106,44 @@ func can_start_wallrunning() -> bool:
 	# perpendicular to wall
 	return playerRef.is_on_wall()
 	
+func can_dash() -> bool:
+	return dashReady and PlayerState.stamina >= PlayerState.dashCost
+	
+func can_jump() -> bool:
+	return jumpReady and PlayerState.stamina >= PlayerState.jumpCost
+	
 func start_dash_cooldown():
-	canDash = false
+	dashReady = false
 	dashCooldown.start()
 	
+func start_dash():
+	currentState = MovementState.DASHING
+	PlayerState.stamina -= PlayerState.dashCost
+	
+func start_airdash():
+	# might change later
+	start_dash()
+	
+func start_jump():
+	currentState = MovementState.JUMPING
+	PlayerState.stamina -= PlayerState.jumpCost
+	reset_recovery_timer()
+	
+func post_dash_recovery():
+	dashReady = true
+	reset_recovery_timer()
+	
+func post_jump_recovery():
+	jumpReady = true
+	reset_recovery_timer()
+	
+func reset_recovery_timer():
+	recoveryTimer.stop()
+	recoveryTimer.wait_time = PlayerState.recoveryDelay
+	recoveryTimer.start()
+	
 func calculate_movement_vector(delta) -> Vector3:
+	UIController.set_movement_state(get_current_state())
 	var input = Vector2()
 	vel.x = 0
 	vel.z = 0
@@ -128,31 +167,31 @@ func calculate_movement_vector(delta) -> Vector3:
 	var relativeDir = (forward * input.y + right * input.x)
 	
 	if currentState != MovementState.DASHING && currentState != MovementState.AIRDASHING:
-		vel.x = relativeDir.x * moveSpeed
-		vel.z = relativeDir.z * moveSpeed
+		vel.x = relativeDir.x * PlayerState.moveSpeed
+		vel.z = relativeDir.z * PlayerState.moveSpeed
 	else:
 		if prevState != currentState: 
 			dashTimer.start()
-		vel.x = relativeDir.x * dashSpeed
-		vel.z = relativeDir.z * dashSpeed
+		vel.x = relativeDir.x * PlayerState.dashSpeed
+		vel.z = relativeDir.z * PlayerState.dashSpeed
 	
 	# apply gravity. handles wether it is glideGravity or regular
 	if currentState != MovementState.GLIDING && currentState != MovementState.WALLRUNNING:
 		vel.y -= gravity * delta
 	elif currentState == MovementState.GLIDING:
-		vel.y -= glideGravity * delta
+		vel.y -= PlayerState.glideGravity * delta
 		vel.x = vel.x * 2
 		vel.z = vel.z * 2
 	elif currentState == MovementState.WALLRUNNING:
 		vel.y = 0
 		
 	if currentState == MovementState.GLIDING:
-		vel.x = vel.x * glideSpeedMult
-		vel.z = vel.z * glideSpeedMult
+		vel.x = vel.x * PlayerState.glideSpeedMult
+		vel.z = vel.z * PlayerState.glideSpeedMult
 		
-	if currentState == MovementState.JUMPING && playerRef.is_on_floor() && canJump:
-		vel.y = jumpForce
-		canJump = false
+	if currentState == MovementState.JUMPING && playerRef.is_on_floor() && jumpReady:
+		vel.y = PlayerState.jumpForce
+		jumpReady = false
 		jumpTimer.start()
 		
 	
@@ -166,10 +205,10 @@ func poll(velocity: Vector3):
 		MovementState.STOPPED:
 			if is_movement_pressed():
 				currentState = MovementState.MOVING
-			elif is_jump_pressed() and canJump:
-				currentState = MovementState.JUMPING
-			elif is_dash_pressed() and canDash:
-				currentState = MovementState.DASHING
+			elif is_jump_pressed() and jumpReady:
+				start_jump()
+			elif is_dash_pressed() and can_dash():
+				start_dash()
 		MovementState.MOVING:
 			if not is_movement_pressed() and \
 			not is_jump_pressed() and \
@@ -178,10 +217,10 @@ func poll(velocity: Vector3):
 			elif not is_jump_pressed() and \
 			not is_dash_pressed():
 				currentState = MovementState.MOVING
-			elif not is_dash_pressed() and canJump:
-				currentState = MovementState.JUMPING
-			elif canDash:
-				currentState = MovementState.DASHING
+			elif not is_dash_pressed() and can_jump():
+				start_jump()
+			elif can_dash():
+				start_dash()
 		MovementState.JUMPING:
 			if velocity.y <= 0:
 				currentState = MovementState.FALLING
@@ -190,8 +229,8 @@ func poll(velocity: Vector3):
 					currentState = MovementState.STOPPED
 				else:
 					currentState = MovementState.MOVING
-			elif is_dash_pressed() and canDash:
-				currentState = MovementState.AIRDASHING
+			elif is_dash_pressed() and can_dash():
+				start_airdash()
 			elif can_start_wallrunning():
 				currentState = MovementState.WALLRUNNING
 		MovementState.FALLING:
@@ -200,22 +239,22 @@ func poll(velocity: Vector3):
 					currentState = MovementState.STOPPED
 				else:
 					currentState = MovementState.MOVING
-			elif is_dash_pressed() and canDash:
-				currentState = MovementState.AIRDASHING
+			elif is_dash_pressed() and can_dash():
+				start_airdash()
 			elif can_start_wallrunning():
 				currentState = MovementState.WALLRUNNING
 			elif is_jump_pressed():
 				currentState = MovementState.GLIDING
 		MovementState.DASHING:
-			if !canDash:
+			if !dashReady:
 				if velocity.x == 0:
 					currentState = MovementState.STOPPED
 				else:
 					currentState = MovementState.MOVING
-			elif is_jump_pressed() and canJump:
-				currentState = MovementState.JUMPING
+			elif is_jump_pressed() and can_jump():
+				start_jump()
 		MovementState.AIRDASHING:
-			if !canDash:
+			if !dashReady:
 				if playerRef.is_on_floor():
 					if velocity.x == 0:
 						currentState = MovementState.STOPPED
@@ -235,6 +274,7 @@ func poll(velocity: Vector3):
 				currentState = MovementState.WALLRUNNING
 		MovementState.WALLRUNNING:
 			if not playerRef.is_on_wall_only():
+				reset_recovery_timer()
 				if not playerRef.is_on_floor():
 					currentState = MovementState.FALLING
 				else:
@@ -242,5 +282,5 @@ func poll(velocity: Vector3):
 						currentState = MovementState.STOPPED
 					else:
 						currentState = MovementState.MOVING
-			elif is_jump_pressed() and canJump:
-				currentState = MovementState.JUMPING
+			elif is_jump_pressed() and can_jump():
+				start_jump()
