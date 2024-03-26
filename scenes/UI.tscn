@@ -17,10 +17,10 @@ script = ExtResource("1_juo5s")
 layout_mode = 0
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 19.2455
-offset_top = -48.8815
-offset_right = 219.245
-offset_bottom = -16.8815
+offset_left = 20.0
+offset_top = -50.0
+offset_right = 219.999
+offset_bottom = -18.0
 value = 50.0
 nine_patch_stretch = true
 texture_under = ExtResource("2_bnrwh")
@@ -28,14 +28,32 @@ texture_progress = ExtResource("2_bnrwh")
 tint_under = Color(0.211765, 0.211765, 0.211765, 1)
 tint_progress = Color(1, 0, 0, 1)
 
-[node name="AmmoText" type="Label" parent="."]
-layout_mode = 0
+[node name="StaminaBar" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 20.3643
-offset_top = -99.9153
-offset_right = 188.364
-offset_bottom = -58.9153
+offset_left = 20.0
+offset_top = -100.0
+offset_right = 219.999
+offset_bottom = -68.0
+grow_vertical = 0
+value = 50.0
+nine_patch_stretch = true
+texture_under = ExtResource("2_bnrwh")
+texture_progress = ExtResource("2_bnrwh")
+tint_under = Color(0.211765, 0.211765, 0.211765, 1)
+
+[node name="AmmoText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -150.0
+offset_right = 188.0
+offset_bottom = -109.0
+grow_vertical = 0
 theme_override_fonts/font = ExtResource("3_5lwx4")
 text = "Ammo: 50"
 

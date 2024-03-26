@@ -17,7 +17,7 @@ func _process(_delta):
 func attack():
 	if equipped_gun:
 		equipped_gun.attack()
-		ui.update_ammo_text(equipped_gun.get_ammo_count())
+		PlayerState.ammo = equipped_gun.get_ammo_count()
 
 func get_ammo_count():
 	# Known bug, for burst weapons, only gets ammo when click is held.
@@ -30,7 +30,7 @@ func get_ammo_count():
 func add_ammo(amount):
 	if equipped_gun:
 		equipped_gun.add_ammo_count(amount)
-		ui.update_ammo_text(equipped_gun.get_ammo_count())
+		PlayerState.ammo = equipped_gun.get_ammo_count()
 
 func set_equipped_gun(new_gun):
 	# TODO
@@ -40,7 +40,7 @@ func set_equipped_gun(new_gun):
 	equipped_gun = replacing_gun.instantiate()
 	add_child(equipped_gun)
 	equipped_gun.global_transform = self.global_transform
-	ui.update_ammo_text(equipped_gun.get_ammo_count())
+	PlayerState.ammo = equipped_gun.get_ammo_count()
 	
 func remove_weapon():
 	if equipped_gun:

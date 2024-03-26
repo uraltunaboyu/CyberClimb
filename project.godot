@@ -19,6 +19,8 @@ config/icon="res://icon.png"
 
 GameState="*res://scripts/GameState.gd"
 Log="*res://scripts/common/Logger.gd"
+PlayerState="*res://scripts/PlayerState.gd"
+UIController="*res://scripts/UIController.gd"
 
 [display]
 
