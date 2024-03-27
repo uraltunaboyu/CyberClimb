@@ -18,9 +18,8 @@ func set_room_order()->void:
 		room_order.append_array(room_levels)
 	
 func go_next_room(reward:String)->int:
-	print(reward)
 	GameState.load_scene_by_path(room_order[0])
-	print('generated')
+	AudioController.play_combat_music()
 	diff += 1
 	room_order.remove_at(0)
 	return(diff)
