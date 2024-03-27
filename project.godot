@@ -21,6 +21,7 @@ GameState="*res://scripts/GameState.gd"
 Log="*res://scripts/common/Logger.gd"
 PlayerState="*res://scripts/PlayerState.gd"
 UIController="*res://scripts/UIController.gd"
+AudioController="*res://scripts/AudioController.gd"
 
 [display]
 
