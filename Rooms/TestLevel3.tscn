@@ -2,13 +2,17 @@
 
 [ext_resource type="MeshLibrary" uid="uid://3vo1kmb7uncb" path="res://maps/ZoneMeshMap.tres" id="1_hgokt"]
 [ext_resource type="Script" path="res://Room Generation/Room.gd" id="1_uwlon"]
-[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="2_mbp3d"]
+[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="2_mbp3d"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="4_25etv"]
 [ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="5_pgs3o"]
 [ext_resource type="Script" path="res://scripts/Door.gd" id="6_hvwtg"]
 
 [node name="TestLevel3" type="Node3D"]
 script = ExtResource("1_uwlon")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("4_25etv")]
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("1_hgokt")
@@ -37,10 +41,6 @@ target_scene = "Not this one either..."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.64772, 0)
 prompt_message = "Escape?"
 target_scene = "You really tried all the buttons? HA! There is no escape!"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="UI" parent="CanvasLayer" instance=ExtResource("4_25etv")]
 
 [node name="Player" parent="." instance=ExtResource("5_pgs3o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.31277, -0.0139799)
