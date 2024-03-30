@@ -75,6 +75,7 @@ func _ready():
 	_animation_player.animation_finished.connect(_anim_finished_handler)
 	
 	max_health = 1000
+	cur_health = max_health
 	_state = BossState.IDLE
 	
 func _process(delta):
@@ -180,3 +181,8 @@ func _on_player_enter_saw(body):
 	if not body.is_in_group("Player"): return
 	if not _animation_player.current_animation == SWIPE_ANIM: return
 	body.take_damage(SWIPE_DAMAGE)
+
+func die():
+	# TODO actual death func
+	Log.Info("Yippee")
+	queue_free()
