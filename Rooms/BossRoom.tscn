@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://bq83cuyytd2pc"]
+
+[ext_resource type="PackedScene" uid="uid://cuch2hh0h7xpx" path="res://models/Rooms/BossRoom.glb" id="1_v50lt"]
+[ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="2_auniy"]
+[ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="2_shaiy"]
+[ext_resource type="Shader" path="res://shaders/bright.gdshader" id="3_lmjfr"]
+[ext_resource type="PackedScene" uid="uid://c66ryo0mg0jd8" path="res://scenes/enemies/RoboSurgeon.tscn" id="4_drmxu"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_aakqn"]
+vertices = PackedVector3Array(-24.5, 0.5, -24.5, -24.5, 0.5, 24.5, 24.5, 0.5, 24.5, 24.5, 0.5, -24.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xsawx"]
+size = Vector2(50, 50)
+
+[sub_resource type="Environment" id="Environment_adh5c"]
+ambient_light_color = Color(0.698039, 0.698039, 0.698039, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctisg"]
+render_priority = 0
+shader = ExtResource("3_lmjfr")
+
+[node name="Boss_Room" instance=ExtResource("1_v50lt")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="0"]
+
+[node name="UI" parent="CanvasLayer" index="0" instance=ExtResource("2_shaiy")]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." index="1"]
+navigation_mesh = SubResource("NavigationMesh_aakqn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D" index="0"]
+mesh = SubResource("PlaneMesh_xsawx")
+
+[node name="BossModel8" parent="." index="2" instance=ExtResource("4_drmxu")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.460072, 0)
+
+[node name="Player" parent="." index="3" instance=ExtResource("2_auniy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4834, 0.5, 18.1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="4"]
+environment = SubResource("Environment_adh5c")
+
+[node name="Roof" parent="." index="6"]
+visible = false
+surface_material_override/0 = SubResource("ShaderMaterial_ctisg")
+
+[node name="Spot_001" parent="." index="22"]
+light_energy = 1.0

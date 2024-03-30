@@ -22,6 +22,7 @@ Log="*res://scripts/common/Logger.gd"
 PlayerState="*res://scripts/PlayerState.gd"
 UIController="*res://scripts/UIController.gd"
 AudioController="*res://scripts/AudioController.gd"
+Debug="*res://scripts/common/Debug.gd"
 
 [display]
 

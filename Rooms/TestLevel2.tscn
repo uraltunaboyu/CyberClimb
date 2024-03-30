@@ -2,13 +2,17 @@
 
 [ext_resource type="MeshLibrary" uid="uid://3vo1kmb7uncb" path="res://maps/ZoneMeshMap.tres" id="1_e251g"]
 [ext_resource type="Script" path="res://Room Generation/Room.gd" id="1_mlk8d"]
-[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="2_v3121"]
+[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="2_v3121"]
 [ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="3_duwww"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="4_fmrvu"]
 [ext_resource type="Script" path="res://scripts/Door.gd" id="6_7r6pk"]
 
 [node name="TestLevel2" type="Node3D"]
 script = ExtResource("1_mlk8d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("4_fmrvu")]
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("1_e251g")
@@ -29,10 +33,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.11965, -0.0139799)
 [node name="OmniLight3D" type="OmniLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34869, 0)
 light_energy = 3.038
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="UI" parent="CanvasLayer" instance=ExtResource("4_fmrvu")]
 
 [node name="Player_Spawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37971, 2.42186, 2.20701)

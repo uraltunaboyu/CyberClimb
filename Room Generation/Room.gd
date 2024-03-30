@@ -21,6 +21,7 @@ func spawn_enemies(diff: int)->void:
 	## Calculate number of enemies based on round(average(min_enemies, max_enemies) * difficulty)
 	## 
 	for spawn_point in get_tree().get_nodes_in_group("spawn_area"):
+		if spawn_point.max_enemies == 0: continue
 		var enemy_count = (randi() % spawn_point.max_enemies) + spawn_point.min_enemies
 		Log.Info("Trying to spawn %s enemies" % enemy_count)
 		for i in range(enemy_count):

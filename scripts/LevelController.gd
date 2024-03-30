@@ -1,6 +1,11 @@
 class_name LevelController extends Node
 
-var all_rooms = {'theme 1' : ["res://Rooms/TestLevel.tscn", "res://Rooms/TestLevel3.tscn", "res://Rooms/TestLevel2.tscn"]}
+var all_rooms = {'theme 1' : [
+	"res://Rooms/TestLevel.tscn", 
+	"res://Rooms/TestLevel2.tscn",
+	"res://Rooms/TestLevel3.tscn",
+	"res://Rooms/BossRoom.tscn" 
+	]}
 var room_order = []
 var diff = 1
 

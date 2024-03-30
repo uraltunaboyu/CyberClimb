@@ -6,3 +6,5 @@ extends Control
 
 @onready var movementStateText: Label = get_node("DebugInfo/MovementState")
 
+func _ready():
+	UIController._initialize()

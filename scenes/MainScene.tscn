@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d02juuvp2nwss"]
+[gd_scene load_steps=10 format=3 uid="uid://d02juuvp2nwss"]
 
 [ext_resource type="Script" path="res://Room Generation/Room.gd" id="1_5jyis"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="1_n14xd"]
@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="3_yr7vg"]
 [ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="5_6v2ur"]
 [ext_resource type="PackedScene" uid="uid://c6eb8ep24xyjx" path="res://scenes/SpawnPoint.tscn" id="6_8bh3o"]
-[ext_resource type="PackedScene" uid="uid://66gabooesopv" path="res://scenes/enemies/Turret.tscn" id="7_i53q7"]
 [ext_resource type="Script" path="res://scripts/Door.gd" id="8_8my33"]
-[ext_resource type="PackedScene" path="res://scenes/SpawnArea.tscn" id="9_hmys0"]
+[ext_resource type="PackedScene" uid="uid://bmuq8c1234kuh" path="res://scenes/SpawnArea.tscn" id="9_hmys0"]
 
 [sub_resource type="ConcavePolygonShape3D" id="2"]
 data = PackedVector3Array(0, 0, 0, 3, 0.3, 0, 3, 0, 0, 3, 0.3, 0, 0, 0, 0, 0, 0.3, 0, 0, 0.3, -3, 3, 0.3, 0, 0, 0.3, 0, 3, 0.3, 0, 0, 0.3, -3, 3, 0.3, -3, 3, 0, -3, 3, 0.3, 0, 3, 0.3, -3, 3, 0.3, 0, 3, 0, -3, 3, 0, 0, 3, 0, -3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, -3, 0, 0, -3, 0, 0.3, -3, 0, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0.3, -3, 0, 0.3, 0, 3, 0, -3, 0, 0.3, -3, 0, 0, -3, 0, 0.3, -3, 3, 0, -3, 3, 0.3, -3)
@@ -48,17 +47,12 @@ prompt_message = "Remove Weapon"
 
 [node name="SpawnPoint" parent="." instance=ExtResource("6_8bh3o")]
 
-[node name="Turret" parent="." instance=ExtResource("7_i53q7")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3.30445, 0, 0)
-
 [node name="Next_Room" parent="." instance=ExtResource("5_6v2ur")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8186, 0.489933, -13.5219)
 script = ExtResource("8_8my33")
 
 [node name="SpawnArea" parent="." instance=ExtResource("9_hmys0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7149, 1.78814e-07, -4.35635)
-min_enemies = 1
-max_enemies = 3
 acceptable_enemies = Array[int]([0])
 
 [node name="EnemyHolder" type="Node" parent="."]
