@@ -26,7 +26,7 @@ func take_damage (damage:int, pos):
 	# The scene is a child of main so it can remain after the enemy dies
 	var hp_chunk:float = float(damage)/max_health
 	var dmgTxt:Node3D = dmgScene.instantiate()
-	get_node("/root/MainScene").add_child(dmgTxt)
+	get_node("..").add_child(dmgTxt)
 	dmgTxt.set_and_animate(damage, hp_chunk, pos)
 	
 	if cur_health <= 0:

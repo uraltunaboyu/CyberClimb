@@ -2,13 +2,17 @@
 
 [ext_resource type="Script" path="res://Room Generation/Room.gd" id="1_3xsf0"]
 [ext_resource type="MeshLibrary" uid="uid://3vo1kmb7uncb" path="res://maps/ZoneMeshMap.tres" id="1_tugkq"]
-[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="2_bqiq1"]
+[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="2_bqiq1"]
 [ext_resource type="Script" path="res://scripts/Door.gd" id="4_du6mi"]
 [ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="4_mpye5"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="5_1cjen"]
 
 [node name="TestLevel" type="Node3D"]
 script = ExtResource("1_3xsf0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("5_1cjen")]
 
 [node name="Flat Level" type="GridMap" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
@@ -68,10 +72,6 @@ target_scene = "You got power!"
 [node name="OmniLight3D" type="OmniLight3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34869, 0)
 light_energy = 3.038
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="UI" parent="CanvasLayer" instance=ExtResource("5_1cjen")]
 
 [connection signal="interacted" from="Flat Level3/Player_Exit/Button" to="Flat Level3/Player_Exit/Button" method="get_printed"]
 [connection signal="interacted" from="Flat Level3/Player_Exit2/Button" to="Flat Level3/Player_Exit2/Button" method="get_printed"]

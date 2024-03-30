@@ -3,19 +3,9 @@ extends Node
 var _ui_node: Node
 const DEBUG_MODE = true
 
-func _ready():
-	get_tree().tree_changed.connect(_on_tree_changed)
-	
-func _on_tree_changed():
-	if not get_tree().current_scene:
-		return
-	_ui_node = get_tree().current_scene.find_child("UI")
-	if not _ui_node:
-		Log.Warn("Unable to find UI node. UI will not work!")
-		return
-	_initialize()
-	
 func _initialize():
+	_ui_node = get_tree().current_scene.find_child("UI")
+	
 	set_max_hp(PlayerState.maxHp)
 	set_cur_hp(PlayerState.hp)
 	set_max_stamina(PlayerState.maxStamina)
