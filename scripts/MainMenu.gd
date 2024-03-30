@@ -2,8 +2,8 @@ extends Control
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	$MarginContainer/VBoxContainer/StartButton.grab_focus()
+#func _ready():
+	#$MarginContainer/VBoxContainer/StartButton.grab_focus()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -20,3 +20,5 @@ func _on_quit_button_pressed():
 
 func _on_credits_button_pressed():
 	pass # Replace with function body.
+
+
