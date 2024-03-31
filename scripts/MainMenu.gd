@@ -16,7 +16,7 @@ func _process(delta):
 var music_bus = AudioServer
 
 func _on_start_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/MainScene.tscn")
+	GameState.load_scene_by_path("res://scenes/MainScene.tscn")
 
 func _on_option_button_pressed():
 	OptionMenu.z_index = 1
@@ -27,7 +27,7 @@ func _on_quit_button_pressed():
 	get_tree().quit()
 
 func _on_credits_button_pressed():
-	pass # Replace with function body.
+	GameState.load_scene_by_path("res://scenes/credits-scene/credits.tscn")
 
 func _on_back_button_pressed():
 	OptionMenu.z_index = -1
