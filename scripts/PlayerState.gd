@@ -1,12 +1,16 @@
 extends Node
 
 enum UpgradeName {
-	BASIC_HP
+	BASIC_HP,
+	BASIC_STAMINA
 }
 
 var UPGRADES = {
-	UpgradeName.BASIC_HP : func(): hp += 10
+	UpgradeName.BASIC_HP : func(): hp += 10,
+	UpgradeName.BASIC_STAMINA : func(): stamina += 10
 }
+
+const string_to_upgrade = {"HP" : UpgradeName.BASIC_HP, "Stamina" : UpgradeName.BASIC_STAMINA}
 
 var hp: int = 100:
 	set(val):
@@ -59,3 +63,6 @@ func add_upgrade(name: UpgradeName):
 func apply_all_upgrades():
 	for upgrade in _upgrades:
 		UPGRADES[upgrade].call()
+
+func upgrade_from_string(upgrade: String) -> UpgradeName:
+	return string_to_upgrade[upgrade]

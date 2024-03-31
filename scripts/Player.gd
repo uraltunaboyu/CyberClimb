@@ -78,3 +78,6 @@ func _on_button_interacted(target_scene):
 	
 func remove_weapon(_nothing):
 	primarySlot.remove_weapon()
+	
+func add_upgrade(upgrade):
+	PlayerState.add_upgrade(PlayerState.upgrade_from_string(upgrade))
