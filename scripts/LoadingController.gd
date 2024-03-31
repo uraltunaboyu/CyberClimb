@@ -7,6 +7,7 @@ var progress: Array[float]
 @onready var target_scene_path: String = GameState.next_scene_path
 
 func _ready() -> void:
+	Log.Info("Start loading %s" % target_scene_path)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	ResourceLoader.load_threaded_request(target_scene_path)
 	
@@ -17,6 +18,7 @@ func _process(_delta: float) -> void:
 		ResourceLoader.THREAD_LOAD_IN_PROGRESS:
 			progress_bar.value = progress[0] * 100
 		ResourceLoader.THREAD_LOAD_LOADED:
+			Log.Info("Done loading!")
 			get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(target_scene_path))
 		ResourceLoader.THREAD_LOAD_FAILED:
-			print("Uh oh!")
+			Log.Error("Load failed!")

@@ -24,10 +24,12 @@ var maxStamina: float = 100.0:
 	set(val):
 		UIController.set_max_stamina(val)
 		maxStamina = val
-var ammo = 30:
+var ammo = null:
 	set(val):
 		UIController.set_ammo(val)
 		ammo = val
+var credits = 100
+var equipped_weapon: WeaponAttributes.Name = WeaponAttributes.Name.NONE
 
 var moveSpeed : float = 5.0
 var wallrunCost : float = 0.8

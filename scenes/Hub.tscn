@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://d02juuvp2nwss"]
+
+[ext_resource type="Script" path="res://scripts/Hub.gd" id="1_b4xss"]
+[ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="2_opr8a"]
+[ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="3_46i81"]
+[ext_resource type="ArrayMesh" uid="uid://b7c8862iey7nc" path="res://models/Environment/Ground.obj" id="3_vapc7"]
+[ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="4_0omxv"]
+[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="5_n2b08"]
+[ext_resource type="Script" path="res://scripts/Door.gd" id="7_qx0x1"]
+
+[sub_resource type="ConcavePolygonShape3D" id="2"]
+data = PackedVector3Array(0, 0, 0, 3, 0.3, 0, 3, 0, 0, 3, 0.3, 0, 0, 0, 0, 0, 0.3, 0, 0, 0.3, -3, 3, 0.3, 0, 0, 0.3, 0, 3, 0.3, 0, 0, 0.3, -3, 3, 0.3, -3, 3, 0, -3, 3, 0.3, 0, 3, 0.3, -3, 3, 0.3, 0, 3, 0, -3, 3, 0, 0, 3, 0, -3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 3, 0, -3, 0, 0, -3, 0, 0.3, -3, 0, 0, 0, 0, 0, -3, 0, 0, 0, 0, 0.3, -3, 0, 0.3, 0, 3, 0, -3, 0, 0.3, -3, 0, 0, -3, 0, 0.3, -3, 3, 0, -3, 3, 0.3, -3)
+
+[node name="MainScene" type="Node3D"]
+script = ExtResource("1_b4xss")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("2_opr8a")]
+
+[node name="HubUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreditsText" type="Label" parent="CanvasLayer/HubUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -200.0
+offset_right = 188.0
+offset_bottom = -159.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_46i81")
+text = "Credits: 0"
+
+[node name="Models" type="Node" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Models"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, -15, -0.3, 15)
+mesh = ExtResource("3_vapc7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Models/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Models/Ground/StaticBody3D"]
+shape = SubResource("2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.612373, 0.353553, 0, 0.5, 0.866025, -0.707107, -0.612372, 0.353553, 11.8919, 10.9564, -11.9145)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("4_0omxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.62576, 2.20622, -10.4846)
+
+[node name="PurchasePistol" parent="." instance=ExtResource("5_n2b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.711, 12.575)
+prompt_message = "Purchase Pistol (20 Credits)"
+target_scene = "pistol"
+
+[node name="PurchaseBurstRifle" parent="." instance=ExtResource("5_n2b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.711, 12.575)
+prompt_message = "Purchase Burst Rifle (100 Credits)"
+target_scene = "burst rifle"
+
+[node name="PurchaseAssaultRifle" parent="." instance=ExtResource("5_n2b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.711, 12.575)
+prompt_message = "Purchase Assault Rifle (100 Credits)"
+target_scene = "assault rifle"
+
+[node name="PurchaseShotgun" parent="." instance=ExtResource("5_n2b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.711, 12.575)
+prompt_message = "Purchase Shotgun (250 Credits)"
+target_scene = "shotgun"
+
+[node name="Button7" parent="." instance=ExtResource("5_n2b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2739, 0.670884, -11.1345)
+prompt_message = "Buy Shotgun"
+
+[node name="Next_Room" parent="." instance=ExtResource("5_n2b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8186, 0.489933, -13.5219)
+script = ExtResource("7_qx0x1")
+prompt_message = "Start Climbing"
+
+[connection signal="interacted" from="PurchasePistol" to="." method="purchase_weapon"]
+[connection signal="interacted" from="PurchaseBurstRifle" to="." method="purchase_weapon"]
+[connection signal="interacted" from="PurchaseAssaultRifle" to="." method="purchase_weapon"]
+[connection signal="interacted" from="PurchaseShotgun" to="." method="purchase_weapon"]
+[connection signal="interacted" from="Button7" to="." method="purchase_shotgun"]

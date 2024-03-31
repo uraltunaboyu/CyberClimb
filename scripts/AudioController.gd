@@ -8,10 +8,11 @@ var _player: AudioStreamPlayer
 var playing: bool = false:
 	get:
 		return _player.playing
-		
+
 func _reset_player(track):
 	if _player == null:
 		_player = AudioStreamPlayer.new()
+		_player.volume_db = -20
 		add_child(_player)
 		_player.stream = track
 	elif _player.stream != track:

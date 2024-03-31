@@ -48,3 +48,7 @@ func remove_weapon():
 		ui.update_ammo_text(null)
 	equipped_gun = null
 	
+func load_state():
+	var weapon = PlayerState.equipped_weapon
+	if weapon != WeaponAttributes.Name.NONE:
+		set_equipped_gun(WeaponAttributes.SCENE[weapon])
