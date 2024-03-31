@@ -1,5 +1,7 @@
 class_name Enemy extends CharacterBody3D
 
+signal dead
+
 # stats
 var max_health : int = 100
 var cur_health = max_health

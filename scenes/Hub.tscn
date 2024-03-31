@@ -58,28 +58,24 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.62576, 2.20622, -10.4846)
 
 [node name="PurchasePistol" parent="." instance=ExtResource("5_n2b08")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.711, 12.575)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.41813, 0.711, -13.639)
 prompt_message = "Purchase Pistol (20 Credits)"
 target_scene = "pistol"
 
 [node name="PurchaseBurstRifle" parent="." instance=ExtResource("5_n2b08")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.711, 12.575)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.41813, 0.711, -13.639)
 prompt_message = "Purchase Burst Rifle (100 Credits)"
 target_scene = "burst rifle"
 
 [node name="PurchaseAssaultRifle" parent="." instance=ExtResource("5_n2b08")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.711, 12.575)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.41813, 0.711, -13.639)
 prompt_message = "Purchase Assault Rifle (100 Credits)"
 target_scene = "assault rifle"
 
 [node name="PurchaseShotgun" parent="." instance=ExtResource("5_n2b08")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0.711, 12.575)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.41813, 0.711, -13.639)
 prompt_message = "Purchase Shotgun (250 Credits)"
 target_scene = "shotgun"
-
-[node name="Button7" parent="." instance=ExtResource("5_n2b08")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2739, 0.670884, -11.1345)
-prompt_message = "Buy Shotgun"
 
 [node name="Next_Room" parent="." instance=ExtResource("5_n2b08")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8186, 0.489933, -13.5219)
@@ -90,4 +86,3 @@ prompt_message = "Start Climbing"
 [connection signal="interacted" from="PurchaseBurstRifle" to="." method="purchase_weapon"]
 [connection signal="interacted" from="PurchaseAssaultRifle" to="." method="purchase_weapon"]
 [connection signal="interacted" from="PurchaseShotgun" to="." method="purchase_weapon"]
-[connection signal="interacted" from="Button7" to="." method="purchase_shotgun"]

@@ -14,6 +14,7 @@ const SHOTGUN_SCENE = "res://scenes/Shotgun.tscn"
 
 func _ready():
 	credits = PlayerState.credits
+	AudioController.play_hub_music()
 
 func purchase_weapon(name):
 	var weapon = WeaponAttributes.BY_NAME[name]
@@ -21,6 +22,3 @@ func purchase_weapon(name):
 	if credits >= WeaponAttributes.COST[weapon]:
 		credits -= WeaponAttributes.COST[weapon]
 		_player.add_weapon(weapon)
-
-func _goto_boss(_a):
-	GameState.load("res://Rooms/BossRoom.tscn")

@@ -16,3 +16,6 @@ func get_prompt():
 	
 func interact():
 	interacted.emit(target_scene)
+
+func get_printed(text:String):
+	print(text)

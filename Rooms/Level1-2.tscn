@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbofgp0x0ix46"]
+
+[ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="2_c8r0j"]
+[ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="3_jpga7"]
+[ext_resource type="PackedScene" uid="uid://d0bdcfsmwtsp0" path="res://Rooms/Level1-2Model.tscn" id="3_sqvcr"]
+[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="4_f0w7e"]
+[ext_resource type="Script" path="res://scripts/Door.gd" id="5_klcf4"]
+
+[node name="Level1-2" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("2_c8r0j")]
+metadata/_edit_use_anchors_ = true
+
+[node name="Player" parent="." instance=ExtResource("3_jpga7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.198062, 1.25953, 7.45531)
+
+[node name="LevelModel" parent="." instance=ExtResource("3_sqvcr")]
+
+[node name="Next_Room" parent="." instance=ExtResource("4_f0w7e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.843, -8)
+script = ExtResource("5_klcf4")
+prompt_message = "Start Climbing"
+
+[node name="Next_Room2" parent="." instance=ExtResource("4_f0w7e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.843, -8)
+script = ExtResource("5_klcf4")
+prompt_message = "Start Climbing"

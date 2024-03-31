@@ -30,7 +30,7 @@ func get_random_point(area_min: Vector3, area_max: Vector3) -> Vector3:
 				   0,
 				   randf_range(area_min.z, area_max.z))
 
-func spawn_appropriate_enemy(diff: int):
+func spawn_appropriate_enemy(diff: int) -> Node3D:
 	var enemy_pool = EnemyAttributes.intersect(all_enemies, EnemyAttributes.ENEMY_BY_DIFFICULTY[diff])
 		
 	var chosen_enemy_name: EnemyAttributes.EnemyName = enemy_pool[randi() % len(enemy_pool)]
@@ -48,16 +48,18 @@ func spawn_appropriate_enemy(diff: int):
 		var bounds = get_spawn_bounds()
 		var spawn_point = get_random_point(bounds[0], bounds[1])
 		spawn_point.y = enemy_radius
+		Debug.debug_cube("spawn" + str(attempt), spawn_point, self)
 		overlapping = _check_overlap(spawn_point, enemy_radius)
 		if overlapping: 
 			attempt += 1
 			continue
 		get_node("../EnemyHolder").add_child(chosen_enemy_instance)
 		chosen_enemy_instance.global_transform.origin = spawn_point
-		return
+		return chosen_enemy_instance
 		
 	Log.Warn("Max attempts exceeded while trying to spawn enemy")
-		
+	return null
+	
 func _check_overlap(pos: Vector3, radius: float) -> bool:
 	var space_state = get_world_3d().direct_space_state
 	var query_shape = SphereShape3D.new()

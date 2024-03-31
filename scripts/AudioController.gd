@@ -2,7 +2,7 @@ extends Node
 
 
 @onready var hub_music = load("res://audio/music/Motherboard.mp3")
-@onready var combat_music = load("res://audio/music/Motherboard.mp3")
+@onready var combat_music = load("res://audio/music/Error 407 (QA 1).mp3")
 
 var _player: AudioStreamPlayer
 var playing: bool = false:
@@ -12,7 +12,10 @@ var playing: bool = false:
 func _reset_player(track):
 	if _player == null:
 		_player = AudioStreamPlayer.new()
-		_player.volume_db = -20
+		if Debug.DEBUG_MODE:
+			_player.volume_db = -50
+		else:
+			_player.volume_db = -30
 		add_child(_player)
 		_player.stream = track
 	elif _player.stream != track:

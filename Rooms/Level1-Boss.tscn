@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://ch8rxfgrog3jx"]
+
+[ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="1_e35b1"]
+[ext_resource type="PackedScene" uid="uid://c66ryo0mg0jd8" path="res://scenes/enemies/RoboSurgeon.tscn" id="2_p6voi"]
+[ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="3_donf0"]
+[ext_resource type="PackedScene" uid="uid://bbgn6bfn0wjif" path="res://Rooms/Level1-BossModel.tscn" id="4_qmbi1"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_me2nb"]
+vertices = PackedVector3Array(-24.5, 0.5, -24.5, -24.5, 0.5, 24.5, 24.5, 0.5, 24.5, 24.5, 0.5, -24.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rbppv"]
+size = Vector2(50, 50)
+
+[sub_resource type="Environment" id="Environment_3brwi"]
+ambient_light_color = Color(0.698039, 0.698039, 0.698039, 1)
+
+[node name="Level1-boss" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("1_e35b1")]
+metadata/_edit_use_anchors_ = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_me2nb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+mesh = SubResource("PlaneMesh_rbppv")
+
+[node name="BossModel8" parent="." instance=ExtResource("2_p6voi")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.37275, 0.460072, -10.0173)
+
+[node name="Player" parent="." instance=ExtResource("3_donf0")]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 2.4834, 0.5, 18.1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3brwi")
+
+[node name="Level_1-Boss" parent="." instance=ExtResource("4_qmbi1")]

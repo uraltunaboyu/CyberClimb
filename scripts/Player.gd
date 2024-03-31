@@ -24,6 +24,7 @@ var fall: Vector3 = Vector3()
 func _ready ():
 	GameState.set_state_playing()
 	load_state()
+	UIController._initialize()
 	movementController.set_player_ref(self)
 
 func _physics_process(delta):
@@ -45,14 +46,14 @@ func _input(event):
 # called when an enemy damages us
 func take_damage (damage):
 	curHp -= damage
-	
 	PlayerState.hp = curHp
 	
 	if curHp <= 0:
 		die()
 
 func die():
-	GameState.load_scene_by_path("res://scenes/Hub.tscn")
+	PlayerState.reset()
+	GameState.reset()
 	
 func add_health(amount):
 	curHp += amount
@@ -71,6 +72,7 @@ func add_weapon(weapon_name):
 	primarySlot.set_equipped_gun(WeaponAttributes.SCENE[weapon_name])
 
 func remove_weapon(_nothing):
+	PlayerState.equipped_weapon = WeaponAttributes.Name.NONE
 	primarySlot.remove_weapon()
 
 func load_state():

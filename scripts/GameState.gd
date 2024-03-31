@@ -2,6 +2,7 @@ extends Node
 
 const LevelController = preload("res://scripts/LevelController.gd")
 const LOADING_SCREEN_PATH = "res://scenes/LoadingScreen.tscn"
+const HUB_PATH = "res://scenes/Hub.tscn"
 
 enum ProgressionFlag {
 	NONE,
@@ -85,3 +86,7 @@ func room_transition(reward_signal: String):
 	reward = reward_signal
 	diff = level_controller.go_next_room(reward)
 	print(diff)
+
+func reset():
+	load_scene_by_path(HUB_PATH)
+	level_controller = LevelController.new()

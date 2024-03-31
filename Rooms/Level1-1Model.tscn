@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuyoar3oe2yuy"]
+
+[ext_resource type="PackedScene" uid="uid://bis0kk0v1mqjl" path="res://models/Rooms/Level 1-1/Level_1-1.glb" id="1_0022k"]
+[ext_resource type="Script" path="res://Room Generation/Room.gd" id="2_b0qqw"]
+
+[node name="Level_1-1" instance=ExtResource("1_0022k")]
+script = ExtResource("2_b0qqw")

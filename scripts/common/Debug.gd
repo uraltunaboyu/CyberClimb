@@ -4,7 +4,7 @@ var _cubes: Dictionary = {
 	
 }
 
-const DEBUG_MODE = false
+const DEBUG_MODE = true
 
 func debug_cube(id: String, pos: Vector3, ref: Node, color = null):
 	if not DEBUG_MODE: return

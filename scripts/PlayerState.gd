@@ -37,7 +37,7 @@ var wallrunCost : float = 0.8
 var jumpCooldown = 1.0
 var jumpCost: float = 20.0
 var doubleJump: float = 33.0
-var jumpForce : float = 12
+var jumpForce : float = 9
 
 var dashSpeed: float = 20.0
 var dashDuration: float = 2.0
@@ -48,8 +48,8 @@ var staminaRecovery = 20.0
 var recoveryDelay = 1.0
 var recoveryRate = 0.5
 
-var glideGravity: float = 1.0
-var glideSpeedMult: float = 1.5
+var glideGravity: float = 4
+var glideSpeedMult: float = 1.25
 
 
 var _upgrades: Array[UpgradeName] = []
@@ -61,3 +61,7 @@ func add_upgrade(name: UpgradeName):
 func apply_all_upgrades():
 	for upgrade in _upgrades:
 		UPGRADES[upgrade].call()
+
+func reset():
+	hp = maxHp
+	stamina = maxStamina

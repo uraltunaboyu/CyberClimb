@@ -25,7 +25,7 @@ const MOVEMENT_STATE_NAMES = {
 var vel: Vector3
 
 #wallrun
-var wallNormal
+const WALLRUN_SPEED_THRESHOLD = 2.0
 
 var jumpTimer: Timer
 var jumpReady = true
@@ -43,7 +43,7 @@ var currentState: MovementState
 var prevState: MovementState
 var playerRef: CharacterBody3D
 
-var gravity : float = 12
+var gravity : float = 9.81
 
 func _ready():
 	currentState = MovementState.STOPPED
@@ -101,10 +101,19 @@ func is_jump_pressed() -> bool:
 func is_dash_pressed() -> bool:
 	return Input.is_action_just_pressed("dash")
 	
-func can_start_wallrunning() -> bool:
+func can_wallrun() -> bool:
 	# TODO: some magic to see if player is moving
 	# perpendicular to wall
-	return playerRef.is_on_wall()
+	if not playerRef.is_on_wall_only(): return false
+	if not get_horizontal_magnitude(vel) > WALLRUN_SPEED_THRESHOLD: return false
+	
+	var input = get_input_vector()
+	var wall_normal = playerRef.get_wall_normal()
+	var wall_normal_2d = Vector2(wall_normal.x, wall_normal.z)
+	var wall_angle = input.angle_to(wall_normal_2d)
+	
+	Log.Debug("Attempt wallrun at angle %s" % wall_angle)
+	return (wall_angle != PI/2) && (wall_angle < PI/4 || wall_angle > 3*PI/4)
 	
 func can_dash() -> bool:
 	return dashReady and PlayerState.stamina >= PlayerState.dashCost
@@ -142,13 +151,9 @@ func reset_recovery_timer():
 	recoveryTimer.wait_time = PlayerState.recoveryDelay
 	recoveryTimer.start()
 	
-func calculate_movement_vector(delta) -> Vector3:
-	UIController.set_movement_state(get_current_state())
-	var input = Vector2()
-	vel.x = 0
-	vel.z = 0
-
+func get_input_vector() -> Vector2:
 	# movement inputs
+	var input = Vector2()
 	if Input.is_action_pressed("move_forward"):
 		input.y -= 1
 	if Input.is_action_pressed("move_backward"):
@@ -158,7 +163,17 @@ func calculate_movement_vector(delta) -> Vector3:
 	if Input.is_action_pressed("move_right"):
 		input.x += 1
 		
-	input = input.normalized()
+	return input.normalized()
+	
+func get_horizontal_magnitude(vec: Vector3) -> float:
+	return sqrt(vec.x * vec.x + vec.z * vec.z)
+	
+	
+func calculate_movement_vector(delta) -> Vector3:
+	UIController.set_movement_state(get_current_state())
+	vel.x = 0
+	vel.z = 0
+	var input = get_input_vector()
 	
 	# get the forward and right directions
 	var forward = playerRef.global_transform.basis.z
@@ -176,8 +191,10 @@ func calculate_movement_vector(delta) -> Vector3:
 		vel.z = relativeDir.z * PlayerState.dashSpeed
 	
 	# apply gravity. handles wether it is glideGravity or regular
-	if currentState != MovementState.GLIDING && currentState != MovementState.WALLRUNNING:
+	if currentState == MovementState.FALLING or currentState == MovementState.JUMPING:
 		vel.y -= gravity * delta
+	elif currentState == MovementState.DASHING:
+		vel.y -= gravity * delta / 2
 	elif currentState == MovementState.GLIDING:
 		vel.y -= PlayerState.glideGravity * delta
 		vel.x = vel.x * 2
@@ -194,7 +211,7 @@ func calculate_movement_vector(delta) -> Vector3:
 		jumpReady = false
 		jumpTimer.start()
 		
-	
+	Log.Debug("Calculated velocity to be %s" % vel)
 	return vel
 
 # get the current input and use currentState to calculate next state
@@ -209,8 +226,12 @@ func poll(velocity: Vector3):
 				start_jump()
 			elif is_dash_pressed() and can_dash():
 				start_dash()
+			elif not playerRef.is_on_floor():
+				currentState = MovementState.FALLING
 		MovementState.MOVING:
-			if not is_movement_pressed() and \
+			if not playerRef.is_on_floor():
+				currentState = MovementState.FALLING
+			elif not is_movement_pressed() and \
 			not is_jump_pressed() and \
 			not is_dash_pressed():
 				currentState = MovementState.STOPPED
@@ -219,35 +240,37 @@ func poll(velocity: Vector3):
 				currentState = MovementState.MOVING
 			elif not is_dash_pressed() and can_jump():
 				start_jump()
-			elif can_dash():
+			elif is_dash_pressed() and can_dash():
 				start_dash()
 		MovementState.JUMPING:
 			if velocity.y <= 0:
 				currentState = MovementState.FALLING
 			if playerRef.is_on_floor():
-				if velocity.x == 0:
+				if get_horizontal_magnitude(velocity) == 0:
 					currentState = MovementState.STOPPED
 				else:
 					currentState = MovementState.MOVING
 			elif is_dash_pressed() and can_dash():
 				start_airdash()
-			elif can_start_wallrunning():
+			elif is_jump_pressed():
+				currentState = MovementState.GLIDING
+			elif can_wallrun():
 				currentState = MovementState.WALLRUNNING
 		MovementState.FALLING:
 			if playerRef.is_on_floor():
-				if velocity.x == 0:
+				if get_horizontal_magnitude(velocity) == 0:
 					currentState = MovementState.STOPPED
 				else:
 					currentState = MovementState.MOVING
 			elif is_dash_pressed() and can_dash():
 				start_airdash()
-			elif can_start_wallrunning():
+			elif can_wallrun():
 				currentState = MovementState.WALLRUNNING
 			elif is_jump_pressed():
 				currentState = MovementState.GLIDING
 		MovementState.DASHING:
 			if !dashReady:
-				if velocity.x == 0:
+				if get_horizontal_magnitude(velocity) == 0:
 					currentState = MovementState.STOPPED
 				else:
 					currentState = MovementState.MOVING
@@ -256,31 +279,28 @@ func poll(velocity: Vector3):
 		MovementState.AIRDASHING:
 			if !dashReady:
 				if playerRef.is_on_floor():
-					if velocity.x == 0:
+					if get_horizontal_magnitude(velocity) == 0:
 						currentState = MovementState.STOPPED
 					else:
 						currentState = MovementState.MOVING
 				else:
 					currentState = MovementState.FALLING
-			elif playerRef.is_on_wall_only():
+			elif can_wallrun():
 				currentState = MovementState.WALLRUNNING
 		MovementState.GLIDING:
 			if playerRef.is_on_floor():
-				if velocity.x == 0:
+				if get_horizontal_magnitude(velocity) == 0:
 					currentState = MovementState.STOPPED
 				else:
 					currentState = MovementState.MOVING
-			elif playerRef.is_on_wall_only():
+			elif can_wallrun():
 				currentState = MovementState.WALLRUNNING
 		MovementState.WALLRUNNING:
-			if not playerRef.is_on_wall_only():
+			if not can_wallrun():
 				reset_recovery_timer()
 				if not playerRef.is_on_floor():
 					currentState = MovementState.FALLING
-				else:
-					if velocity.x == 0:
-						currentState = MovementState.STOPPED
-					else:
-						currentState = MovementState.MOVING
 			elif is_jump_pressed() and can_jump():
 				start_jump()
+			elif get_horizontal_magnitude(velocity) == 0:
+					currentState = MovementState.STOPPED

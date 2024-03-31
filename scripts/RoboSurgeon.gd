@@ -150,7 +150,7 @@ func _spawn_syringe():
 	syringe.global_transform = muzzle.global_transform
 	
 	
-	get_node("/root/Boss_Room").add_child(syringe)
+	get_tree().root.add_child(syringe)
 	syringe.look_at(-adjustedPos)
 	
 func _get_player_pos():
@@ -185,4 +185,5 @@ func _on_player_enter_saw(body):
 func die():
 	# TODO actual death func
 	Log.Info("Yippee")
-	queue_free()
+	PlayerState.credits += 100
+	GameState.reset()
