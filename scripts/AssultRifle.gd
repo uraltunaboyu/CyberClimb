@@ -14,6 +14,6 @@ func _ready():
 func attack():
 	if ammoCount != 0 and shot_timer.is_stopped():
 		make_bullet()
-		
+		$ShotAudio.play()
 		ammoCount -= 1
 		shot_timer.start()
