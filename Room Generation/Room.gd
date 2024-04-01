@@ -6,11 +6,13 @@ var info # holds the values for above vars
 var rewards = {'power' : 0, 'money' : 0}
 const chosen_multiplier = 1.5
 var player = preload("res://scenes/Player.tscn")
-signal completed
 
 func _ready():
 	generate(GameState.reward, GameState.diff)
 
+func check_clear() -> bool:
+	return self.find_children("EnemyHolder").is_empty()
+	
 func load_info(json_content:String)->void:
 	info = JSON.parse_string(json_content)
 	enemies = info[enemies]
