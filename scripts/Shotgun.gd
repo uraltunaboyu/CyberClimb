@@ -17,6 +17,7 @@ func attack():
 	if ammoCount != 0 and shot_timer.is_stopped():
 		for i in range(pellet_count):
 			make_bullet()
+		$ShootAudio.play()
 		
 		ammoCount -= 1
 		shot_timer.start()
