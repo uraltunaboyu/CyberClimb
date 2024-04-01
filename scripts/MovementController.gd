@@ -211,7 +211,6 @@ func calculate_movement_vector(delta) -> Vector3:
 		jumpReady = false
 		jumpTimer.start()
 		
-	Log.Debug("Calculated velocity to be %s" % vel)
 	return vel
 
 # get the current input and use currentState to calculate next state

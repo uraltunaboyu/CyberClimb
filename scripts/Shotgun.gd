@@ -3,10 +3,10 @@ extends SemiAutoGun
 var pellet_count = 30
 
 func _ready():
-	ammoCount = 15
+	ammoCount = 150
 	bullet_speed = 18
 	bullet_damage_min = 1
-	bullet_damage_max = 5
+	bullet_damage_max = 15
 	spread_angle = 0.25 # Cone with this angle (radians)
 	bullet_life = 1
 	shots_per_sec = 1.2

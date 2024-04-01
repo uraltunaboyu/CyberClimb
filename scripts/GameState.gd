@@ -85,7 +85,6 @@ func return_tree():
 func room_transition(reward_signal: String):
 	reward = reward_signal
 	diff = level_controller.go_next_room(reward)
-	print(diff)
 
 func reset():
 	load_scene_by_path(HUB_PATH)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgv3r5i1gs63l"]
+
+[ext_resource type="Script" path="res://scripts/Drone.gd" id="1_3dpbn"]
+[ext_resource type="PackedScene" uid="uid://budlylt5uxy8p" path="res://scenes/enemies/DroneModel.tscn" id="1_ri2dc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gtjov"]
+size = Vector3(1.6, 0.874176, 1.6)
+
+[node name="Drone" type="CharacterBody3D" groups=["Enemy"]]
+script = ExtResource("1_3dpbn")
+
+[node name="EnemyCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.191971, 0)
+shape = SubResource("BoxShape3D_gtjov")
+
+[node name="Model" parent="." instance=ExtResource("1_ri2dc")]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 1.5
+target_desired_distance = 3.0
+path_height_offset = -3.5
+avoidance_enabled = true
+radius = 0.8
+debug_enabled = true
+debug_path_custom_color = Color(0, 1, 1, 1)
