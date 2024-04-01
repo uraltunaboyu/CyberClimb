@@ -44,7 +44,7 @@ func spawn_appropriate_enemy(diff: int) -> Node3D:
 	var overlapping = false
 	var attempt = 0
 	
-	while attempt < MAX_ATTEMPTS and not overlapping:
+	while attempt < MAX_ATTEMPTS:
 		var bounds = get_spawn_bounds()
 		var spawn_point = get_random_point(bounds[0], bounds[1])
 		spawn_point.y = enemy_radius
