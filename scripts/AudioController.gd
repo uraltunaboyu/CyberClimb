@@ -4,6 +4,7 @@ extends Node
 @onready var hub_music = load("res://audio/music/Motherboard.mp3")
 @onready var combat_music = load("res://audio/music/Error 407 (QA 1).mp3")
 
+var default_audio = 20.0
 var _player: AudioStreamPlayer
 var playing: bool = false:
 	get:
@@ -29,3 +30,7 @@ func play_hub_music():
 	
 func play_combat_music():
 	_reset_player(combat_music)
+	
+func toggle_mute():
+	var mute_status = _player.get_stream_paused()
+	_player.set_stream_paused(!mute_status)

@@ -1,7 +1,9 @@
-[gd_scene load_steps=68 format=3 uid="uid://d1bl13s3yfic0"]
+[gd_scene load_steps=70 format=3 uid="uid://da0bl5cu7lpx0"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_u1dsp"]
-[ext_resource type="Texture2D" uid="uid://dq3ho4oc0b71x" path="res://images/computer_pyramid_grid.png" id="2_j0pcn"]
+[ext_resource type="Texture2D" path="res://images/computer_pyramid_grid.png" id="2_j0pcn"]
+[ext_resource type="Texture2D" uid="uid://dcjvfknybe4s2" path="res://images/unmuted.jpg" id="3_mvgij"]
+[ext_resource type="Texture2D" uid="uid://bco6uq1aheqri" path="res://images/muted.jpg" id="4_fo5wa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_175vb"]
 atlas = ExtResource("2_j0pcn")
@@ -462,34 +464,25 @@ animations = [{
 [node name="Menu" type="Control"]
 process_mode = 3
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -639.0
-offset_top = -358.0
-offset_right = -639.0
-offset_bottom = -358.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_u1dsp")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_right = 1920.0
-offset_bottom = 1050.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 656.0
+offset_bottom = 355.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer"]
 z_as_relative = false
-position = Vector2(-4, 1)
 scale = Vector2(1.008, 1)
 sprite_frames = SubResource("SpriteFrames_ltbyp")
 autoplay = "default"
@@ -497,18 +490,12 @@ frame = 11
 frame_progress = 0.428627
 centered = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-alignment = 1
-
 [node name="StartButton" type="Button" parent="."]
 z_index = 1
 layout_mode = 2
-offset_left = 135.0
+offset_left = 140.0
 offset_top = 337.0
-offset_right = 514.0
+offset_right = 518.0
 offset_bottom = 467.0
 scale = Vector2(1.17932, 1.19521)
 size_flags_horizontal = 4
@@ -519,9 +506,9 @@ flat = true
 [node name="OptionButton" type="Button" parent="."]
 z_index = 1
 layout_mode = 2
-offset_left = 135.0
-offset_top = 554.0
-offset_right = 291.0
+offset_left = 139.0
+offset_top = 555.0
+offset_right = 294.0
 offset_bottom = 596.0
 scale = Vector2(2.88262, 3.74849)
 flat = true
@@ -529,7 +516,7 @@ flat = true
 [node name="CreditsButton" type="Button" parent="."]
 z_index = 1
 layout_mode = 2
-offset_left = 137.0
+offset_left = 144.0
 offset_top = 769.0
 offset_right = 584.0
 offset_bottom = 928.0
@@ -542,7 +529,30 @@ offset_bottom = 31.0
 focus_neighbor_bottom = NodePath("../StartButton")
 text = "Quit"
 
+[node name="OptionMenu" type="VBoxContainer" parent="."]
+z_index = -1
+layout_mode = 2
+offset_left = 806.0
+offset_top = 303.0
+offset_right = 1080.0
+offset_bottom = 767.0
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="MuteButton" type="TextureButton" parent="OptionMenu"]
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("3_mvgij")
+texture_pressed = ExtResource("4_fo5wa")
+stretch_mode = 0
+
+[node name="BackButton" type="Button" parent="OptionMenu"]
+layout_mode = 2
+text = "Back"
+
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="OptionButton" to="." method="_on_option_button_pressed"]
 [connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="OptionMenu/MuteButton" to="." method="_on_mute_button_pressed"]
+[connection signal="pressed" from="OptionMenu/BackButton" to="." method="_on_back_button_pressed"]

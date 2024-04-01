@@ -25,6 +25,7 @@ func multiple_attacks():
 			await burst_timer.timeout
 			
 			make_bullet()
+			$ShotPlayer.play()
 			ammoCount -= 1
 
 func attack():
