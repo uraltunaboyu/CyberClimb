@@ -22,7 +22,7 @@ func make_bullet():
 		var bullet = bulletScene.instantiate()
 		bullet.initialize(bullet_speed, randi_range(bullet_damage_min, bullet_damage_max), bullet_life)
 		
-		get_node("/root/MainScene").add_child(bullet)
+		get_tree().root.add_child(bullet)
 		bullet.global_transform = muzzle.global_transform
 		
 		var angle_x = randfn(0, spread_angle/1.5)

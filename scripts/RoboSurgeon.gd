@@ -150,8 +150,8 @@ func _spawn_syringe():
 	syringe.global_transform = muzzle.global_transform
 	
 	
-	get_node("/root/Boss_Room").add_child(syringe)
-	syringe.look_at(-adjustedPos)
+	get_tree().root.add_child(syringe)
+	syringe.look_at(-adjustedPos, Vector3.UP, true)
 	
 func _get_player_pos():
 	return _player_ref.global_transform.origin
@@ -162,10 +162,10 @@ func _on_player_spotted(body: Node):
 	# TODO better decision-making idea
 	# 	if distance between player and nearest wall behind them
 	# 	is below threshold, try and use the saw (?)
-	if randf() <= 0.5:
-		_state = BossState.SWIPE
-	else:
-		_state = BossState.SHOOT
+	#if randf() <= 0.5:
+		#_state = BossState.SWIPE
+	#else:
+	_state = BossState.SHOOT
 		
 func _on_player_lost(body: Node):
 	if not body.is_in_group("Player"): return
@@ -185,4 +185,5 @@ func _on_player_enter_saw(body):
 func die():
 	# TODO actual death func
 	Log.Info("Yippee")
-	queue_free()
+	PlayerState.credits += 100
+	GameState.reset()

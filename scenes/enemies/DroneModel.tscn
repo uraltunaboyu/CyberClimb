@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://budlylt5uxy8p"]
+
+[ext_resource type="PackedScene" uid="uid://cm10gbiog4vcv" path="res://models/Enemies/Drone.glb" id="1_q4353"]
+
+[node name="Drone2" instance=ExtResource("1_q4353")]
+
+[node name="Muzzle" type="Node3D" parent="Drone/DroneCannon" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.610407, 0)
+
+[node name="DroneEye" parent="Drone" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.525, -4.96705e-09)

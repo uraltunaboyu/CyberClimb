@@ -30,7 +30,7 @@ func get_random_point(area_min: Vector3, area_max: Vector3) -> Vector3:
 				   0,
 				   randf_range(area_min.z, area_max.z))
 
-func spawn_appropriate_enemy(diff: int):
+func spawn_appropriate_enemy(diff: int) -> Node3D:
 	var enemy_pool = EnemyAttributes.intersect(all_enemies, EnemyAttributes.ENEMY_BY_DIFFICULTY[diff])
 		
 	var chosen_enemy_name: EnemyAttributes.EnemyName = enemy_pool[randi() % len(enemy_pool)]
@@ -44,7 +44,7 @@ func spawn_appropriate_enemy(diff: int):
 	var overlapping = false
 	var attempt = 0
 	
-	while attempt < MAX_ATTEMPTS and not overlapping:
+	while attempt < MAX_ATTEMPTS:
 		var bounds = get_spawn_bounds()
 		var spawn_point = get_random_point(bounds[0], bounds[1])
 		spawn_point.y = enemy_radius
@@ -54,10 +54,11 @@ func spawn_appropriate_enemy(diff: int):
 			continue
 		get_node("../EnemyHolder").add_child(chosen_enemy_instance)
 		chosen_enemy_instance.global_transform.origin = spawn_point
-		return
+		return chosen_enemy_instance
 		
 	Log.Warn("Max attempts exceeded while trying to spawn enemy")
-		
+	return null
+	
 func _check_overlap(pos: Vector3, radius: float) -> bool:
 	var space_state = get_world_3d().direct_space_state
 	var query_shape = SphereShape3D.new()
@@ -68,6 +69,9 @@ func _check_overlap(pos: Vector3, radius: float) -> bool:
 	shape_query.transform = Transform3D.IDENTITY.translated(pos)
 	
 	var result = space_state.intersect_shape(shape_query)
+	if result.size() > 0: 
+		Debug.debug_cube("spawn", pos, self)
+		Log.Warn("Collision with %s objects" % result.size())
 	return result.size() > 0
 	
 func _calculate_radius(collider: Node) -> float:
@@ -82,7 +86,7 @@ func _calculate_radius(collider: Node) -> float:
 		elif shape is CapsuleShape3D:
 			return max(shape.radius, shape.height / 2.0)
 		else:
-			Log.Warn("Unknown shape type %s" % typeof(shape))
+			Log.Warn("Unknown shape type %s" % type_string(typeof(shape)))
 			return 1.0
 	elif collider is CollisionPolygon3D:
 		var points = collider.polygon
@@ -92,5 +96,5 @@ func _calculate_radius(collider: Node) -> float:
 		
 		return aabb.get_longest_axis_size() / 2.0
 		
-	Log.Warn("Unknown collider type %s" % typeof(collider))
+	Log.Warn("Unknown collider type %s" % type_string(typeof(collider)))
 	return 1.0

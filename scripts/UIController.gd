@@ -1,7 +1,6 @@
 extends Node
 
 var _ui_node: Node
-const DEBUG_MODE = true
 
 func _initialize():
 	_ui_node = get_tree().current_scene.find_child("UI")
@@ -25,6 +24,7 @@ func set_max_stamina(val):
 	_ui_node.staminaBar.max_value = val
 	
 func set_ammo(val):
+	if not _ui_node: return
 	if val:
 		_ui_node.ammoText.visible = true
 		_ui_node.ammoText.text = "Ammo: " + str(val)
@@ -32,5 +32,5 @@ func set_ammo(val):
 		_ui_node.ammoText.visible = false
 
 func set_movement_state(val):
-	if DEBUG_MODE:
+	if Debug.DEBUG_MODE:
 		_ui_node.movementStateText.text = val

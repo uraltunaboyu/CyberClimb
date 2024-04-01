@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://ryi4cgmknv6t"]
+
+[ext_resource type="Script" path="res://Room Generation/Room.gd" id="1_hlmr0"]
+[ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="2_42e81"]
+[ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="3_0b8bc"]
+[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="4_1scs2"]
+[ext_resource type="PackedScene" uid="uid://b34eexu2b0rn6" path="res://Rooms/Level1-3Model.tscn" id="5_2obqs"]
+[ext_resource type="Script" path="res://scripts/Door.gd" id="5_p3pa3"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_shrnr"]
+vertices = PackedVector3Array(-9.52009, 10.8815, -9.5, -9.52009, 10.8815, 9.75, 9.72991, 10.8815, 9.75, 9.72991, 10.8815, -9.5, -7.02009, 0.88152, -8, -5.77009, 0.88152, -8.25, -5.77009, 0.88152, -9.25, -9.27009, 0.88152, -9.25, -5.77009, 0.88152, 9.5, -5.77009, 0.88152, 8, -7.02009, 0.88152, 7.75, -9.27009, 0.88152, 9.5, -7.02009, 0.88152, 7.75, -7.02009, 0.88152, -8, -9.27009, 0.88152, -9.25, -9.27009, 0.88152, 9.5, -5.77009, 0.88152, -9.25, -5.77009, 0.88152, -8.25, -5.02009, 0.88152, -8.25, 5.22991, 0.88152, -8, 6.22991, 0.88152, -8, 6.22991, 0.88152, -9.25, -5.77009, 0.88152, -9.25, -5.02009, 0.88152, -8.25, -3.77009, 0.88152, -6.75, 5.22991, 0.88152, -8, 6.22991, 0.88152, -9.25, -3.77009, 0.88152, -6.75, 4.22991, 0.88152, -6.75, 5.22991, 0.88152, -8, 7.22991, 0.88152, 8, 6.22991, 0.88152, 8.25, 6.22991, 0.88152, 9.5, 9.47991, 0.88152, 9.5, 6.22991, 0.88152, -9.25, 6.22991, 0.88152, -8, 7.22991, 0.88152, -7.75, 9.47991, 0.88152, -9.25, 7.22991, 0.88152, -6, 7.22991, 0.88152, 6.25, 9.47991, 0.88152, 9.5, 9.47991, 0.88152, -9.25, 7.22991, 0.88152, -6, 6.72991, 0.88152, -5.75, 6.72991, 0.88152, 6, 7.22991, 0.88152, 6.25, 7.22991, 0.88152, 6.25, 7.22991, 0.88152, 8, 9.47991, 0.88152, 9.5, 9.47991, 0.88152, -9.25, 7.22991, 0.88152, -7.75, 7.22991, 0.88152, -6, -5.77009, -1.61848, -5.75, -4.77009, -1.61848, -4.5, 4.47991, -1.61848, -4.75, 5.72991, -1.61848, -5.75, -4.77009, -1.61848, -4.5, -5.77009, -1.61848, -5.75, -5.77009, -1.61848, 5.75, -4.52009, -1.61848, 4.75, 5.72991, -1.61848, -5.75, 4.47991, -1.61848, -4.75, 4.72991, -1.61848, 4.5, 5.72991, -1.61848, 5.75, -4.52009, -1.61848, 4.75, -5.77009, -1.61848, 5.75, 5.72991, -1.61848, 5.75, 4.72991, -1.61848, 4.5, 3.72991, -2.86848, 3.75, 3.72991, -2.86848, 2.25, 1.47991, -2.86848, 3.5, 1.47991, -2.86848, -3.5, 3.72991, -2.86848, -2.25, 3.72991, -2.86848, -3.75, -1.27009, -2.86848, -3.5, 1.47991, -2.86848, -3.5, 3.72991, -2.86848, -3.75, -3.77009, -2.86848, -3.75, -3.77009, -2.86848, -3.75, -3.77009, -2.86848, 3.75, -3.52009, -2.86848, 2.25, -3.52009, -2.86848, -2.25, -3.52009, -2.86848, -2.25, -1.27009, -2.86848, -3.5, -3.77009, -2.86848, -3.75, -3.77009, -2.86848, 3.75, 3.72991, -2.86848, 3.75, 1.47991, -2.86848, 3.5, -3.77009, -2.86848, 3.75, 1.47991, -2.86848, 3.5, -2.77009, -2.86848, 3, -3.77009, -2.86848, 3.75, -2.77009, -2.86848, 3, -3.52009, -2.86848, 2.25, -2.52009, 5.88152, -2.5, -1.27009, 5.88152, -1.25, 1.22991, 5.88152, -1.5, 2.72991, 5.88152, -2.5, 2.72991, 5.88152, 2.75, 1.47991, 5.88152, 1.25, -1.02009, 5.88152, 1.5, -2.52009, 5.88152, 2.75, 2.72991, 5.88152, -2.5, 1.22991, 5.88152, -1.5, 1.47991, 5.88152, 1.25, 2.72991, 5.88152, 2.75, -2.52009, 5.88152, 2.75, -1.02009, 5.88152, 1.5, -1.27009, 5.88152, -1.25, -2.52009, 5.88152, -2.5, -1.52009, -4.36848, -1.75, -1.52009, -4.36848, 1.75, 1.47991, -4.36848, 1.5, 1.47991, -4.36848, -1.5, 6.22991, 0.88152, 9.5, 6.22991, 0.88152, 8.25, 5.22991, 0.88152, 8.25, -5.02009, 0.88152, 8, -5.77009, 0.88152, 8, -5.77009, 0.88152, 9.5, -4.02009, 0.88152, 6.75, -5.02009, 0.88152, 8, -5.77009, 0.88152, 9.5, 6.22991, 0.88152, 9.5, 5.22991, 0.88152, 8.25, 3.97991, 0.88152, 6.75)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 11), PackedInt32Array(13, 12, 14), PackedInt32Array(14, 12, 15), PackedInt32Array(18, 17, 16), PackedInt32Array(21, 20, 19), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 25), PackedInt32Array(25, 22, 26), PackedInt32Array(29, 28, 27), PackedInt32Array(31, 30, 32), PackedInt32Array(32, 30, 33), PackedInt32Array(35, 34, 36), PackedInt32Array(36, 34, 37), PackedInt32Array(38, 41, 39), PackedInt32Array(39, 41, 40), PackedInt32Array(43, 42, 44), PackedInt32Array(44, 42, 45), PackedInt32Array(48, 47, 46), PackedInt32Array(51, 50, 49), PackedInt32Array(53, 52, 54), PackedInt32Array(54, 52, 55), PackedInt32Array(59, 58, 56), PackedInt32Array(56, 58, 57), PackedInt32Array(61, 60, 62), PackedInt32Array(62, 60, 63), PackedInt32Array(67, 66, 64), PackedInt32Array(64, 66, 65), PackedInt32Array(70, 69, 68), PackedInt32Array(73, 72, 71), PackedInt32Array(75, 74, 76), PackedInt32Array(76, 74, 77), PackedInt32Array(81, 80, 78), PackedInt32Array(78, 80, 79), PackedInt32Array(84, 83, 82), PackedInt32Array(87, 86, 85), PackedInt32Array(90, 89, 88), PackedInt32Array(93, 92, 91), PackedInt32Array(95, 94, 96), PackedInt32Array(96, 94, 97), PackedInt32Array(99, 98, 100), PackedInt32Array(100, 98, 101), PackedInt32Array(103, 102, 104), PackedInt32Array(104, 102, 105), PackedInt32Array(108, 107, 109), PackedInt32Array(109, 107, 106), PackedInt32Array(113, 112, 110), PackedInt32Array(110, 112, 111), PackedInt32Array(116, 115, 114), PackedInt32Array(119, 118, 117), PackedInt32Array(121, 120, 122), PackedInt32Array(122, 120, 125), PackedInt32Array(122, 125, 124), PackedInt32Array(122, 124, 123)]
+
+[node name="Level1-3" type="Node3D"]
+script = ExtResource("1_hlmr0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("2_42e81")]
+metadata/_edit_use_anchors_ = true
+
+[node name="Player" parent="." instance=ExtResource("3_0b8bc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.45272, 1.25953, 8.62962)
+
+[node name="Next_Room" parent="." instance=ExtResource("4_1scs2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.8, 0)
+script = ExtResource("5_p3pa3")
+prompt_message = "Start Climbing"
+
+[node name="EnemyHolder" type="Node" parent="."]
+
+[node name="Level_1-3" parent="." instance=ExtResource("5_2obqs")]
+navigation_mesh = SubResource("NavigationMesh_shrnr")

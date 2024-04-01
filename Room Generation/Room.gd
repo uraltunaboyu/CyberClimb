@@ -1,23 +1,18 @@
 class_name Room extends Node
 
-var enemies = {}
-var info # holds the values for above vars
+var level_complete: bool = false
+var total_enemies: int = 0
 
 var rewards = {'power' : 0, 'money' : 0}
 const chosen_multiplier = 1.5
-var player = preload("res://scenes/Player.tscn")
+signal completed
 
 func _ready():
-	generate(GameState.reward, GameState.diff)
+	_set_rewards(GameState.reward, GameState.diff)
+	_spawn_enemies(GameState.diff)
+	level_complete = total_enemies == 0
 
-func check_clear() -> bool:
-	return self.find_children("EnemyHolder").is_empty()
-	
-func load_info(json_content:String)->void:
-	info = JSON.parse_string(json_content)
-	enemies = info[enemies]
-	
-func spawn_enemies(diff: int)->void:
+func _spawn_enemies(diff: int)->void:
 	# Iterate through spawn areas
 	# For an area:
 	## Calculate number of enemies based on round(average(min_enemies, max_enemies) * difficulty)
@@ -27,21 +22,24 @@ func spawn_enemies(diff: int)->void:
 		var enemy_count = (randi() % spawn_point.max_enemies) + spawn_point.min_enemies
 		Log.Info("Trying to spawn %s enemies" % enemy_count)
 		for i in range(enemy_count):
-			spawn_point.spawn_appropriate_enemy(diff)
+			var enemy = spawn_point.spawn_appropriate_enemy(diff)
+			if enemy:
+				total_enemies += 1
+				enemy.dead.connect(_on_enemy_dead)
+				
 
-func set_rewards(reward, diff)->void:
+func _set_rewards(reward, diff) -> void:
 	if reward == 'money':
 		rewards['money'] = diff*chosen_multiplier
 	else:
 		rewards['power'] = diff*chosen_multiplier
-	
-func load_player()->void:
-	player.instantiate()
-	#get_tree().add_child(player)
-	
-func generate(reward:String, diff:int)->int:
-	#load_player()
-	set_rewards(reward, diff)
-	spawn_enemies(diff)
-	# stop execution let the game play
-	return 1
+
+func _on_enemy_dead():
+	total_enemies -= 1
+	if total_enemies == 0:
+		level_complete = true
+
+func _next_room(reward):
+	if level_complete:
+		PlayerState.credits += 20
+		GameState.room_transition(reward)

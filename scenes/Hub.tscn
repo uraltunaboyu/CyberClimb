@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://d02juuvp2nwss"]
+
+[ext_resource type="Script" path="res://scripts/Hub.gd" id="1_b4xss"]
+[ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="2_opr8a"]
+[ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="3_46i81"]
+[ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="4_0omxv"]
+[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="5_n2b08"]
+[ext_resource type="PackedScene" uid="uid://e1rlcjhqpy36" path="res://scenes/HubModel.tscn" id="7_788ns"]
+[ext_resource type="Script" path="res://scripts/Door.gd" id="7_qx0x1"]
+
+[node name="MainScene" type="Node3D"]
+script = ExtResource("1_b4xss")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("2_opr8a")]
+
+[node name="HubUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreditsText" type="Label" parent="CanvasLayer/HubUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -200.0
+offset_right = 188.0
+offset_bottom = -159.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_46i81")
+text = "Credits: 0"
+
+[node name="Player" parent="." instance=ExtResource("4_0omxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.37682, 3.81636, 17.0886)
+
+[node name="PurchasePistol" parent="." instance=ExtResource("5_n2b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.58445, 3.76531, 13.9342)
+prompt_message = "Purchase Pistol (20 Credits)"
+target_scene = "pistol"
+
+[node name="PurchaseBurstRifle" parent="." instance=ExtResource("5_n2b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.58445, 3.76531, 13.9342)
+prompt_message = "Purchase Burst Rifle (100 Credits)"
+target_scene = "burst rifle"
+
+[node name="PurchaseAssaultRifle" parent="." instance=ExtResource("5_n2b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.58445, 3.76531, 13.9342)
+prompt_message = "Purchase Assault Rifle (100 Credits)"
+target_scene = "assault rifle"
+
+[node name="PurchaseShotgun" parent="." instance=ExtResource("5_n2b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.58445, 3.76531, 13.9342)
+prompt_message = "Purchase Shotgun (250 Credits)"
+target_scene = "shotgun"
+
+[node name="Next_Room" parent="." instance=ExtResource("5_n2b08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00679, 3.76723, 13.9719)
+script = ExtResource("7_qx0x1")
+prompt_message = "Start Climbing"
+
+[node name="HubLevel" parent="." instance=ExtResource("7_788ns")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4345, 12.1332, 0)
+omni_range = 100.0
+
+[connection signal="interacted" from="PurchasePistol" to="." method="purchase_weapon"]
+[connection signal="interacted" from="PurchaseBurstRifle" to="." method="purchase_weapon"]
+[connection signal="interacted" from="PurchaseAssaultRifle" to="." method="purchase_weapon"]
+[connection signal="interacted" from="PurchaseShotgun" to="." method="purchase_weapon"]

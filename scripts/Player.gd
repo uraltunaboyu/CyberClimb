@@ -19,22 +19,17 @@ var fall: Vector3 = Vector3()
 @onready var camera : Camera3D = get_node("Camera3D")
 @onready var ui : Node = get_node("../CanvasLayer/UI")
 @onready var primarySlot: Node3D = get_node("Camera3D/GunSlotPrimary")
-#@onready var secondarySlot: Node = get_node("Camera3D/GunSlotSecondary") TODO
 @onready var movementController = get_node("MovementController")
 
 func _ready ():
-	# hide and lock the mouse cursor
 	GameState.set_state_playing()
-	
-	PlayerState.ammo = primarySlot.get_ammo_count()
-	
+	load_state()
+	UIController._initialize()
 	movementController.set_player_ref(self)
 
-# called 60 times a second
 func _physics_process(delta):
 	movementController.poll(velocity)
 	
-	# move the player
 	set_velocity(movementController.calculate_movement_vector(delta))
 	move_and_slide()
 
@@ -51,17 +46,16 @@ func _input(event):
 # called when an enemy damages us
 func take_damage (damage):
 	curHp -= damage
-	
 	PlayerState.hp = curHp
 	
 	if curHp <= 0:
 		die()
 
-# called when our health reaches 0	
-func die ():
-	get_tree().reload_current_scene()
+func die():
+	PlayerState.reset()
+	GameState.reset()
 	
-func add_health (amount):
+func add_health(amount):
 	curHp += amount
 	
 	if curHp > maxHp:
@@ -69,12 +63,19 @@ func add_health (amount):
 		
 	PlayerState.hp = curHp
 	
-func add_ammo (amount):
+func add_ammo(amount):
 	if primarySlot.equipped_gun:
 		primarySlot.add_ammo(int(amount))
 	
-func _on_button_interacted(target_scene):
-	primarySlot.set_equipped_gun(target_scene)
-	
+func add_weapon(weapon_name):
+	PlayerState.equipped_weapon = weapon_name
+	primarySlot.set_equipped_gun(WeaponAttributes.SCENE[weapon_name])
+
 func remove_weapon(_nothing):
+	PlayerState.equipped_weapon = WeaponAttributes.Name.NONE
 	primarySlot.remove_weapon()
+
+func load_state():
+	curHp = PlayerState.hp
+	maxHp = PlayerState.maxHp
+	primarySlot.load_state()

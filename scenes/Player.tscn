@@ -12,6 +12,7 @@ radius = 0.489975
 height = 1.77068
 
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
+wall_min_slide_angle = 0.802851
 script = ExtResource("1_obko2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

@@ -5,7 +5,6 @@ var movement_speed: float = 2.0
 var rotation_speed: float = 1.0
 
 func set_navigation_target(point: Vector3):
-	Debug.debug_cube("path", point, self)
 	_navigator.set_target_position(point)
 	
 func get_navigation_target():

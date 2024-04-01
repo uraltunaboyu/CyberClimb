@@ -1,6 +1,5 @@
 extends Node
 
-@onready var ui : Node = get_node("../../../CanvasLayer/UI")
 var equipped_gun = null
 
 func _ready():
@@ -32,7 +31,7 @@ func add_ammo(amount):
 		equipped_gun.add_ammo_count(amount)
 		PlayerState.ammo = equipped_gun.get_ammo_count()
 
-func set_equipped_gun(new_gun):
+func set_equipped_gun(new_gun, set_ammo = true):
 	# TODO
 	var replacing_gun = load(new_gun)
 	if equipped_gun:
@@ -40,11 +39,15 @@ func set_equipped_gun(new_gun):
 	equipped_gun = replacing_gun.instantiate()
 	add_child(equipped_gun)
 	equipped_gun.global_transform = self.global_transform
-	PlayerState.ammo = equipped_gun.get_ammo_count()
+	if set_ammo:
+		PlayerState.ammo = equipped_gun.get_ammo_count()
 	
 func remove_weapon():
 	if equipped_gun:
 		get_child(0).queue_free()
-		ui.update_ammo_text(null)
 	equipped_gun = null
 	
+func load_state():
+	var weapon = PlayerState.equipped_weapon
+	if weapon != WeaponAttributes.Name.NONE:
+		set_equipped_gun(WeaponAttributes.SCENE[weapon], false)

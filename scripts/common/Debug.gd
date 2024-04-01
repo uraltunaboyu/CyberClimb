@@ -4,7 +4,10 @@ var _cubes: Dictionary = {
 	
 }
 
+const DEBUG_MODE = true
+
 func debug_cube(id: String, pos: Vector3, ref: Node, color = null):
+	if not DEBUG_MODE: return
 	if _cubes.has(id):
 		_cubes.get(id).free()
 	_cubes[id] = MeshInstance3D.new()
