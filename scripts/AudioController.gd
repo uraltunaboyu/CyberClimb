@@ -16,7 +16,7 @@ func _reset_player(track):
 		if Debug.DEBUG_MODE:
 			_player.volume_db = -50
 		else:
-			_player.volume_db = -30
+			_player.volume_db = -10
 		add_child(_player)
 		_player.stream = track
 	elif _player.stream != track:

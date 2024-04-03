@@ -37,9 +37,9 @@ var wallrunCost : float = 0.8
 var jumpCooldown = 1.0
 var jumpCost: float = 20.0
 var doubleJump: float = 33.0
-var jumpForce : float = 9
+var jumpForce : float = 5
 
-var dashSpeed: float = 20.0
+var dashSpeed: float = 9.0
 var dashDuration: float = 2.0
 var dashCooldownDuration = 3.0
 var dashCost: float = 40.0
@@ -49,7 +49,7 @@ var recoveryDelay = 1.0
 var recoveryRate = 0.5
 
 var glideGravity: float = 4
-var glideSpeedMult: float = 1.25
+var glideSpeedMult: float = 1.15
 
 
 var _upgrades: Array[UpgradeName] = []

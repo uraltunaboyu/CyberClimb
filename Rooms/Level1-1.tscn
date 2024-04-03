@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Room Generation/Room.gd" id="2_golc6"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="3_hap3d"]
 [ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="4_smojq"]
-[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="5_l1y6o"]
+[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="5_l1y6o"]
 [ext_resource type="PackedScene" uid="uid://cuyoar3oe2yuy" path="res://Rooms/Level1-1Model.tscn" id="5_xuve5"]
 [ext_resource type="Script" path="res://scripts/Door.gd" id="6_tql8u"]
 [ext_resource type="PackedScene" uid="uid://bmuq8c1234kuh" path="res://scenes/SpawnArea.tscn" id="6_tvtd8"]
@@ -26,20 +26,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4527, 1.25953, 8.62962)
 [node name="Next_Room" parent="." instance=ExtResource("5_l1y6o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.37945, 6.40721, -8.7613)
 script = ExtResource("6_tql8u")
-prompt_message = "Start Climbing"
-
-[node name="Next_Room2" parent="." instance=ExtResource("5_l1y6o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.73965, 6.40721, -8.7613)
-script = ExtResource("6_tql8u")
-prompt_message = "Start Climbing"
+prompt_message = "Next Floor"
 
 [node name="SpawnArea" parent="." instance=ExtResource("6_tvtd8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.07925, 2.23787, 0.404335)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.07925, 1.01389, 0.404335)
 min_enemies = 1
-max_enemies = 5
+max_enemies = 3
 acceptable_enemies = Array[int]([0])
 
 [node name="EnemyHolder" type="Node" parent="."]
 
 [node name="Level_1-1" parent="." instance=ExtResource("5_xuve5")]
 navigation_mesh = SubResource("NavigationMesh_gfycf")
+
+[node name="SpawnArea2" parent="." instance=ExtResource("6_tvtd8")]
+transform = Transform3D(0.52, 0, 0, 0, 0.52, 0, 0, 0, 0.52, 3.2499, 6.328, -9.53269)
+min_enemies = 1
+max_enemies = 2
+acceptable_enemies = Array[int]([0])
+
+[node name="SpawnArea3" parent="." instance=ExtResource("6_tvtd8")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -9.05594, 4.35642, 0.000181556)
+max_enemies = 2
+acceptable_enemies = Array[int]([0])

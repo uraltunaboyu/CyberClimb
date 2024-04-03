@@ -24,6 +24,7 @@ func destroy ():
 
 # called when we enter the collider of another body
 func _on_Bullet_body_entered(body):
+	destroy()
 	# does this body have a 'take_damage' function?
 	# if so, deal damage and destroy the bullet
 	if body.has_method("take_damage"):
@@ -31,4 +32,3 @@ func _on_Bullet_body_entered(body):
 			body.take_damage(damage, position)
 		else:
 			body.take_damage(damage)
-		destroy()

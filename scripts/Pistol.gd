@@ -1,7 +1,7 @@
 class_name SemiAutoGun extends Gun
 
 func _ready():
-	ammoCount = 100
+	ammoCount = 200
 	bullet_speed = 15
 	bullet_damage_min = 8
 	bullet_damage_max = 12

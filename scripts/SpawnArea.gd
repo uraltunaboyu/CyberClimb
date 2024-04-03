@@ -27,7 +27,7 @@ func get_spawn_bounds():
 	
 func get_random_point(area_min: Vector3, area_max: Vector3) -> Vector3:
 	return Vector3(randf_range(area_min.x, area_max.x),
-				   0,
+				   global_position.y,
 				   randf_range(area_min.z, area_max.z))
 
 func spawn_appropriate_enemy(diff: int) -> Node3D:
@@ -47,7 +47,6 @@ func spawn_appropriate_enemy(diff: int) -> Node3D:
 	while attempt < MAX_ATTEMPTS:
 		var bounds = get_spawn_bounds()
 		var spawn_point = get_random_point(bounds[0], bounds[1])
-		spawn_point.y = enemy_radius
 		overlapping = _check_overlap(spawn_point, enemy_radius)
 		if overlapping: 
 			attempt += 1

@@ -4,7 +4,6 @@ extends CharacterBody3D
 var curHp : int = 100
 var maxHp : int = 100
 var ammo : int = 30
-var score: int = 0
 
 # cam look
 var minLookAngle : float = -90.0

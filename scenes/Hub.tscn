@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="2_opr8a"]
 [ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="3_46i81"]
 [ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="4_0omxv"]
-[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/Button.tscn" id="5_n2b08"]
+[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="5_n2b08"]
 [ext_resource type="PackedScene" uid="uid://e1rlcjhqpy36" path="res://scenes/HubModel.tscn" id="7_788ns"]
 [ext_resource type="Script" path="res://scripts/Door.gd" id="7_qx0x1"]
 
@@ -56,7 +56,7 @@ target_scene = "assault rifle"
 
 [node name="PurchaseShotgun" parent="." instance=ExtResource("5_n2b08")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.58445, 3.76531, 13.9342)
-prompt_message = "Purchase Shotgun (250 Credits)"
+prompt_message = "Purchase Shotgun (25 Credits)"
 target_scene = "shotgun"
 
 [node name="Next_Room" parent="." instance=ExtResource("5_n2b08")]
@@ -68,6 +68,10 @@ prompt_message = "Start Climbing"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4345, 12.1332, 0)
+omni_range = 100.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5948, 12.1332, 49.1426)
 omni_range = 100.0
 
 [connection signal="interacted" from="PurchasePistol" to="." method="purchase_weapon"]
