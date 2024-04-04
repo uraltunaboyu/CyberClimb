@@ -11,18 +11,18 @@ config_version=5
 [application]
 
 config/name="CyberClimb"
-run/main_scene="res://scenes/MainMenu.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
 
 [autoload]
 
-GameState="*res://scripts/GameState.gd"
-Log="*res://scripts/common/Logger.gd"
-PlayerState="*res://scripts/PlayerState.gd"
-UIController="*res://scripts/UIController.gd"
-AudioController="*res://scripts/AudioController.gd"
-Debug="*res://scripts/common/Debug.gd"
+GameState="*res://scripts/common/game_state.gd"
+Log="*res://scripts/common/logger.gd"
+PlayerState="*res://scripts/common/player_state.gd"
+UIController="*res://scripts/common/ui_controller.gd"
+AudioController="*res://scripts/common/audio_controller.gd"
+Debug="*res://scripts/common/debug.gd"
 
 [display]
 

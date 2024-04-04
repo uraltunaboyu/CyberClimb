@@ -1,19 +1,19 @@
 [gd_scene load_steps=8 format=3 uid="uid://d02juuvp2nwss"]
 
-[ext_resource type="Script" path="res://scripts/Hub.gd" id="1_b4xss"]
-[ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/UI.tscn" id="2_opr8a"]
-[ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="3_46i81"]
-[ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/Player.tscn" id="4_0omxv"]
-[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="5_n2b08"]
-[ext_resource type="PackedScene" uid="uid://e1rlcjhqpy36" path="res://scenes/HubModel.tscn" id="7_788ns"]
-[ext_resource type="Script" path="res://scripts/Door.gd" id="7_qx0x1"]
+[ext_resource type="Script" path="res://scripts/hub.gd" id="1_lwoju"]
+[ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/ui.tscn" id="2_0juo0"]
+[ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="3_2anbs"]
+[ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/player.tscn" id="4_ibnnl"]
+[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="5_wk8m3"]
+[ext_resource type="Script" path="res://scripts/door.gd" id="6_82u8d"]
+[ext_resource type="PackedScene" uid="uid://e1rlcjhqpy36" path="res://scenes/models/hub_model.tscn" id="7_h2jr2"]
 
 [node name="MainScene" type="Node3D"]
-script = ExtResource("1_b4xss")
+script = ExtResource("1_lwoju")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="UI" parent="CanvasLayer" instance=ExtResource("2_opr8a")]
+[node name="UI" parent="CanvasLayer" instance=ExtResource("2_0juo0")]
 
 [node name="HubUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -33,38 +33,38 @@ offset_top = -200.0
 offset_right = 188.0
 offset_bottom = -159.0
 grow_vertical = 0
-theme_override_fonts/font = ExtResource("3_46i81")
+theme_override_fonts/font = ExtResource("3_2anbs")
 text = "Credits: 0"
 
-[node name="Player" parent="." instance=ExtResource("4_0omxv")]
+[node name="Player" parent="." instance=ExtResource("4_ibnnl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.37682, 3.81636, 17.0886)
 
-[node name="PurchasePistol" parent="." instance=ExtResource("5_n2b08")]
+[node name="PurchasePistol" parent="." instance=ExtResource("5_wk8m3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.58445, 3.76531, 13.9342)
 prompt_message = "Purchase Pistol (20 Credits)"
 target_scene = "pistol"
 
-[node name="PurchaseBurstRifle" parent="." instance=ExtResource("5_n2b08")]
+[node name="PurchaseBurstRifle" parent="." instance=ExtResource("5_wk8m3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.58445, 3.76531, 13.9342)
 prompt_message = "Purchase Burst Rifle (100 Credits)"
 target_scene = "burst rifle"
 
-[node name="PurchaseAssaultRifle" parent="." instance=ExtResource("5_n2b08")]
+[node name="PurchaseAssaultRifle" parent="." instance=ExtResource("5_wk8m3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.58445, 3.76531, 13.9342)
 prompt_message = "Purchase Assault Rifle (100 Credits)"
 target_scene = "assault rifle"
 
-[node name="PurchaseShotgun" parent="." instance=ExtResource("5_n2b08")]
+[node name="PurchaseShotgun" parent="." instance=ExtResource("5_wk8m3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.58445, 3.76531, 13.9342)
 prompt_message = "Purchase Shotgun (25 Credits)"
 target_scene = "shotgun"
 
-[node name="Next_Room" parent="." instance=ExtResource("5_n2b08")]
+[node name="Next_Room" parent="." instance=ExtResource("5_wk8m3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00679, 3.76723, 13.9719)
-script = ExtResource("7_qx0x1")
+script = ExtResource("6_82u8d")
 prompt_message = "Start Climbing"
 
-[node name="HubLevel" parent="." instance=ExtResource("7_788ns")]
+[node name="HubLevel" parent="." instance=ExtResource("7_h2jr2")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4345, 12.1332, 0)
