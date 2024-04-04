@@ -1,7 +1,7 @@
 extends AutoGun
 
 func _ready():
-	ammoCount = 50
+	ammoCount = 200
 	bullet_speed = 10
 	bullet_damage_min = 4
 	bullet_damage_max = 7

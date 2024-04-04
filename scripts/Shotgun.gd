@@ -1,9 +1,9 @@
 extends SemiAutoGun
 
-var pellet_count = 30
+var pellet_count = 20
 
 func _ready():
-	ammoCount = 150
+	ammoCount = 100
 	bullet_speed = 18
 	bullet_damage_min = 1
 	bullet_damage_max = 15

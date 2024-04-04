@@ -33,6 +33,9 @@ func _ready():
 
 func _physics_process(delta):
 	var angle_info = angle_to_obj(player.position)
+	if not is_on_floor():
+		velocity.y -= 9.81*delta
+		move_and_slide()
 	if detected:
 		if abs(angle_info[0]) > 0.02:
 			if angle_info[1] > 0:
@@ -84,3 +87,14 @@ func _on_shoots_body_exited(body):
 	if body.is_in_group("Player"):
 		Log.Debug("Player out of spread range!")
 		shooting = false
+
+func die():
+	alive = false
+	set_physics_process(false)
+	find_child(collider_name).queue_free()
+	emit_signal("dead")
+	ap.stop()
+	if death_ap and death_ap.has_animation("Death"):
+		death_ap.play("Death")
+	else:
+		remove()

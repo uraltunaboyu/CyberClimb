@@ -26,12 +26,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.198062, 1.25953, 7.45531)
 [node name="Next_Room" parent="." instance=ExtResource("4_f0w7e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.843, -8)
 script = ExtResource("5_klcf4")
-prompt_message = "Start Climbing"
-
-[node name="Next_Room2" parent="." instance=ExtResource("4_f0w7e")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.843, -8)
-script = ExtResource("5_klcf4")
-prompt_message = "Start Climbing"
+prompt_message = "Next Room"
 
 [node name="SpawnArea" parent="." instance=ExtResource("7_bi3jb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.556798, 1.38924, -4.70663)

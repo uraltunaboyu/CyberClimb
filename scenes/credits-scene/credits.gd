@@ -19,7 +19,7 @@ signal ended
 
 var viewSize # The size of the window
 ## Speed of scrolling
-@export var speed = 40
+@export var speed = 80
 var regularSpeed # To keep track of the original speed
 var done = false # True if all the credits have been scrolled off the screen
 #				 # (don't change this value, to end just use "end" function)

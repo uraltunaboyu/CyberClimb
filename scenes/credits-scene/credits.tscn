@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct4dek63v5j5j"]
+[gd_scene load_steps=4 format=3 uid="uid://ct4dek63v5j5j"]
 
 [ext_resource type="Script" path="res://scenes/credits-scene/credits.gd" id="1_3jpn6"]
-[ext_resource type="Texture2D" uid="uid://tsln7dwid0dq" path="res://scenes/credits-scene/exampleTitle.png" id="2_xutvm"]
+[ext_resource type="Texture2D" uid="uid://d4d4gn1tiq4sf" path="res://scenes/credits-scene/computer_pyramid_just_title.png" id="2_m5rnk"]
+[ext_resource type="PackedScene" uid="uid://da0bl5cu7lpx0" path="res://scenes/MainMenu.tscn" id="3_2aqof"]
 
 [node name="credits" type="Control"]
 layout_mode = 3
@@ -11,8 +12,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3jpn6")
-creditsFile = "res://scenes/credits-scene/example-CREDITS"
-titleImage = ExtResource("2_xutvm")
+creditsFile = "res://scenes/credits-scene/FINALCREDITS.txt"
+titleImage = ExtResource("2_m5rnk")
+nextScene = ExtResource("3_2aqof")
 destroyOnEnd = true
 
 [node name="background" type="ColorRect" parent="."]

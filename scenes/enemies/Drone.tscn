@@ -18,8 +18,7 @@ shape = SubResource("BoxShape3D_gtjov")
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_desired_distance = 1.5
 target_desired_distance = 3.0
-path_height_offset = -3.5
+path_height_offset = -2.0
 avoidance_enabled = true
 radius = 0.8
-debug_enabled = true
 debug_path_custom_color = Color(0, 1, 1, 1)

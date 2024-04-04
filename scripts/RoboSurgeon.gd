@@ -74,7 +74,7 @@ func _ready():
 	saw_area.body_entered.connect(_on_player_enter_saw)
 	_animation_player.animation_finished.connect(_anim_finished_handler)
 	
-	max_health = 1000
+	max_health = 500
 	cur_health = max_health
 	_state = BossState.IDLE
 	
@@ -151,7 +151,7 @@ func _spawn_syringe():
 	
 	
 	get_tree().root.add_child(syringe)
-	syringe.look_at(-adjustedPos, Vector3.UP, true)
+	syringe.look_at(adjustedPos, Vector3.UP, true)
 	
 func _get_player_pos():
 	return _player_ref.global_transform.origin

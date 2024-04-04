@@ -6,7 +6,7 @@ var burst_shots = 3
 var burst_delay = 0.05
 
 func _ready():
-	ammoCount = 30
+	ammoCount = 200
 	bullet_speed = 20
 	bullet_damage_min = 20
 	bullet_damage_max = 25
