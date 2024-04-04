@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://c66ryo0mg0jd8"]
+
+[ext_resource type="PackedScene" uid="uid://cy5j7lq7lwc40" path="res://scenes/enemies/robo_surgeon_model.tscn" id="2_qj470"]
+[ext_resource type="Script" path="res://scripts/enemies/robo_surgeon.gd" id="2_whrmd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_odxpw"]
+size = Vector3(9, 4, 14)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tv31d"]
+size = Vector3(13, 6, 18)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2rwk1"]
+size = Vector3(1.45, 1.62414, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ewcbe"]
+size = Vector3(5, 3, 5)
+
+[node name="BossModel8" type="CharacterBody3D" groups=["Enemy"]]
+script = ExtResource("2_whrmd")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Sight" type="Area3D" parent="."]
+
+[node name="SightCollider" type="CollisionShape3D" parent="Sight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.211258, 1.46404, -4.81787)
+shape = SubResource("BoxShape3D_odxpw")
+
+[node name="Horizon" type="Area3D" parent="."]
+
+[node name="HorizonCollider" type="CollisionShape3D" parent="Horizon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.211258, 1.46404, -4.81787)
+shape = SubResource("BoxShape3D_tv31d")
+
+[node name="BossCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, -4.26333e-14, 2.81347e-15, 1.42109e-14, 1, -3.73049e-08, -2.81347e-15, 3.73049e-08, 1, -0.0184631, 1.45879, 3.74876e-08)
+shape = SubResource("BoxShape3D_2rwk1")
+
+[node name="Trigger" type="Area3D" parent="."]
+
+[node name="SawCollider" type="CollisionShape3D" parent="Trigger"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, -2)
+shape = SubResource("BoxShape3D_ewcbe")
+
+[node name="SearchTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="RoboSurgeon" parent="." instance=ExtResource("2_qj470")]
+
+[connection signal="body_entered" from="Sight" to="." method="_on_player_spotted"]
+[connection signal="body_exited" from="Horizon" to="." method="_on_player_lost"]
+[connection signal="body_entered" from="Trigger" to="." method="_on_player_close"]
+[connection signal="timeout" from="SearchTimer" to="." method="_search"]

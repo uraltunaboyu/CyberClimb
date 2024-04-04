@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cem0yrawhwf00"]
 
-[ext_resource type="Script" path="res://scripts/UI.gd" id="1_juo5s"]
-[ext_resource type="Texture2D" uid="uid://dmqgjb33c3675" path="res://ui/UI_Square.png" id="2_bnrwh"]
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_juo5s"]
+[ext_resource type="Texture2D" uid="uid://dmqgjb33c3675" path="res://images/ui_square.png" id="2_bnrwh"]
 [ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="3_5lwx4"]
 
 [node name="UI" type="Control"]

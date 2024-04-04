@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://e1rlcjhqpy36"]
-
-[ext_resource type="PackedScene" uid="uid://5mo2y6774e02" path="res://models/Rooms/Hub/HubLevel.glb" id="1_ymt05"]
-
-[node name="HubLevel2" instance=ExtResource("1_ymt05")]

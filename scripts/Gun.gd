@@ -1,7 +1,7 @@
 class_name Gun extends Node3D
 
 @onready var muzzle : Node3D = $Muzzle
-@onready var bulletScene = preload("res://scenes/Bullet.tscn")
+@onready var bulletScene = preload("res://scenes/projectiles/bullet.tscn")
 @onready var shot_timer : Timer = $Timer
 
 var ammoCount = 40
