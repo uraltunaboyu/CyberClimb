@@ -38,7 +38,7 @@ func set_equipped_gun(new_gun, set_ammo = true):
 		get_child(0).queue_free()
 	equipped_gun = replacing_gun.instantiate()
 	add_child(equipped_gun)
-	equipped_gun.global_transform = self.global_transform
+	equipped_gun.global_position = self.global_position
 	if set_ammo:
 		PlayerState.ammo = equipped_gun.get_ammo_count()
 	

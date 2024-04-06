@@ -1,6 +1,7 @@
 class_name AutoGun extends Gun
 
 func _ready():
+	muzzle = $assault_rifle/Muzzle
 	ammoCount = 200
 	bullet_speed = 15
 	bullet_damage_min = 11

@@ -1,5 +1,10 @@
 class_name WeaponAttributes extends Node
 
+const PISTOL_NAME = "pistol"
+const ASSAULT_RIFLE_NAME = "assault rifle"
+const BURST_GUN_NAME = "burst rifle"
+const SHOTGUN_NAME = "shotgun"
+
 enum Name {
 	NONE,
 	PISTOL,
@@ -9,10 +14,17 @@ enum Name {
 }
 
 const BY_NAME = {
-	"pistol" : Name.PISTOL,
-	"assault rifle" : Name.ASSAULT_RIFLE,
-	"burst rifle" : Name.BURST_RIFLE,
-	"shotgun" : Name.SHOTGUN,
+	PISTOL_NAME : Name.PISTOL,
+	ASSAULT_RIFLE_NAME : Name.ASSAULT_RIFLE,
+	BURST_GUN_NAME : Name.BURST_RIFLE,
+	SHOTGUN_NAME : Name.SHOTGUN,
+}
+
+const TO_NAME = {
+	Name.PISTOL : PISTOL_NAME,
+	Name.ASSAULT_RIFLE : ASSAULT_RIFLE_NAME,
+	Name.BURST_RIFLE : BURST_GUN_NAME,
+	Name.SHOTGUN : SHOTGUN_NAME,
 }
 
 const SCENE = {

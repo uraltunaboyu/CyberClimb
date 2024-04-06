@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7dqes4dn103w"]
+
+[ext_resource type="PackedScene" uid="uid://dtlhawtjvgmk1" path="res://models/weapons/assault_rifle.glb" id="1_nmvm5"]
+
+[node name="assault_rifle" instance=ExtResource("1_nmvm5")]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(-1.84907e-08, 0, -0.0922819, 0, 0.108675, 0, 0.423018, 0, -4.03377e-09, 0, 0.0106667, -0.444839)
