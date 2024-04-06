@@ -36,19 +36,32 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_10ofd")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="MovementController" type="Node3D" parent="."]
+script = ExtResource("3_md0ua")
+
+[node name="Down" type="RayCast3D" parent="MovementController"]
+
+[node name="Left" type="RayCast3D" parent="MovementController"]
+target_position = Vector3(-1, 0, 0)
+
+[node name="Right" type="RayCast3D" parent="MovementController"]
+target_position = Vector3(1, 0, 0)
+
+[node name="PivotPoint" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="PivotPoint"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43342, 0)
 current = true
 
-[node name="GunSlotPrimary" type="Node3D" parent="Camera3D"]
+[node name="GunSlotPrimary" type="Node3D" parent="PivotPoint/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.25, -0.4)
 script = ExtResource("2_vdmnf")
 
-[node name="InteractRay" type="RayCast3D" parent="Camera3D"]
+[node name="InteractRay" type="RayCast3D" parent="PivotPoint/Camera3D"]
 target_position = Vector3(0, 0, -4)
 script = ExtResource("4_k452p")
 
-[node name="Prompt" type="Label" parent="Camera3D/InteractRay"]
+[node name="Prompt" type="Label" parent="PivotPoint/Camera3D/InteractRay"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -63,6 +76,3 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_w7asp")
 theme_override_font_sizes/font_size = 80
 horizontal_alignment = 1
-
-[node name="MovementController" type="Node" parent="."]
-script = ExtResource("3_md0ua")
