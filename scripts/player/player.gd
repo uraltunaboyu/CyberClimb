@@ -36,7 +36,7 @@ func _ready ():
 func _physics_process(delta):
 	movementController.poll(velocity)
 	
-	set_velocity(movementController.calculate_movement_vector(delta))
+	set_velocity(movementController.calculate_velocity(delta))
 	
 	_lean(delta, false)
 	move_and_slide()

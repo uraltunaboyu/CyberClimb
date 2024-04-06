@@ -22,7 +22,32 @@ const MOVEMENT_STATE_NAMES = {
 	MovementState.WALLRUNNING : "WALLRUNNING"
 }
 
+var targetVel: Vector3
 var vel: Vector3
+
+const ACCELERATION_BY_STATE = {
+	MovementState.STOPPED : 10.0,
+	MovementState.MOVING : 3.0,
+	MovementState.DASHING : 5.0,
+	MovementState.JUMPING : 2.0,
+	MovementState.FALLING : 2.0,
+	MovementState.GLIDING : 2.5,
+	MovementState.AIRDASHING : 5.0,
+	MovementState.WALLRUNNING : 3.0,
+}
+
+const ACCELERATION_Y_BY_STATE = {
+	MovementState.JUMPING : 10.0,
+	MovementState.FALLING : 8.0,
+	MovementState.GLIDING : 2.5,
+	MovementState.AIRDASHING : 3.0,
+	MovementState.WALLRUNNING : 1.0,
+	
+	# these values should never be relevant
+	MovementState.STOPPED : 3.0,
+	MovementState.MOVING : 3.0,
+	MovementState.DASHING : 3.0,
+}
 
 #wallrun
 const WALLRUN_SPEED_THRESHOLD = 2.0
@@ -57,7 +82,7 @@ const FLOOR_DISTANCE_THRESHOLD: float = 0.35
 
 func _ready():
 	currentState = MovementState.STOPPED
-	vel = Vector3(0, 0, 0)
+	targetVel = Vector3(0, 0, 0)
 	
 	recoveryTimer = Timer.new()
 	add_child(recoveryTimer)
@@ -124,7 +149,7 @@ func is_dash_pressed() -> bool:
 func can_wallrun() -> bool:
 	if not (playerRef.is_on_wall_only() and _is_far_from_floor()):
 		return false
-	if get_horizontal_magnitude(vel) < WALLRUN_SPEED_THRESHOLD:
+	if get_horizontal_magnitude(targetVel) < WALLRUN_SPEED_THRESHOLD:
 		Log.Debug("Cannot wallrun while so slow")
 		return false
 	if stamina < WALLRUN_MIN_STAMINA:
@@ -191,10 +216,10 @@ func get_input_vector() -> Vector2:
 func get_horizontal_magnitude(vec: Vector3) -> float:
 	return sqrt(vec.x * vec.x + vec.z * vec.z)
 	
-func calculate_movement_vector(delta) -> Vector3:
+func _calculate_target_velocity(delta):
 	UIController.set_movement_state(get_current_state())
-	vel.x = 0
-	vel.z = 0
+	targetVel.x = 0
+	targetVel.z = 0
 	var input = get_input_vector()
 	
 	# get the forward and right directions
@@ -204,32 +229,32 @@ func calculate_movement_vector(delta) -> Vector3:
 	var relativeDir = (forward * input.y + right * input.x)
 	
 	if currentState != MovementState.DASHING && currentState != MovementState.AIRDASHING:
-		vel.x = relativeDir.x * PlayerState.move_speed
-		vel.z = relativeDir.z * PlayerState.move_speed
+		targetVel.x = relativeDir.x * PlayerState.move_speed
+		targetVel.z = relativeDir.z * PlayerState.move_speed
 	else:
 		if prevState != currentState: 
 			dashTimer.start()
-		vel.x = relativeDir.x * PlayerState.dash_speed
-		vel.z = relativeDir.z * PlayerState.dash_speed
+		targetVel.x = relativeDir.x * PlayerState.dash_speed
+		targetVel.z = relativeDir.z * PlayerState.dash_speed
 	
 	# apply gravity. handles wether it is glide_gravity or regular
 	if currentState == MovementState.FALLING or currentState == MovementState.JUMPING:
-		vel.y -= gravity * delta
+		targetVel.y -= gravity * delta
 	elif currentState == MovementState.DASHING:
-		vel.y -= gravity * delta / 2
+		targetVel.y -= gravity * delta / 2
 	elif currentState == MovementState.GLIDING:
-		vel.y -= PlayerState.glide_gravity * delta
-		vel.x = vel.x * 2
-		vel.z = vel.z * 2
+		targetVel.y -= PlayerState.glide_gravity * delta
+		targetVel.x = targetVel.x * 2
+		targetVel.z = targetVel.z * 2
 	elif currentState == MovementState.WALLRUNNING:
-		vel.y = 0
+		targetVel.y = -1
 		
 	if currentState == MovementState.GLIDING:
-		vel.x = vel.x * PlayerState.glide_speed_mult
-		vel.z = vel.z * PlayerState.glide_speed_mult
+		targetVel.x = targetVel.x * PlayerState.glide_speed_mult
+		targetVel.z = targetVel.z * PlayerState.glide_speed_mult
 		
 	if prevState != MovementState.JUMPING and currentState == MovementState.JUMPING:
-		vel.y = PlayerState.jump_force
+		targetVel.y = PlayerState.jump_force
 		jumpReady = false
 		jumpTimer.start()
 		
@@ -237,9 +262,19 @@ func calculate_movement_vector(delta) -> Vector3:
 		Log.Debug("Disengaging from wall")
 		var wall_normal: Vector3 = playerRef.get_wall_normal()
 		var flat_wall_normal: Vector2 = Vector2(wall_normal.x, wall_normal.z) * 20
-		vel.x = flat_wall_normal.x
-		vel.z = flat_wall_normal.y
+		targetVel.x = flat_wall_normal.x
+		targetVel.z = flat_wall_normal.y
 		
+func calculate_velocity(delta) -> Vector3:
+	_calculate_target_velocity(delta)
+	
+	var horizontal_accel = ACCELERATION_BY_STATE[currentState]
+	var vertical_accel = ACCELERATION_Y_BY_STATE[currentState]
+	
+	vel.x = lerp(vel.x, targetVel.x, delta * horizontal_accel)
+	vel.z = lerp(vel.z, targetVel.z, delta * horizontal_accel)
+	vel.y = lerp(vel.y, targetVel.y, delta * vertical_accel)
+	
 	return vel
 	
 func get_lean_direction() -> float:
