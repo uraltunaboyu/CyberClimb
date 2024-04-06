@@ -73,6 +73,9 @@ func add_weapon(weapon_name):
 func remove_weapon(_nothing):
 	PlayerState.equipped_weapon = WeaponAttributes.Name.NONE
 	primarySlot.remove_weapon()
+	
+func add_upgrade(upgrade):
+	PlayerState.add_upgrade(PlayerState.upgrade_from_string(upgrade))
 
 func load_state():
 	curHp = PlayerState.hp
