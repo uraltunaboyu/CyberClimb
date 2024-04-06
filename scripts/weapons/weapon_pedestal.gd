@@ -14,11 +14,12 @@ const WeaponOffsets = {
 	WeaponAttributes.Name.PISTOL : Vector3(0, 0, 0),
 	WeaponAttributes.Name.SHOTGUN : Vector3(0, 0, 0),
 	WeaponAttributes.Name.ASSAULT_RIFLE : Vector3(0, 0.15, 0.4),
-	WeaponAttributes.Name.BURST_RIFLE : Vector3(0, 0, 0),
+	WeaponAttributes.Name.BURST_RIFLE : Vector3(0, 0.15, 0.4),
 }
 
 func _ready():
 	target_scene = WeaponAttributes.TO_NAME[Weapon]
+	prompt_message = "Purchase %s: %s" % [WeaponAttributes.TO_NAME[Weapon].capitalize(), WeaponAttributes.COST[Weapon]]
 	
 	var weapon = load(WeaponAttributes.SCENE[Weapon]).instantiate()
 	rot_point.add_child(weapon)

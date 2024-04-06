@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhvigbygpb5cg"]
+[gd_scene load_steps=9 format=3 uid="uid://dhvigbygpb5cg"]
 
 [ext_resource type="Script" path="res://scripts/room.gd" id="1_bpnvt"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/ui.tscn" id="2_j3jhn"]
 [ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/player.tscn" id="3_fqig6"]
-[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="4_witbt"]
-[ext_resource type="Script" path="res://scripts/door.gd" id="5_l2w0j"]
 [ext_resource type="PackedScene" uid="uid://53xc6fm8vbx1" path="res://scenes/models/level1-5_model.tscn" id="6_djins"]
 [ext_resource type="PackedScene" uid="uid://bmuq8c1234kuh" path="res://scenes/spawn_area.tscn" id="7_o5tc0"]
+[ext_resource type="PackedScene" uid="uid://co1kai21xg8xa" path="res://scenes/models/ladder_by_rung.tscn" id="7_pr1rv"]
 [ext_resource type="Environment" uid="uid://q8whx4pat7nx" path="res://resources/new_environment4-5.tres" id="8_e74od"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_6x6rj"]
@@ -23,11 +22,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("3_fqig6")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.28978, 1.25953, 7.33225)
-
-[node name="Next_Room" parent="." instance=ExtResource("4_witbt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.56179, 4.05453, 1.1706)
-script = ExtResource("5_l2w0j")
-prompt_message = "Next Floor"
 
 [node name="EnemyHolder" type="Node" parent="."]
 
@@ -54,3 +48,9 @@ acceptable_enemies = Array[int]([0])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("8_e74od")
+
+[node name="Ladder_By_Rung" parent="." instance=ExtResource("7_pr1rv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.37808, 3.5, 1.12471)
+
+[node name="Ladder_By_Rung2" parent="." instance=ExtResource("7_pr1rv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.37808, 7.49924, 1.12471)

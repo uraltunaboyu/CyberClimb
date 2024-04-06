@@ -15,6 +15,7 @@ const SHOTGUN_SCENE = "res://scenes/Shotgun.tscn"
 func _ready():
 	credits = PlayerState.credits
 	AudioController.play_hub_music()
+	UIController.disable_crosshair()
 
 func purchase_weapon(name):
 	var weapon = WeaponAttributes.BY_NAME[name]
