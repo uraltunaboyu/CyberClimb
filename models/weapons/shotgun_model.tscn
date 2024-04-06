@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://c01aco41f8dte"]
+
+[ext_resource type="PackedScene" uid="uid://yiul46rhktgx" path="res://models/weapons/shotgun.glb" id="1_2awfy"]
+
+[sub_resource type="Animation" id="Animation_g5gsf"]
+resource_name = "shotgun_pump"
+length = 0.8
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube/Cube_001")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.254489, 0, -0.138276, 0.2, 1, 0.254489, 0, -0.138276, 0.4, 1, -0.0636174, 0, -0.138276, 0.8, 1, 0.254489, 0, -0.138276)
+tracks/1/type = "position_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cube/Cube_002")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.254489, 0, 0.136724, 0.2, 1, 0.254489, 0, 0.136724, 0.4, 1, -0.0636174, 0, 0.136724, 0.8, 1, 0.254489, 0, 0.136724)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.1, 1, 0.173648, 0, 0, 0.984808, 0.5, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0tic3"]
+_data = {
+"shotgun_pump": SubResource("Animation_g5gsf")
+}
+
+[node name="shotgun" instance=ExtResource("1_2awfy")]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.565)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_0tic3")
+}

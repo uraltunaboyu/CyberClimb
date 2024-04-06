@@ -1,23 +1,26 @@
 [gd_scene load_steps=4 format=3 uid="uid://c8fvpv5g7f360"]
 
 [ext_resource type="Script" path="res://scripts/weapons/shotgun.gd" id="1_sb7nr"]
-[ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/weapons/shotgun.obj" id="2_qudby"]
-[ext_resource type="AudioStream" uid="uid://cn8aihofe02sr" path="res://audio/audio_effects/Shotgun shot.wav" id="3_x6rt7"]
+[ext_resource type="PackedScene" uid="uid://c01aco41f8dte" path="res://models/weapons/shotgun_model.tscn" id="2_ea2hh"]
+[ext_resource type="AudioStream" uid="uid://b2e7rqkb0y5a4" path="res://audio/audio_effects/Shotgun shot.wav" id="3_x6rt7"]
 
 [node name="Shotgun" type="Node3D"]
-transform = Transform3D(0.99863, 0.0018265, 0.0523041, 0, 0.999391, -0.0348995, -0.052336, 0.0348517, 0.998021, 0, 0, -0.405356)
+transform = Transform3D(0.97437, 0.00785068, 0.224814, 0, 0.999391, -0.0348995, -0.224951, 0.034005, 0.973776, 0, 0.213047, -0.537176)
 script = ExtResource("1_sb7nr")
 
-[node name="GunModel" type="MeshInstance3D" parent="."]
-transform = Transform3D(-15, 0, -5.06239e-06, 0, 10, 0, 5.84122e-06, 0, -13, 0, 0, -0.114732)
-mesh = ExtResource("2_qudby")
-skeleton = NodePath("../..")
+[node name="shotgun" parent="." instance=ExtResource("2_ea2hh")]
+transform = Transform3D(0.84, 0, 0, 0, 0.84, 0, 0, 0, 0.84, 0.06633, -0.0081467, -0.21957)
 
-[node name="Muzzle" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0.0677762, -0.658718)
+[node name="Cube" parent="shotgun" index="0"]
+transform = Transform3D(-2.98023e-08, 0, 1, -7.45058e-09, 1, -4.65661e-10, -1, 0, -2.98023e-08, -0.0759359, 0.015247, -0.134426)
+
+[node name="Muzzle" type="Node3D" parent="shotgun"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0754932, 0.0101439, -0.608911)
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="ShootAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_x6rt7")
 volume_db = -10.0
+
+[editable path="shotgun"]
