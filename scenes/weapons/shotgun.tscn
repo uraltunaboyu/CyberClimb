@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://b2e7rqkb0y5a4" path="res://audio/audio_effects/Shotgun shot.wav" id="3_x6rt7"]
 
 [node name="Shotgun" type="Node3D"]
-transform = Transform3D(0.97437, 0.00785068, 0.224814, 0, 0.999391, -0.0348995, -0.224951, 0.034005, 0.973776, 0, 0.213047, -0.537176)
+transform = Transform3D(0.997564, 0.00121742, 0.0697458, 0, 0.999848, -0.0174524, -0.0697565, 0.0174099, 0.997412, 0, 0.213047, -0.537176)
 script = ExtResource("1_sb7nr")
 
 [node name="shotgun" parent="." instance=ExtResource("2_ea2hh")]

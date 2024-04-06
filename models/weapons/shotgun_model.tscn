@@ -35,7 +35,7 @@ _data = {
 [node name="shotgun" instance=ExtResource("1_2awfy")]
 
 [node name="Cube" parent="." index="0"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.565)
+transform = Transform3D(-4.37114e-08, 0, 0.894384, 0, 1, 0, -1, 0, -3.90948e-08, 0, 0, -0.565)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
 libraries = {

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7qf0ost3cgrk"]
+
+[ext_resource type="Script" path="res://scripts/weapons/weapon_pedestal.gd" id="1_xjk50"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_y16dn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xuh57"]
+albedo_color = Color(0.74558, 0.74558, 0.74558, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jmx8o"]
+height = 1.22649
+
+[node name="Pedestal" type="StaticBody3D"]
+script = ExtResource("1_xjk50")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.61371, 0, 0, 0, 1, 0, 0.619783, 0)
+mesh = SubResource("CylinderMesh_y16dn")
+surface_material_override/0 = SubResource("StandardMaterial3D_xuh57")
+
+[node name="RotationPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, -0.34202, 0, 0.34202, 0.939693, 0, 1.59845, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.619783, 0)
+shape = SubResource("CylinderShape3D_jmx8o")

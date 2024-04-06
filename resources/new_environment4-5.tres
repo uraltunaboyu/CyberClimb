@@ -1,0 +1,17 @@
+[gd_resource type="Environment" format=3 uid="uid://q8whx4pat7nx"]
+
+[resource]
+background_mode = 3
+ssr_enabled = true
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 2.0
+glow_strength = 2.0
+glow_blend_mode = 4
+fog_light_energy = 0.6
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
+volumetric_fog_detail_spread = 0.5
+adjustment_enabled = true
+adjustment_brightness = 0.7
+adjustment_contrast = 1.3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d02juuvp2nwss"]
+[gd_scene load_steps=9 format=3 uid="uid://d02juuvp2nwss"]
 
 [ext_resource type="Script" path="res://scripts/hub.gd" id="1_lwoju"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/ui.tscn" id="2_0juo0"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="5_wk8m3"]
 [ext_resource type="Script" path="res://scripts/door.gd" id="6_82u8d"]
 [ext_resource type="PackedScene" uid="uid://e1rlcjhqpy36" path="res://scenes/models/hub_model.tscn" id="7_h2jr2"]
+[ext_resource type="PackedScene" uid="uid://b7qf0ost3cgrk" path="res://scenes/weapons/weapon_pedestal.tscn" id="8_p0n5p"]
 
 [node name="MainScene" type="Node3D"]
 script = ExtResource("1_lwoju")
@@ -74,7 +75,13 @@ omni_range = 100.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5948, 12.1332, 49.1426)
 omni_range = 100.0
 
+[node name="Pedestal" parent="." instance=ExtResource("8_p0n5p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.55268, 3.46839, 5.03073)
+Weapon = 2
+prompt_message = "Purchase Assault Rifle (100 Credits)"
+
 [connection signal="interacted" from="PurchasePistol" to="." method="purchase_weapon"]
 [connection signal="interacted" from="PurchaseBurstRifle" to="." method="purchase_weapon"]
 [connection signal="interacted" from="PurchaseAssaultRifle" to="." method="purchase_weapon"]
 [connection signal="interacted" from="PurchaseShotgun" to="." method="purchase_weapon"]
+[connection signal="interacted" from="Pedestal" to="." method="purchase_weapon"]
