@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://66gabooesopv"]
 
-[ext_resource type="Script" path="res://scripts/Turret.gd" id="2_s7hgm"]
+[ext_resource type="Script" path="res://scripts/enemies/turret.gd" id="1_f1q5h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jf1kl"]
 resource_name = "MetalBody"
@@ -511,7 +511,7 @@ _data = {
 }
 
 [node name="Turret" type="CharacterBody3D" groups=["Enemy"]]
-script = ExtResource("2_s7hgm")
+script = ExtResource("1_f1q5h")
 
 [node name="EnemyCollider" type="CollisionPolygon3D" parent="."]
 depth = 0.65

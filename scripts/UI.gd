@@ -5,6 +5,3 @@ extends Control
 @onready var ammoText : Label = get_node("AmmoText")
 
 @onready var movementStateText: Label = get_node("DebugInfo/MovementState")
-
-func _ready():
-	UIController._initialize()

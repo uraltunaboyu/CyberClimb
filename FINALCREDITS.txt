@@ -1,0 +1,41 @@
+[Technical Lead]
+Ural
+
+[Creative Lead]
+Max
+
+[Writing and Worldbuilding]
+Alwyn
+Hanna
+Matt
+Max
+Sarah
+Zheng
+
+[Programming]
+Kagan
+Ural
+
+[Junior Programming]
+Brandon
+Liam
+Max
+Ryan
+Senlin
+
+[Concept Art]
+Ariel
+
+[Menu Design]
+Andrew
+
+[Music Composition & Sound Design]
+Matt
+
+[Level Design]
+Max
+Nico
+Paige
+
+[Enemy Design]
+Max
