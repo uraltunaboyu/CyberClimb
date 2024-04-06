@@ -34,3 +34,12 @@ func set_ammo(val):
 func set_movement_state(val):
 	if Debug.DEBUG_MODE:
 		_ui_node.movementStateText.text = val
+
+func enable_crosshair():
+	_ui_node.crosshair.visible = true
+	
+func disable_crosshair():
+	_ui_node.crosshair.visible = false
+
+func set_prompt(val):
+	_ui_node.promptText.text = val

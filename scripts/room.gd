@@ -11,6 +11,7 @@ func _ready():
 	_set_rewards(GameState.reward, GameState.diff)
 	_spawn_enemies(GameState.diff)
 	level_complete = total_enemies == 0
+	UIController.enable_crosshair()
 
 func _spawn_enemies(diff: int)->void:
 	# Iterate through spawn areas

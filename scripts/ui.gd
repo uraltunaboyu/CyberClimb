@@ -1,7 +1,9 @@
 extends Control
 
-@onready var healthBar : TextureProgressBar = get_node("HealthBar")
-@onready var staminaBar: TextureProgressBar = get_node("StaminaBar")
-@onready var ammoText : Label = get_node("AmmoText")
+@onready var healthBar : TextureProgressBar = $HealthBar
+@onready var staminaBar: TextureProgressBar = $StaminaBar
+@onready var ammoText : Label = $AmmoText
+@onready var crosshair : TextureRect = $Crosshair
+@onready var promptText : Label = $Prompt
 
-@onready var movementStateText: Label = get_node("DebugInfo/MovementState")
+@onready var movementStateText: Label = $DebugInfo/MovementState

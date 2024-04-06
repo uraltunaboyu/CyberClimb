@@ -36,7 +36,7 @@ const SCENE = {
 
 const COST = {
 	Name.PISTOL: 0,
-	Name.ASSAULT_RIFLE: 100,
-	Name.BURST_RIFLE: 100, 
-	Name.SHOTGUN: 25,
+	Name.ASSAULT_RIFLE: 50,
+	Name.BURST_RIFLE: 25, 
+	Name.SHOTGUN: 50,
 }

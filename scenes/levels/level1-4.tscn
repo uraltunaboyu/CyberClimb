@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://s6dmwulbrcq2"]
+[gd_scene load_steps=9 format=3 uid="uid://s6dmwulbrcq2"]
 
 [ext_resource type="Script" path="res://scripts/room.gd" id="1_u6eqy"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/ui.tscn" id="2_0f5ok"]
 [ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/player.tscn" id="3_bwu5t"]
-[ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="4_7x0k4"]
-[ext_resource type="Script" path="res://scripts/door.gd" id="5_78yh8"]
 [ext_resource type="PackedScene" uid="uid://r182bir1jfaw" path="res://scenes/models/level1-4_model.tscn" id="6_iqhm4"]
 [ext_resource type="PackedScene" uid="uid://bmuq8c1234kuh" path="res://scenes/spawn_area.tscn" id="7_0wmuw"]
+[ext_resource type="PackedScene" uid="uid://co1kai21xg8xa" path="res://scenes/models/ladder_by_rung.tscn" id="7_dgdp7"]
 [ext_resource type="Environment" uid="uid://q8whx4pat7nx" path="res://resources/new_environment4-5.tres" id="8_m2voi"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_5ejbp"]
@@ -23,11 +22,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="." instance=ExtResource("3_bwu5t")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 4.17879, 1.25953, 8.4651)
-
-[node name="Next_Room" parent="." instance=ExtResource("4_7x0k4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.09755, 1.08031, 9.17603)
-script = ExtResource("5_78yh8")
-prompt_message = "Next Floor"
 
 [node name="EnemyHolder" type="Node" parent="."]
 
@@ -52,3 +46,9 @@ acceptable_enemies = Array[int]([0])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("8_m2voi")
+
+[node name="Ladder_By_Rung" parent="." instance=ExtResource("7_dgdp7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.0225, 0.5, 9.86088)
+
+[node name="Ladder_By_Rung2" parent="." instance=ExtResource("7_dgdp7")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.0225, 4.49971, 9.86088)
