@@ -14,13 +14,20 @@ var lookSensitivity : float = 10.0
 var mouseDelta : Vector2 = Vector2()
 var fall: Vector3 = Vector3()
 
+# leaning
+const LEAN_AMOUNT_RAD = deg_to_rad(10.0)
+var leanTarget: float = 0.0
+var leanElapsed: float = 0.0
+
 # components
-@onready var camera : Camera3D = get_node("Camera3D")
+@onready var camera : Camera3D = get_node("PivotPoint/Camera3D")
 @onready var ui : Node = get_node("../CanvasLayer/UI")
-@onready var primarySlot: Node3D = get_node("Camera3D/GunSlotPrimary")
+@onready var primarySlot: Node3D = get_node("PivotPoint/Camera3D/GunSlotPrimary")
 @onready var movementController = get_node("MovementController")
+@onready var pivotPoint: Node3D = get_node("PivotPoint")
 
 func _ready ():
+	Log.Debug(get_path())
 	GameState.set_state_playing()
 	load_state()
 	UIController._initialize()
@@ -30,6 +37,8 @@ func _physics_process(delta):
 	movementController.poll(velocity)
 	
 	set_velocity(movementController.calculate_movement_vector(delta))
+	
+	_lean(delta, false)
 	move_and_slide()
 
 func _process(delta):
@@ -41,6 +50,16 @@ func _process(delta):
 func _input(event):
 	if event is InputEventMouseMotion:
 		mouseDelta = event.relative
+		
+func _lean(delta, lean_right: bool):
+	var rotateAngle: float = LEAN_AMOUNT_RAD * movementController.get_lean_direction()
+	if leanTarget != rotateAngle:
+		leanTarget = rotateAngle
+		leanElapsed = 0.0
+	
+	var newRotation: float = lerp_angle(pivotPoint.global_rotation.z, rotateAngle, leanElapsed)
+	leanElapsed = min(leanElapsed + delta, 1.0)
+	pivotPoint.global_rotation.z = newRotation
 
 # called when an enemy damages us
 func take_damage (damage):

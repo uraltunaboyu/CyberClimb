@@ -20,11 +20,11 @@ var maxHp: int = 100:
 	set(val):
 		UIController.set_max_hp(hp)
 		maxHp = val
-var stamina: float = 100.0:
+var stamina: float = 1000.0:
 	set(val):
 		UIController.set_cur_stamina(val)
 		stamina = val
-var maxStamina: float = 100.0:
+var maxStamina: float = 1000.0:
 	set(val):
 		UIController.set_max_stamina(val)
 		maxStamina = val
@@ -35,25 +35,25 @@ var ammo = null:
 var credits = 100
 var equipped_weapon: WeaponAttributes.Name = WeaponAttributes.Name.NONE
 
-var moveSpeed : float = 5.0
-var wallrunCost : float = 0.8
+var move_speed : float = 5.0
+var wallrun_cost : float = 0.3
 
-var jumpCooldown = 1.0
-var jumpCost: float = 20.0
-var doubleJump: float = 33.0
-var jumpForce : float = 5
+var jump_cooldown = 1.0
+var jump_cost: float = 20.0
+var double_jump_cost: float = 33.0
+var jump_force : float = 5
 
-var dashSpeed: float = 9.0
-var dashDuration: float = 2.0
-var dashCooldownDuration = 3.0
-var dashCost: float = 40.0
+var dash_speed: float = 9.0
+var dash_duration: float = 1.5
+var dash_cooldown_duration = 1.0
+var dash_cost: float = 40.0
 
-var staminaRecovery = 20.0
-var recoveryDelay = 1.0
-var recoveryRate = 0.5
+var stamina_recovery = 20.0
+var recovery_delay = 1.0
+var recovery_rate = 0.5
 
-var glideGravity: float = 4
-var glideSpeedMult: float = 1.15
+var glide_gravity: float = 4
+var glide_speed_mult: float = 1.15
 
 
 var _upgrades: Array[UpgradeName] = []

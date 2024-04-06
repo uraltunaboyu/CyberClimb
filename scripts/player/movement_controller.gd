@@ -1,4 +1,4 @@
-class_name MovementController extends Node
+class_name MovementController extends Node3D
 
 enum MovementState {
 	STOPPED,
@@ -26,6 +26,8 @@ var vel: Vector3
 
 #wallrun
 const WALLRUN_SPEED_THRESHOLD = 2.0
+const WALLRUN_MIN_STAMINA = 20
+var wallDirection: int
 
 var jumpTimer: Timer
 var jumpReady = true
@@ -36,6 +38,8 @@ var dashCooldown: Timer
 var dashTimer: Timer
 
 # stamina
+var stamina: float = PlayerState.maxStamina:
+	set = _set_stamina
 var isRecovering = false
 var recoveryTimer: Timer
 
@@ -45,6 +49,12 @@ var playerRef: CharacterBody3D
 
 var gravity : float = 9.81
 
+const FLOOR_DISTANCE_THRESHOLD: float = 0.35
+
+@onready var _down: RayCast3D = get_node("Down")
+@onready var _left: RayCast3D = get_node("Left")
+@onready var _right: RayCast3D = get_node("Right")
+
 func _ready():
 	currentState = MovementState.STOPPED
 	vel = Vector3(0, 0, 0)
@@ -52,7 +62,7 @@ func _ready():
 	recoveryTimer = Timer.new()
 	add_child(recoveryTimer)
 	
-	recoveryTimer.wait_time = PlayerState.recoveryDelay
+	recoveryTimer.wait_time = PlayerState.recovery_delay
 	recoveryTimer.one_shot = true
 	recoveryTimer.timeout.connect(func(): isRecovering = true)
 	
@@ -63,25 +73,35 @@ func _ready():
 	jumpTimer = Timer.new()
 	add_child(jumpTimer)
 	
-	jumpTimer.wait_time = PlayerState.jumpCooldown
+	jumpTimer.wait_time = PlayerState.jump_cooldown
 	jumpTimer.one_shot = true
 	jumpTimer.timeout.connect(post_jump_recovery)
 	
-	dashTimer.wait_time = PlayerState.dashDuration
+	dashTimer.wait_time = PlayerState.dash_duration
 	dashTimer.one_shot = true
 	dashTimer.timeout.connect(start_dash_cooldown)
 	
-	dashCooldown.wait_time = PlayerState.dashCooldownDuration
+	dashCooldown.wait_time = PlayerState.dash_cooldown_duration
 	dashCooldown.one_shot = true
 	dashCooldown.timeout.connect(post_dash_recovery)
 	
 func _process(_delta):
 	if currentState == MovementState.WALLRUNNING:
-		PlayerState.stamina -= PlayerState.wallrunCost
+		stamina -= PlayerState.wallrun_cost
 	if isRecovering:
-		PlayerState.stamina += PlayerState.recoveryRate
-		PlayerState.stamina = min(PlayerState.stamina, PlayerState.maxStamina)
-		isRecovering = PlayerState.stamina != PlayerState.maxStamina
+		stamina += PlayerState.recovery_rate
+		stamina = min(stamina, PlayerState.maxStamina)
+		isRecovering = stamina != PlayerState.maxStamina
+		
+func _set_stamina(val: float):
+	if val < stamina:
+		reset_recovery_timer()
+	stamina = val
+	PlayerState.stamina = stamina	
+	
+func _is_far_from_floor() -> bool:
+	if not _down.is_colliding(): return true
+	return global_position.distance_to(_down.get_collision_point()) < FLOOR_DISTANCE_THRESHOLD
 	
 func set_player_ref(player: CharacterBody3D):
 	playerRef = player
@@ -102,24 +122,27 @@ func is_dash_pressed() -> bool:
 	return Input.is_action_just_pressed("dash")
 	
 func can_wallrun() -> bool:
-	# TODO: some magic to see if player is moving
-	# perpendicular to wall
-	if not playerRef.is_on_wall_only(): return false
-	if not get_horizontal_magnitude(vel) > WALLRUN_SPEED_THRESHOLD: return false
+	if not (playerRef.is_on_wall_only() and _is_far_from_floor()):
+		return false
+	if get_horizontal_magnitude(vel) < WALLRUN_SPEED_THRESHOLD:
+		Log.Debug("Cannot wallrun while so slow")
+		return false
+	if stamina < WALLRUN_MIN_STAMINA:
+		Log.Debug("Cannot wallrun without stamina")
+		return false
 	
 	var input = get_input_vector()
 	var wall_normal = playerRef.get_wall_normal()
 	var wall_normal_2d = Vector2(wall_normal.x, wall_normal.z)
 	var wall_angle = input.angle_to(wall_normal_2d)
 	
-	Log.Debug("Attempt wallrun at angle %s" % wall_angle)
 	return (wall_angle != PI/2) && (wall_angle < PI/4 || wall_angle > 3*PI/4)
 	
 func can_dash() -> bool:
-	return dashReady and PlayerState.stamina >= PlayerState.dashCost
+	return dashReady and stamina >= PlayerState.dash_cost
 	
 func can_jump() -> bool:
-	return jumpReady and PlayerState.stamina >= PlayerState.jumpCost
+	return jumpReady and stamina >= PlayerState.jump_cost
 	
 func start_dash_cooldown():
 	dashReady = false
@@ -127,7 +150,7 @@ func start_dash_cooldown():
 	
 func start_dash():
 	currentState = MovementState.DASHING
-	PlayerState.stamina -= PlayerState.dashCost
+	stamina -= PlayerState.dash_cost
 	
 func start_airdash():
 	# might change later
@@ -135,7 +158,7 @@ func start_airdash():
 	
 func start_jump():
 	currentState = MovementState.JUMPING
-	PlayerState.stamina -= PlayerState.jumpCost
+	stamina -= PlayerState.jump_cost
 	reset_recovery_timer()
 	
 func post_dash_recovery():
@@ -148,7 +171,7 @@ func post_jump_recovery():
 	
 func reset_recovery_timer():
 	recoveryTimer.stop()
-	recoveryTimer.wait_time = PlayerState.recoveryDelay
+	recoveryTimer.wait_time = PlayerState.recovery_delay
 	recoveryTimer.start()
 	
 func get_input_vector() -> Vector2:
@@ -168,7 +191,6 @@ func get_input_vector() -> Vector2:
 func get_horizontal_magnitude(vec: Vector3) -> float:
 	return sqrt(vec.x * vec.x + vec.z * vec.z)
 	
-	
 func calculate_movement_vector(delta) -> Vector3:
 	UIController.set_movement_state(get_current_state())
 	vel.x = 0
@@ -182,36 +204,59 @@ func calculate_movement_vector(delta) -> Vector3:
 	var relativeDir = (forward * input.y + right * input.x)
 	
 	if currentState != MovementState.DASHING && currentState != MovementState.AIRDASHING:
-		vel.x = relativeDir.x * PlayerState.moveSpeed
-		vel.z = relativeDir.z * PlayerState.moveSpeed
+		vel.x = relativeDir.x * PlayerState.move_speed
+		vel.z = relativeDir.z * PlayerState.move_speed
 	else:
 		if prevState != currentState: 
 			dashTimer.start()
-		vel.x = relativeDir.x * PlayerState.dashSpeed
-		vel.z = relativeDir.z * PlayerState.dashSpeed
+		vel.x = relativeDir.x * PlayerState.dash_speed
+		vel.z = relativeDir.z * PlayerState.dash_speed
 	
-	# apply gravity. handles wether it is glideGravity or regular
+	# apply gravity. handles wether it is glide_gravity or regular
 	if currentState == MovementState.FALLING or currentState == MovementState.JUMPING:
 		vel.y -= gravity * delta
 	elif currentState == MovementState.DASHING:
 		vel.y -= gravity * delta / 2
 	elif currentState == MovementState.GLIDING:
-		vel.y -= PlayerState.glideGravity * delta
+		vel.y -= PlayerState.glide_gravity * delta
 		vel.x = vel.x * 2
 		vel.z = vel.z * 2
 	elif currentState == MovementState.WALLRUNNING:
 		vel.y = 0
 		
 	if currentState == MovementState.GLIDING:
-		vel.x = vel.x * PlayerState.glideSpeedMult
-		vel.z = vel.z * PlayerState.glideSpeedMult
+		vel.x = vel.x * PlayerState.glide_speed_mult
+		vel.z = vel.z * PlayerState.glide_speed_mult
 		
-	if currentState == MovementState.JUMPING && playerRef.is_on_floor() && jumpReady:
-		vel.y = PlayerState.jumpForce
+	if prevState != MovementState.JUMPING and currentState == MovementState.JUMPING:
+		vel.y = PlayerState.jump_force
 		jumpReady = false
 		jumpTimer.start()
 		
+	if prevState == MovementState.WALLRUNNING && currentState != MovementState.WALLRUNNING:
+		Log.Debug("Disengaging from wall")
+		var wall_normal: Vector3 = playerRef.get_wall_normal()
+		var flat_wall_normal: Vector2 = Vector2(wall_normal.x, wall_normal.z) * 20
+		vel.x = flat_wall_normal.x
+		vel.z = flat_wall_normal.y
+		
 	return vel
+	
+func get_lean_direction() -> float:
+	if not currentState == MovementState.WALLRUNNING:
+		return 0.0
+	else:
+		if _left.is_colliding() and not _right.is_colliding():
+			return -1
+		elif not _left.is_colliding() and _right.is_colliding():
+			return 1
+		elif _left.is_colliding() and _right.is_colliding():
+			var left_distance = global_position.distance_to(_left.get_collision_point())
+			var right_distance = global_position.distance_to(_right.get_collision_point())
+			return -1 if left_distance > right_distance else 1
+		else:
+			Log.Warn("State is WALLRUNNING but not close to any walls!")
+			return 0.0
 
 # get the current input and use currentState to calculate next state
 # and update self
@@ -275,6 +320,8 @@ func poll(velocity: Vector3):
 					currentState = MovementState.MOVING
 			elif is_jump_pressed() and can_jump():
 				start_jump()
+			elif can_wallrun():
+				currentState = MovementState.WALLRUNNING
 		MovementState.AIRDASHING:
 			if !dashReady:
 				if playerRef.is_on_floor():
@@ -300,6 +347,7 @@ func poll(velocity: Vector3):
 				if not playerRef.is_on_floor():
 					currentState = MovementState.FALLING
 			elif is_jump_pressed() and can_jump():
+				Log.Info("Walljump")
 				start_jump()
 			elif get_horizontal_magnitude(velocity) == 0:
 					currentState = MovementState.STOPPED
