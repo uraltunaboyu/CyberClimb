@@ -8,8 +8,8 @@ var burst_delay = 0.05
 func _ready():
 	ammoCount = 200
 	bullet_speed = 20
-	bullet_damage_min = 20
-	bullet_damage_max = 25
+	bullet_damage_min = 8
+	bullet_damage_max = 14
 	spread_angle = 0.06
 	bullet_life = 2
 	shots_per_sec = 1.33

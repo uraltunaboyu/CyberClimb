@@ -10,7 +10,7 @@ extends Enemy
 
 var detected: bool = false
 var shooting: bool = false
-var rot_speed: float = 0.6 # In radians/s
+var rot_speed: float = 1.2 # In radians/s
 var i = 0
 
 var bullet_speed = 15
@@ -22,7 +22,7 @@ var bullet_life = 2
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	collider_name = "EnemyCollider"
-	max_health = 100
+	max_health = 150
 	cur_health = max_health
 	moveSpeed = 0
 	

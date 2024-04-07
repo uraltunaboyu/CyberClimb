@@ -1,6 +1,5 @@
 extends RayCast3D
 
-@onready var prompt = $Prompt
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_exception(owner)

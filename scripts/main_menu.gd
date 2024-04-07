@@ -16,7 +16,7 @@ func _process(delta):
 var music_bus = AudioServer
 
 func _on_start_button_pressed():
-	GameState.load_scene_by_path("res://scenes/hub.tscn")
+	GameState.load_scene_by_path("res://scenes/levels/hub.tscn")
 
 func _on_option_button_pressed():
 	OptionMenu.z_index = 1

@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 # stats
-var curHp : int = 100
-var maxHp : int = 100
+var maxHp : int = PlayerState.maxHp
+var curHp = maxHp
 var ammo : int = 30
 
 # cam look
@@ -94,7 +94,7 @@ func remove_weapon(_nothing):
 	primarySlot.remove_weapon()
 	
 func add_upgrade(upgrade):
-	PlayerState.add_upgrade(PlayerState.upgrade_from_string(upgrade))
+	PlayerState.add_upgrade(upgrade)
 
 func load_state():
 	curHp = PlayerState.hp
