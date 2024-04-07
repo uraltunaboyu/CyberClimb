@@ -11,7 +11,7 @@ signal ended
 ## Container of all scrolling nodes
 @onready var scrollingContainer = get_node("scrollingContainer")
 ## Container of titles and names
-@onready var scrollingTextScene = preload("res://scenes/credits-scene/scrollingText.tscn")
+@onready var scrollingTextScene = preload("res://scenes/scrolling_text.tscn")
 ## An image to use as Title for the credits
 @onready var titleImg = get_node("scrollingContainer/titleImg")
 ## The credits file (formatted like a INI file (more info inside README.md))

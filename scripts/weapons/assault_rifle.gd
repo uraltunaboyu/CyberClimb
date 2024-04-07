@@ -4,8 +4,8 @@ func _ready():
 	muzzle = $assault_rifle/Muzzle
 	ammoCount = 200
 	bullet_speed = 15
-	bullet_damage_min = 11
-	bullet_damage_max = 15
+	bullet_damage_min = 6
+	bullet_damage_max = 10
 	spread_angle = 0.06
 	bullet_life = 2
 	shots_per_sec = 20

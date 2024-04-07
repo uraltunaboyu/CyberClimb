@@ -6,8 +6,13 @@ enum UpgradeName {
 }
 
 var UPGRADES = {
-	UpgradeName.BASIC_HP : func(): hp += 10,
-	UpgradeName.BASIC_STAMINA : func(): stamina += 10
+	UpgradeName.BASIC_HP : func(): hp += 25,
+	UpgradeName.BASIC_STAMINA : func(): stamina += 25
+}
+
+const COST = {
+	UpgradeName.BASIC_HP : 50,
+	UpgradeName.BASIC_STAMINA : 50
 }
 
 const string_to_upgrade = {"HP" : UpgradeName.BASIC_HP, "Stamina" : UpgradeName.BASIC_STAMINA}
@@ -20,11 +25,11 @@ var maxHp: int = 100:
 	set(val):
 		UIController.set_max_hp(hp)
 		maxHp = val
-var stamina: float = 1000.0:
+var stamina: float = 100.0:
 	set(val):
 		UIController.set_cur_stamina(val)
 		stamina = val
-var maxStamina: float = 1000.0:
+var maxStamina: float = 100.0:
 	set(val):
 		UIController.set_max_stamina(val)
 		maxStamina = val
@@ -72,4 +77,3 @@ func upgrade_from_string(upgrade: String) -> UpgradeName:
 func reset():
 	hp = maxHp
 	stamina = maxStamina
-

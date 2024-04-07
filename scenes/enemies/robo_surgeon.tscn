@@ -19,6 +19,7 @@ size = Vector3(5, 3, 5)
 script = ExtResource("2_whrmd")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_height_offset = 0.5
 
 [node name="Sight" type="Area3D" parent="."]
 

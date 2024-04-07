@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d02juuvp2nwss"]
+[gd_scene load_steps=10 format=3 uid="uid://d02juuvp2nwss"]
 
 [ext_resource type="Script" path="res://scripts/hub.gd" id="1_lwoju"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/ui.tscn" id="2_0juo0"]
@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="5_wk8m3"]
 [ext_resource type="Script" path="res://scripts/door.gd" id="6_82u8d"]
 [ext_resource type="PackedScene" uid="uid://e1rlcjhqpy36" path="res://scenes/models/hub_model.tscn" id="7_h2jr2"]
-[ext_resource type="PackedScene" path="res://scenes/weapons/weapon_pedestal.tscn" id="8_p0n5p"]
+[ext_resource type="PackedScene" uid="uid://b7qf0ost3cgrk" path="res://scenes/weapons/weapon_pedestal.tscn" id="8_p0n5p"]
+[ext_resource type="Environment" uid="uid://q8whx4pat7nx" path="res://resources/new_environment4-5.tres" id="9_aessc"]
 
 [node name="MainScene" type="Node3D"]
 script = ExtResource("1_lwoju")
@@ -45,14 +46,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.58667, 4.75983, 19.2908)
 script = ExtResource("6_82u8d")
 prompt_message = "Start Climbing"
 
+[node name="SpotLight3D3" type="SpotLight3D" parent="Next_Room"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.00177288, 0.793283, 0.00841522)
+light_color = Color(0.231373, 0.615686, 1, 1)
+light_energy = 4.49
+
 [node name="HubLevel" parent="." instance=ExtResource("7_h2jr2")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4345, 12.1332, 0)
-omni_range = 100.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4345, 12.1332, 4.83333)
+light_energy = 9.506
+omni_range = 309.433
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.2756, 12.1332, 28.4388)
+light_energy = 9.506
+omni_range = 309.433
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5948, 12.1332, 49.1426)
+light_energy = 14.502
 omni_range = 100.0
 
 [node name="AssaultRiflePedestal" parent="." instance=ExtResource("8_p0n5p")]
@@ -75,7 +88,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 5)
 Weapon = 4
 prompt_message = "Purchase Assault Rifle (100 Credits)"
 
+[node name="Button" parent="." instance=ExtResource("5_wk8m3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5581, 4.56054, 9.65283)
+prompt_message = "Health Upgrade (50 Credits)"
+target_scene = "HP"
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Button"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.865006, 0)
+light_color = Color(1, 0.231373, 0.231373, 1)
+light_energy = 4.49
+
+[node name="Button2" parent="." instance=ExtResource("5_wk8m3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5581, 4.56054, 12.6714)
+prompt_message = "Stamina Upgrade (50 Credits)"
+target_scene = "Stamina"
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Button2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.892024, 0.0350676)
+light_color = Color(0.345098, 1, 0.231373, 1)
+light_energy = 4.49
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("9_aessc")
+
 [connection signal="interacted" from="AssaultRiflePedestal" to="." method="purchase_weapon"]
 [connection signal="interacted" from="BurstRiflePedestal" to="." method="purchase_weapon"]
 [connection signal="interacted" from="PistolPedestal" to="." method="purchase_weapon"]
 [connection signal="interacted" from="ShotgunPedestal" to="." method="purchase_weapon"]
+[connection signal="interacted" from="Button" to="." method="purchase_upgrade"]
+[connection signal="interacted" from="Button2" to="." method="purchase_upgrade"]

@@ -2,7 +2,7 @@ extends Node
 
 const LevelController = preload("res://scripts/level_controller.gd")
 const LOADING_SCREEN_PATH = "res://scenes/loading_screen.tscn"
-const HUB_PATH = "res://scenes/hub.tscn"
+const HUB_PATH = "res://scenes/levels/hub.tscn"
 
 enum ProgressionFlag {
 	NONE,

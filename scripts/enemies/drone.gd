@@ -15,6 +15,10 @@ var bullet_scene = load("res://scenes/projectiles/bullet.tscn")
 @onready var _cannon: MeshInstance3D = $Model/Drone/DroneCannon
 @onready var _muzzle: Node3D = $Model/Drone/DroneCannon/Muzzle
 
+func _ready():
+	max_health = 250
+	cur_health = max_health
+
 func _process(delta):
 	_cannon.look_at(player.global_position, Vector3.UP, true)
 	_cannon.rotate_x(PI/8)

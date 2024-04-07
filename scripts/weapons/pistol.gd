@@ -4,7 +4,7 @@ func _ready():
 	ammoCount = 200
 	bullet_speed = 15
 	bullet_damage_min = 8
-	bullet_damage_max = 12
+	bullet_damage_max = 11
 	spread_angle = 0.05 # Cone with this angle (radians)
 	bullet_life = 1.3
 	shots_per_sec = 3
