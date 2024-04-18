@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://c66ryo0mg0jd8"]
+[gd_scene load_steps=8 format=3 uid="uid://c66ryo0mg0jd8"]
 
+[ext_resource type="PackedScene" uid="uid://dlgnshjne4lpw" path="res://scenes/death_overlay.tscn" id="2_blrkp"]
 [ext_resource type="PackedScene" uid="uid://cy5j7lq7lwc40" path="res://scenes/enemies/robo_surgeon_model.tscn" id="2_qj470"]
 [ext_resource type="Script" path="res://scripts/enemies/robo_surgeon.gd" id="2_whrmd"]
 
@@ -17,6 +18,7 @@ size = Vector3(5, 3, 5)
 
 [node name="BossModel8" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("2_whrmd")
+death_overlay_scene = ExtResource("2_blrkp")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 path_height_offset = 0.5

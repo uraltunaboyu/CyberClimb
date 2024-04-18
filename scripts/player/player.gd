@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@export var death_overlay_scene: PackedScene
 # stats
 var maxHp : int = PlayerState.maxHp
 var curHp = maxHp
@@ -70,8 +71,14 @@ func take_damage (damage):
 		die()
 
 func die():
+	await display_death_message()
 	PlayerState.reset()
 	GameState.reset()
+	
+func display_death_message():
+	var death_overlay = death_overlay_scene.instantiate()
+	add_sibling(death_overlay)
+	await death_overlay.show_game_over("Defeat")
 	
 func add_health(amount):
 	curHp += amount

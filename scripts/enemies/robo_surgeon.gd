@@ -1,5 +1,7 @@
 extends PathfindingEnemy
 
+@export var death_overlay_scene: PackedScene
+
 enum BossState {
 	IDLE,
 	SEARCHING,
@@ -186,4 +188,10 @@ func die():
 	# TODO actual death func
 	Log.Info("Yippee")
 	PlayerState.credits += 100
+	await display_death_message()
 	GameState.reset()
+	
+func display_death_message():
+	var death_overlay = death_overlay_scene.instantiate()
+	add_sibling(death_overlay)
+	await death_overlay.show_game_over("Victory!")
