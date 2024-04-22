@@ -58,6 +58,10 @@ func _input(event):
 	if Debug.DEBUG_MODE and event is InputEventKey:
 		if Input.is_key_label_pressed(KEY_K):
 			die()
+		if Input.is_key_label_pressed(KEY_P):
+			take_damage(75)
+		if Input.is_key_label_pressed(KEY_O):
+			add_health(75)
 
 func _lean(delta, lean_right: bool):
 	var rotateAngle: float = LEAN_AMOUNT_RAD * movementController.get_lean_direction()
@@ -77,6 +81,8 @@ func take_damage (damage):
 		die()
 	elif not $HitAudio.is_playing():
 		$HitAudio.play()
+	
+	UIController.flash_at_low_health()
 		
 func die():
 	_disabled = true
@@ -96,6 +102,7 @@ func add_health(amount):
 		curHp = maxHp
 		
 	PlayerState.hp = curHp
+	UIController.flash_at_low_health()
 	
 func add_ammo(amount):
 	if primarySlot.equipped_gun:

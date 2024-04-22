@@ -43,3 +43,19 @@ func disable_crosshair():
 
 func set_prompt(val):
 	_ui_node.promptText.text = val
+
+var bloody_tween: Tween
+
+func flash_at_low_health():
+	if (float(PlayerState.hp) / float(PlayerState.maxHp) > .25 and bloody_tween):
+		bloody_tween.kill()
+		_ui_node.bloodOverlay.modulate.a = 0.0
+	else:
+		flash_overlay()
+	
+func flash_overlay():
+	if (not bloody_tween) or (bloody_tween and not bloody_tween.is_running()):
+		bloody_tween = create_tween().set_loops()
+		bloody_tween.set_trans(Tween.TRANS_CUBIC)
+		bloody_tween.tween_property(_ui_node.bloodOverlay, "modulate:a", 0.75, .6)
+		bloody_tween.tween_property(_ui_node.bloodOverlay, "modulate:a", 0.0, .8)

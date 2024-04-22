@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cem0yrawhwf00"]
+[gd_scene load_steps=6 format=3 uid="uid://cem0yrawhwf00"]
 
 [ext_resource type="Script" path="res://scripts/ui.gd" id="1_juo5s"]
-[ext_resource type="Texture2D" uid="uid://dmqgjb33c3675" path="res://images/ui_square.png" id="2_bnrwh"]
+[ext_resource type="Texture2D" uid="uid://cscpi8nqjylcm" path="res://images/BloodOverlay.png" id="2_3q5ke"]
+[ext_resource type="Texture2D" uid="uid://csi1hvejkrs2f" path="res://images/ui_square.png" id="2_bnrwh"]
 [ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="3_5lwx4"]
-[ext_resource type="Texture2D" uid="uid://bc0lmnbbfhfv5" path="res://images/crosshair.png" id="4_8x7fj"]
+[ext_resource type="Texture2D" uid="uid://dwayfp34tc5ic" path="res://images/crosshair.png" id="4_8x7fj"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -13,6 +14,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_juo5s")
+
+[node name="BloodOverlay" type="TextureRect" parent="."]
+modulate = Color(0.360784, 0.360784, 0.360784, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3q5ke")
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 layout_mode = 0
