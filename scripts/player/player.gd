@@ -73,10 +73,11 @@ func _lean(delta, lean_right: bool):
 func take_damage (damage):
 	curHp -= damage
 	PlayerState.hp = curHp
-	
 	if curHp <= 0:
 		die()
-
+	else:
+		$HitAudio.play()
+		
 func die():
 	_disabled = true
 	var death_overlay = death_overlay_scene.instantiate()
