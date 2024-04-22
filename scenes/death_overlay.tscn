@@ -1,44 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlgnshjne4lpw"]
+[gd_scene load_steps=3 format=3 uid="uid://dlgnshjne4lpw"]
 
 [ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="1_m5d5x"]
 [ext_resource type="Script" path="res://scripts/death_overlay.gd" id="1_pmamj"]
-
-[sub_resource type="Animation" id="Animation_0c7dm"]
-resource_name = "fade_to_black"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_4tmej"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wobli"]
-_data = {
-"RESET": SubResource("Animation_4tmej"),
-"fade_to_black": SubResource("Animation_0c7dm")
-}
 
 [node name="DeathOverlay" type="CanvasLayer"]
 script = ExtResource("1_pmamj")
@@ -51,13 +14,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../ColorRect")
-libraries = {
-"": SubResource("AnimationLibrary_wobli")
-}
-
 [node name="Message" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -71,4 +29,3 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_m5d5x")
 theme_override_font_sizes/font_size = 128
-text = "Victory!"
