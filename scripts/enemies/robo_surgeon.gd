@@ -1,5 +1,7 @@
 extends PathfindingEnemy
 
+@export var death_overlay_scene: PackedScene
+
 enum BossState {
 	IDLE,
 	SEARCHING,
@@ -47,6 +49,8 @@ var _remaining_mag: int = MAGAZINE_SIZE:
 			reload_timer.timeout.connect(func(): _remaining_mag = MAGAZINE_SIZE)
 			reload_timer.start()
 			
+var _disabled = false
+
 @onready var _player_ref: CharacterBody3D = get_tree().get_first_node_in_group("Player")
 # TODO replace with actual syringe scene
 @onready var syringe_scene = preload("res://scenes/projectiles/bullet.tscn")
@@ -79,6 +83,7 @@ func _ready():
 	_state = BossState.IDLE
 	
 func _process(delta):
+	if _disabled: return
 	match _state:
 		BossState.SEARCHING:
 			if _navigator.is_target_reached():
@@ -103,6 +108,7 @@ func _process(delta):
 			pass
 			
 func _physics_process(delta: float):
+	if _disabled: return
 	navigate_to_target(delta)
 
 func _idle():
@@ -183,7 +189,10 @@ func _on_player_enter_saw(body):
 	body.take_damage(SWIPE_DAMAGE)
 
 func die():
-	# TODO actual death func
-	Log.Info("Yippee")
+	Log.Info("Boss is dead")
+	_disabled = true
 	PlayerState.credits += 100
-	GameState.reset()
+	var death_overlay = death_overlay_scene.instantiate()
+	death_overlay.set_text("Victory!")
+	death_overlay.set_callback(GameState.reset)
+	add_sibling(death_overlay)

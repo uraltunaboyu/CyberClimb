@@ -87,5 +87,6 @@ func room_transition(reward_signal: String):
 	diff = level_controller.go_next_room(reward)
 
 func reset():
+	PlayerState.reset()
 	load_scene_by_path(HUB_PATH)
 	level_controller = LevelController.new()
