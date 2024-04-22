@@ -75,7 +75,7 @@ func take_damage (damage):
 	PlayerState.hp = curHp
 	if curHp <= 0:
 		die()
-	else:
+	elif not $HitAudio.is_playing():
 		$HitAudio.play()
 		
 func die():
