@@ -28,6 +28,8 @@ var current_state: GameStates = GameStates.MAIN_MENU:
 			
 		if new_state == GameStates.LOADING && current_state != GameStates.LOADING:
 			get_tree().change_scene_to_file(LOADING_SCREEN_PATH)
+		
+		update_active_time(new_state)
 		current_state = new_state
 
 var next_scene_path: String
@@ -48,6 +50,7 @@ var level_controller = LevelController.new()
 var diff: int = 1
 var reward : String
 var score_text: String 
+var last_start_time = Time.get_ticks_msec()
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -94,16 +97,30 @@ func reset():
 	load_scene_by_path(HUB_PATH)
 	level_controller = LevelController.new()
 
+func update_active_time(new_state):
+	if new_state == GameStates.PLAYING:
+		last_start_time = Time.get_ticks_msec()
+	else:
+		elapsed_time += Time.get_ticks_msec() - last_start_time
+	
 var score_info = []
 var enemies_killed = 0
 var levels_complete = 0
+var elapsed_time = 0
+var boss_dead = false
 
 func update_score_text():
-	# todo - add in the time
-	var score = 10000.0/float(500) + enemies_killed * 10 + levels_complete * 100
-	var cur_run = [500, enemies_killed, levels_complete - 1, score]
+	var time = elapsed_time / 1000 # time in ms
+	var time_str = "%02d:%02d" % [time / 60, fmod(time, 60)]
+	var score = enemies_killed * 10 + levels_complete * 100
+	if boss_dead:
+		score += round (10000.0/float(time))
+	var cur_run = [time_str, enemies_killed, levels_complete - 1, score]
+	
 	enemies_killed = 0
 	levels_complete = 0
+	boss_dead = false
+	
 	score_info.append(cur_run)
 	format_score_info()
 	

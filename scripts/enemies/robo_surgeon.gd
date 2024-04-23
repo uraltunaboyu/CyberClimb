@@ -193,6 +193,7 @@ func die():
 	_disabled = true
 	PlayerState.credits += 100
 	GameState.enemies_killed += 1
+	GameState.boss_dead = true
 	var death_overlay = death_overlay_scene.instantiate()
 	death_overlay.set_text("Victory!")
 	death_overlay.set_callback(GameState.reset)
