@@ -5,6 +5,7 @@ const SHOTGUN_SCENE = "res://scenes/Shotgun.tscn"
 
 @onready var _credits_text = $CanvasLayer/HubUI/CreditsText
 @onready var _player = $Player
+@onready var _score_text = $ScoreBillboard/ScoreText
 @onready var credits: int:
 	get:
 		return PlayerState.credits
@@ -14,6 +15,7 @@ const SHOTGUN_SCENE = "res://scenes/Shotgun.tscn"
 
 func _ready():
 	credits = PlayerState.credits
+	_score_text.text = GameState.score_text
 	AudioController.play_hub_music()
 	UIController.disable_crosshair()
 

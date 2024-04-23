@@ -93,6 +93,7 @@ func die():
 	set_physics_process(false)
 	find_child(collider_name).queue_free()
 	emit_signal("dead")
+	GameState.enemies_killed += 1
 	ap.stop()
 	if death_ap and death_ap.has_animation("Death"):
 		death_ap.play("Death")

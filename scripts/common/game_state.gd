@@ -47,6 +47,7 @@ var level_controller = LevelController.new()
 
 var diff: int = 1
 var reward : String
+var score_text: String 
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -85,8 +86,32 @@ func return_tree():
 func room_transition(reward_signal: String):
 	reward = reward_signal
 	diff = level_controller.go_next_room(reward)
+	levels_complete += 1
 
 func reset():
+	update_score_text()
 	PlayerState.reset()
 	load_scene_by_path(HUB_PATH)
 	level_controller = LevelController.new()
+
+var score_info = []
+var enemies_killed = 0
+var levels_complete = 0
+
+func update_score_text():
+	# todo - add in the time
+	var score = 10000.0/float(500) + enemies_killed * 10 + levels_complete * 100
+	var cur_run = [500, enemies_killed, levels_complete - 1, score]
+	enemies_killed = 0
+	levels_complete = 0
+	score_info.append(cur_run)
+	format_score_info()
+	
+func format_score_info():
+	var text = ""
+	for row in score_info:
+		for item in row:
+			text += "%25s" % str(item)
+		text += "\n"
+	score_text = text
+	

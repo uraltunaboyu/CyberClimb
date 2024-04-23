@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d02juuvp2nwss"]
+[gd_scene load_steps=11 format=3 uid="uid://d02juuvp2nwss"]
 
 [ext_resource type="Script" path="res://scripts/hub.gd" id="1_lwoju"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/ui.tscn" id="2_0juo0"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://e1rlcjhqpy36" path="res://scenes/models/hub_model.tscn" id="7_h2jr2"]
 [ext_resource type="PackedScene" uid="uid://b7qf0ost3cgrk" path="res://scenes/weapons/weapon_pedestal.tscn" id="8_p0n5p"]
 [ext_resource type="Environment" uid="uid://q8whx4pat7nx" path="res://resources/new_environment4-5.tres" id="9_aessc"]
+[ext_resource type="PackedScene" uid="uid://bxidry460736x" path="res://scenes/score_billboard.tscn" id="10_tjres"]
 
 [node name="MainScene" type="Node3D"]
 script = ExtResource("1_lwoju")
@@ -110,6 +111,9 @@ light_energy = 4.49
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("9_aessc")
+
+[node name="ScoreBillboard" parent="." instance=ExtResource("10_tjres")]
+transform = Transform3D(0.619519, 0, 0.784982, 0, 1, 0, -0.784982, 0, 0.619519, -18.2724, 5.47613, 7.04221)
 
 [connection signal="interacted" from="AssaultRiflePedestal" to="." method="purchase_weapon"]
 [connection signal="interacted" from="BurstRiflePedestal" to="." method="purchase_weapon"]
