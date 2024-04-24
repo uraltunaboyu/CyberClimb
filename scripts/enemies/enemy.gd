@@ -41,7 +41,7 @@ func take_damage(damage:int, pos):
 		var previous_pos = position
 		shake_tween = get_tree().create_tween()
 		var shake = .2
-		var shake_time = 1
+		var shake_time = .1
 		for i in 3:
 			shake_tween.tween_property(self, "position", Vector3(position.x + randf_range(-shake,shake), position.y + randf_range(0,shake), position.z + randf_range(-shake,shake)), shake_time)
 			shake_tween.tween_property(self, "position", previous_pos, shake_time)
