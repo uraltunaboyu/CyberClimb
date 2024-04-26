@@ -12,11 +12,19 @@ func _initialize():
 	set_cur_stamina(PlayerState.stamina)
 	set_ammo(PlayerState.ammo)
 
+var all_health_tween: Tween
+
 func set_cur_hp(val):
-	_ui_node.healthBar.value = val
-	
+	if all_health_tween and all_health_tween.is_running():
+		_ui_node.healthBar.value = val
+	else:
+		var hp_only_tween = get_tree().create_tween()
+		hp_only_tween.tween_property(_ui_node.healthBar, "value", val, .5)
+		
 func set_max_hp(val):
 	_ui_node.healthBar.max_value = val
+	all_health_tween = get_tree().create_tween()
+	all_health_tween.parallel().tween_property(_ui_node.healthBar, "size:x", val * 2, 1)
 
 func set_cur_stamina(val):
 	_ui_node.staminaBar.value = val

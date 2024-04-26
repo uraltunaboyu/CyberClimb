@@ -19,11 +19,15 @@ const string_to_upgrade = {"HP" : UpgradeName.BASIC_HP, "Stamina" : UpgradeName.
 
 var hp: int = 100:
 	set(val):
-		UIController.set_cur_hp(hp)
+		UIController.set_cur_hp(val)
 		hp = val
 var maxHp: int = 100:
 	set(val):
-		UIController.set_max_hp(hp)
+		UIController.set_max_hp(val)
+		var increase = val - maxHp
+		if increase > 0:
+			hp += increase
+			
 		maxHp = val
 var stamina: float = 100.0:
 	set(val):
