@@ -46,6 +46,7 @@ func _physics_process(delta):
 	
 	_lean(delta, false)
 	move_and_slide()
+	primarySlot.weapon_bob(velocity.length(), delta)
 
 func _process(delta):
 	if _disabled: return
