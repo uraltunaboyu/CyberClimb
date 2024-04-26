@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://7yt2qhayiu58"]
+[gd_scene load_steps=5 format=3 uid="uid://7yt2qhayiu58"]
 
 [ext_resource type="Script" path="res://scripts/weapons/assault_rifle.gd" id="1_hd54v"]
-[ext_resource type="PackedScene" path="res://models/weapons/assault_rifle_model.tscn" id="3_6mq67"]
-[ext_resource type="AudioStream" uid="uid://bcddmiqkaobba" path="res://audio/audio_effects/Rifle(Single).wav" id="3_l3sht"]
+[ext_resource type="Curve" path="res://scenes/weapons/recoil_curve.tres" id="2_psll6"]
+[ext_resource type="PackedScene" uid="uid://b7dqes4dn103w" path="res://models/weapons/assault_rifle_model.tscn" id="3_6mq67"]
+[ext_resource type="AudioStream" uid="uid://du8v7ae84lyyc" path="res://audio/audio_effects/Rifle(Single).wav" id="3_l3sht"]
 
 [node name="AssultRifle" type="Node3D"]
 transform = Transform3D(0.999658, 0.000456851, 0.026173, 0, 0.999848, -0.0174524, -0.026177, 0.0174464, 0.999505, -0.12651, 0, -0.92317)
 script = ExtResource("1_hd54v")
+recoil_rotation_x = ExtResource("2_psll6")
+recoil_rotation_z = ExtResource("2_psll6")
+recoil_position_z = ExtResource("2_psll6")
+recoil_amplitude = Vector3(0.75, 0.4, 0.15)
+lerp_speed = 5.0
 
 [node name="assault_rifle" parent="." instance=ExtResource("3_6mq67")]
 transform = Transform3D(1, -1.39698e-09, 1.49012e-08, 0, 0.999999, 5.96046e-08, 4.09782e-08, 0, 1, -0.00699575, 0.00465863, 0.133406)

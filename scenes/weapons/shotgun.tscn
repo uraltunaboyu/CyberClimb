@@ -1,12 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8fvpv5g7f360"]
+[gd_scene load_steps=5 format=3 uid="uid://c8fvpv5g7f360"]
 
 [ext_resource type="Script" path="res://scripts/weapons/shotgun.gd" id="1_sb7nr"]
-[ext_resource type="PackedScene" path="res://models/weapons/shotgun_model.tscn" id="2_ea2hh"]
-[ext_resource type="AudioStream" uid="uid://cn8aihofe02sr" path="res://audio/audio_effects/Shotgun shot.wav" id="3_x6rt7"]
+[ext_resource type="PackedScene" uid="uid://c01aco41f8dte" path="res://models/weapons/shotgun_model.tscn" id="2_ea2hh"]
+[ext_resource type="Curve" path="res://scenes/weapons/recoil_curve.tres" id="2_em0rr"]
+[ext_resource type="AudioStream" uid="uid://cbb6bwi816x4s" path="res://audio/audio_effects/Shotgun shot.wav" id="3_x6rt7"]
 
 [node name="Shotgun" type="Node3D"]
 transform = Transform3D(0.997564, 0.00121742, 0.0697458, 0, 0.999848, -0.0174524, -0.0697565, 0.0174099, 0.997412, 0, 0.213047, -0.537176)
 script = ExtResource("1_sb7nr")
+recoil_rotation_x = ExtResource("2_em0rr")
+recoil_rotation_z = ExtResource("2_em0rr")
+recoil_position_z = ExtResource("2_em0rr")
+recoil_amplitude = Vector3(0.75, 0.9, 0.15)
 
 [node name="shotgun" parent="." instance=ExtResource("2_ea2hh")]
 transform = Transform3D(0.84, 0, 0, 0, 0.84, 0, 0, 0, 0.84, 0.06633, -0.0081467, -0.21957)

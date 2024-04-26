@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dn50txa15t6cc"]
+[gd_scene load_steps=4 format=3 uid="uid://dn50txa15t6cc"]
 
 [ext_resource type="Script" path="res://scripts/weapons/submachine_gun.gd" id="1_7euw2"]
-[ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/weapons/shotgun.obj" id="2_ofh04"]
+[ext_resource type="Curve" path="res://scenes/weapons/recoil_curve.tres" id="2_gm7hw"]
+[ext_resource type="ArrayMesh" uid="uid://np7utbmea70g" path="res://models/weapons/shotgun.obj" id="2_ofh04"]
 
 [node name="SubmachineGun" type="Node3D"]
 transform = Transform3D(0.99863, 0.0018265, 0.0523041, 0, 0.999391, -0.0348995, -0.052336, 0.0348517, 0.998021, 0, 0, -0.29894)
 script = ExtResource("1_7euw2")
+recoil_rotation_x = ExtResource("2_gm7hw")
+recoil_rotation_z = ExtResource("2_gm7hw")
+recoil_position_z = ExtResource("2_gm7hw")
+recoil_amplitude = Vector3(0.75, 0.4, 0.15)
+lerp_speed = 4.0
 
 [node name="GunModel" type="MeshInstance3D" parent="."]
 transform = Transform3D(-10, 0, -3.89414e-06, 0, 10, 0, 3.89414e-06, 0, -10, 0, 0, -0.104309)

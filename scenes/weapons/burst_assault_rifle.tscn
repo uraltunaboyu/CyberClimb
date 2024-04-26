@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://ci7n671ec817t"]
+[gd_scene load_steps=5 format=3 uid="uid://ci7n671ec817t"]
 
 [ext_resource type="Script" path="res://scripts/weapons/burst_assault_rifle.gd" id="1_jrhwh"]
-[ext_resource type="AudioStream" uid="uid://duysw5w3l5pcj" path="res://audio/audio_effects/Rifle(Triple Burst).wav" id="3_04q4p"]
-[ext_resource type="PackedScene" path="res://models/weapons/assault_rifle_model.tscn" id="3_6rft0"]
+[ext_resource type="Curve" path="res://scenes/weapons/recoil_curve.tres" id="2_jc486"]
+[ext_resource type="AudioStream" uid="uid://rv5dqrm1x06x" path="res://audio/audio_effects/Rifle(Triple Burst).wav" id="3_04q4p"]
+[ext_resource type="PackedScene" uid="uid://b7dqes4dn103w" path="res://models/weapons/assault_rifle_model.tscn" id="3_6rft0"]
 
 [node name="BurstAssultRifle" type="Node3D"]
 transform = Transform3D(0.99863, 0.0018265, 0.0523041, 0, 0.999391, -0.0348995, -0.052336, 0.0348517, 0.998021, 0, 0, -0.686023)
 script = ExtResource("1_jrhwh")
+recoil_rotation_x = ExtResource("2_jc486")
+recoil_rotation_z = ExtResource("2_jc486")
+recoil_position_z = ExtResource("2_jc486")
+recoil_amplitude = Vector3(0.75, 0.4, 0.15)
+lerp_speed = 5.0
 
 [node name="Timer" type="Timer" parent="."]
 editor_description = "Time is set dynamically in the _ready() function of the parentn node script.

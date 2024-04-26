@@ -18,6 +18,7 @@ func _process(_delta):
 func attack():
 	if equipped_gun:
 		equipped_gun.attack()
+		equipped_gun.apply_recoil()
 		PlayerState.ammo = equipped_gun.get_ammo_count()
 
 func get_ammo_count():

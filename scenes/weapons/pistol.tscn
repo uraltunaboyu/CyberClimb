@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnno232gqjba5"]
+[gd_scene load_steps=5 format=3 uid="uid://bnno232gqjba5"]
 
 [ext_resource type="Script" path="res://scripts/weapons/pistol.gd" id="1_7k0ov"]
-[ext_resource type="ArrayMesh" uid="uid://d0adte0x2ne4s" path="res://models/weapons/shotgun.obj" id="2_2had5"]
-[ext_resource type="AudioStream" uid="uid://g2qe5e4pmob7" path="res://audio/audio_effects/Pistol(Single).wav" id="3_f3b6q"]
+[ext_resource type="ArrayMesh" uid="uid://np7utbmea70g" path="res://models/weapons/shotgun.obj" id="2_2had5"]
+[ext_resource type="Curve" path="res://scenes/weapons/recoil_curve.tres" id="2_skoo5"]
+[ext_resource type="AudioStream" uid="uid://brhsntoohnnev" path="res://audio/audio_effects/Pistol(Single).wav" id="3_f3b6q"]
 
 [node name="Pistol" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.272173)
 script = ExtResource("1_7k0ov")
+recoil_rotation_x = ExtResource("2_skoo5")
+recoil_rotation_z = ExtResource("2_skoo5")
+recoil_position_z = ExtResource("2_skoo5")
+recoil_amplitude = Vector3(0.75, 0.4, 0.15)
+lerp_speed = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-10.6984, 0, 5.66011e-07, 0, 10.0227, 0, -9.35281e-07, 0, -6.47441, 0, 0, 0)
