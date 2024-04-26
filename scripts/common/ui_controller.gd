@@ -55,17 +55,14 @@ func point_enemy_direction(direction):
 	var y = get_viewport().size.y / 2
 	var spread = 6
 	if direction > -PI/4 and direction < PI/4:
-		Log.Info("UP")
 		y = 2 * y / spread
 	elif direction > PI/4 and direction < 3*PI/4:
-		Log.Info("RIGHT")
 		x = 2 * (spread - 1) * x / spread
 	elif direction > -3*PI/4 and direction < - PI/4:
-		Log.Info("LEFT")
 		x = 2 * x / spread
 	else:
-		Log.Info("DOWN")
 		y = 2 * (spread - 1) * y / spread
+		
 	_ui_node.damageIndicator.position = Vector2i(x,y)
 	
 var bloody_tween: Tween
