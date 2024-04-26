@@ -5,6 +5,7 @@ var _ui_node: Node
 func _initialize():
 	_ui_node = get_tree().current_scene.find_child("UI")
 	
+	_ui_node.damageIndicator.visible = false
 	set_max_hp(PlayerState.maxHp)
 	set_cur_hp(PlayerState.hp)
 	set_max_stamina(PlayerState.maxStamina)
@@ -44,6 +45,29 @@ func disable_crosshair():
 func set_prompt(val):
 	_ui_node.promptText.text = val
 
+func point_enemy_direction(direction):
+	_ui_node.damageIndicator.show()
+	_ui_node.indicatorTimer.start(2)
+	_ui_node.damageIndicator.rotation = direction
+	
+	# split screen into X (four quadrants separated at diagonal)
+	var x = get_viewport().size.x / 2
+	var y = get_viewport().size.y / 2
+	var spread = 6
+	if direction > -PI/4 and direction < PI/4:
+		Log.Info("UP")
+		y = 2 * y / spread
+	elif direction > PI/4 and direction < 3*PI/4:
+		Log.Info("RIGHT")
+		x = 2 * (spread - 1) * x / spread
+	elif direction > -3*PI/4 and direction < - PI/4:
+		Log.Info("LEFT")
+		x = 2 * x / spread
+	else:
+		Log.Info("DOWN")
+		y = 2 * (spread - 1) * y / spread
+	_ui_node.damageIndicator.position = Vector2i(x,y)
+	
 var bloody_tween: Tween
 
 func flash_at_low_health():

@@ -111,3 +111,14 @@ offset_left = 1034.0
 offset_top = 3.0
 offset_right = 1275.0
 offset_bottom = 67.0
+
+[node name="DamageIndicator" type="Line2D" parent="."]
+position = Vector2(960, 418)
+points = PackedVector2Array(-50, 0, 0, -31, 50, 0)
+default_color = Color(1, 0, 0, 1)
+
+[node name="IndicatorTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="IndicatorTimer" to="." method="_on_indicator_timer_timeout"]

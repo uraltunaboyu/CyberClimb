@@ -47,3 +47,5 @@ script = ExtResource("4_k452p")
 
 [node name="HitAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_0un1b")
+
+[node name="DamageIndicatorLookAt" type="Node3D" parent="."]

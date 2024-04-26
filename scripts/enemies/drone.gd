@@ -34,7 +34,7 @@ func _physics_process(delta):
 
 func _make_bullet():
 	var bullet = bullet_scene.instantiate()
-	bullet.initialize(BULLET_SPEED, randi_range(BULLET_DAMAGE_MIN, BULLET_DAMAGE_MAX), BULLET_LIFETIME)
+	bullet.initialize(BULLET_SPEED, randi_range(BULLET_DAMAGE_MIN, BULLET_DAMAGE_MAX), BULLET_LIFETIME, self)
 	
 	get_tree().root.add_child(bullet)
 	bullet.global_transform = _muzzle.global_transform

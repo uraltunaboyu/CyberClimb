@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
 @export var death_overlay_scene: PackedScene
+
+@onready var damage_indicator_look_at = $DamageIndicatorLookAt
 # stats
 var maxHp : int = PlayerState.maxHp
 var curHp = maxHp
@@ -58,10 +60,6 @@ func _input(event):
 	if Debug.DEBUG_MODE and event is InputEventKey:
 		if Input.is_key_label_pressed(KEY_K):
 			die()
-		if Input.is_key_label_pressed(KEY_P):
-			take_damage(75)
-		if Input.is_key_label_pressed(KEY_O):
-			add_health(75)
 
 func _lean(delta, lean_right: bool):
 	var rotateAngle: float = LEAN_AMOUNT_RAD * movementController.get_lean_direction()
@@ -74,7 +72,7 @@ func _lean(delta, lean_right: bool):
 	pivotPoint.global_rotation.z = newRotation
 
 # called when an enemy damages us
-func take_damage (damage):
+func take_damage (damage, enemy):
 	curHp -= damage
 	PlayerState.hp = curHp
 	if curHp <= 0:
@@ -82,6 +80,8 @@ func take_damage (damage):
 	elif not $HitAudio.is_playing():
 		$HitAudio.play()
 	
+	damage_indicator_look_at.look_at(enemy.global_transform.origin, Vector3.UP)
+	UIController.point_enemy_direction(-damage_indicator_look_at.rotation.y)
 	UIController.flash_at_low_health()
 		
 func die():

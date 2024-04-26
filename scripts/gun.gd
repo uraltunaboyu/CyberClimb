@@ -20,7 +20,7 @@ func add_ammo_count(count):
 	
 func make_bullet():
 		var bullet = bulletScene.instantiate()
-		bullet.initialize(bullet_speed, randi_range(bullet_damage_min, bullet_damage_max), bullet_life)
+		bullet.initialize(bullet_speed, randi_range(bullet_damage_min, bullet_damage_max), bullet_life, null)
 		
 		get_tree().root.add_child(bullet)
 		bullet.global_transform = muzzle.global_transform
