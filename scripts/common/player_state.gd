@@ -1,21 +1,8 @@
 extends Node
 
-enum UpgradeName {
-	BASIC_HP,
-	BASIC_STAMINA
-}
-
-var UPGRADES = {
-	UpgradeName.BASIC_HP : func(): hp += 25,
-	UpgradeName.BASIC_STAMINA : func(): stamina += 25
-}
-
-const COST = {
-	UpgradeName.BASIC_HP : 50,
-	UpgradeName.BASIC_STAMINA : 50
-}
-
-const string_to_upgrade = {"HP" : UpgradeName.BASIC_HP, "Stamina" : UpgradeName.BASIC_STAMINA}
+const Upgrades = preload("res://scripts/common/upgrade_attributes.gd")
+const UpgradeName = Upgrades.UpgradeName
+var UPGRADES = Upgrades.UPGRADES
 
 var hp: int = 100:
 	set(val):
@@ -63,16 +50,18 @@ var glide_speed_mult: float = 1.15
 
 var _upgrades: Array[UpgradeName] = []
 
+func purchase(upgrade_name: UpgradeName):
+	var upgrade = UPGRADES[upgrade_name]
+	if credits >= upgrade.cost:
+		add_upgrade(upgrade_name)
+
 func add_upgrade(name: UpgradeName):
 	_upgrades.append(name)
-	UPGRADES[name].call()
+	UPGRADES[name].callback.call()
 	
 func apply_all_upgrades():
 	for upgrade in _upgrades:
-		UPGRADES[upgrade].call()
-
-func upgrade_from_string(upgrade: String) -> UpgradeName:
-	return string_to_upgrade[upgrade]
+		UPGRADES[upgrade].callback.call()
 
 func reset():
 	hp = maxHp
