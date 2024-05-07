@@ -36,6 +36,7 @@ var stamina: float = 100.0:
 var maxStamina: float = 100.0:
 	set(val):
 		UIController.set_max_stamina(val)
+		stamina += val - maxStamina
 		maxStamina = val
 var ammo = null:
 	set(val):
