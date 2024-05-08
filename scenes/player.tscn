@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ygq2q8lm2ubk"]
+[gd_scene load_steps=8 format=3 uid="uid://ygq2q8lm2ubk"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_obko2"]
 [ext_resource type="PackedScene" uid="uid://dlgnshjne4lpw" path="res://scenes/death_overlay.tscn" id="2_txvtr"]
 [ext_resource type="Script" path="res://scripts/player/gun_slot.gd" id="2_vdmnf"]
 [ext_resource type="Script" path="res://scripts/player/movement_controller.gd" id="3_md0ua"]
 [ext_resource type="Script" path="res://scripts/player/interact_ray.gd" id="4_k452p"]
+[ext_resource type="AudioStream" uid="uid://dfs2qn4ojeabc" path="res://audio/audio_effects/player_damage_sound.wav" id="6_0un1b"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.489975
@@ -43,3 +44,8 @@ script = ExtResource("2_vdmnf")
 [node name="InteractRay" type="RayCast3D" parent="PivotPoint/Camera3D"]
 target_position = Vector3(0, 0, -4)
 script = ExtResource("4_k452p")
+
+[node name="HitAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_0un1b")
+
+[node name="DamageIndicatorLookAt" type="Node3D" parent="."]

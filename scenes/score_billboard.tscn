@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxidry460736x"]
+
+[ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="1_tb8al"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ko356"]
+size = Vector3(4, 3, 0.2)
+
+[node name="ScoreBillboard" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("BoxMesh_ko356")
+metadata/_edit_group_ = true
+
+[node name="ScoreTextTitle" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0163755, 1.20381, 0.154689)
+text = "Score Board
+Time       Enemies Slain       Floors Climbed 	      Score"
+font = ExtResource("1_tb8al")
+
+[node name="ScoreText" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.452919, 0.947951, 0.154689)
+text = "5 20 32"
+vertical_alignment = 0

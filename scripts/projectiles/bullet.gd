@@ -2,10 +2,12 @@ class_name Bullet extends Area3D
 
 var speed : float = 30.0
 var damage : int = 1
+var shooter
 
-func initialize(bullet_speed, bullet_damage, lifetime):
+func initialize(bullet_speed, bullet_damage, lifetime, bullet_shooter):
 	speed = bullet_speed
 	damage = bullet_damage
+	shooter = bullet_shooter
 	var life : Timer = Timer.new()
 	add_child(life)
 	life.wait_time = lifetime
@@ -31,4 +33,4 @@ func _on_Bullet_body_entered(body):
 		if body.is_in_group("Enemy"):
 			body.take_damage(damage, position)
 		else:
-			body.take_damage(damage)
+			body.take_damage(damage, shooter)

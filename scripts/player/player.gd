@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
 @export var death_overlay_scene: PackedScene
+
+@onready var damage_indicator_look_at = $DamageIndicatorLookAt
 # stats
 var maxHp : int = PlayerState.maxHp
 var curHp = maxHp
@@ -44,6 +46,7 @@ func _physics_process(delta):
 	
 	_lean(delta, false)
 	move_and_slide()
+	primarySlot.weapon_bob(velocity.length(), delta)
 
 func _process(delta):
 	if _disabled: return
@@ -70,13 +73,18 @@ func _lean(delta, lean_right: bool):
 	pivotPoint.global_rotation.z = newRotation
 
 # called when an enemy damages us
-func take_damage (damage):
+func take_damage (damage, enemy):
 	curHp -= damage
 	PlayerState.hp = curHp
-	
 	if curHp <= 0:
 		die()
-
+	elif not $HitAudio.is_playing():
+		$HitAudio.play()
+	
+	damage_indicator_look_at.look_at(enemy.global_transform.origin, Vector3.UP)
+	UIController.point_enemy_direction(-damage_indicator_look_at.rotation.y)
+	UIController.flash_at_low_health()
+		
 func die():
 	_disabled = true
 	var death_overlay = death_overlay_scene.instantiate()
@@ -95,6 +103,7 @@ func add_health(amount):
 		curHp = maxHp
 		
 	PlayerState.hp = curHp
+	UIController.flash_at_low_health()
 	
 func add_ammo(amount):
 	if primarySlot.equipped_gun:

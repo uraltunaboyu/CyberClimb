@@ -57,7 +57,7 @@ func angle_to_obj(obj_position:Vector3):
 	
 func make_bullet():
 	var bullet = bulletScene.instantiate()
-	bullet.initialize(bullet_speed, randi_range(bullet_damage_min, bullet_damage_max), bullet_life)
+	bullet.initialize(bullet_speed, randi_range(bullet_damage_min, bullet_damage_max), bullet_life, self)
 	
 	get_tree().root.add_child(bullet)
 	bullet.global_transform = barrel.global_transform
@@ -93,6 +93,7 @@ func die():
 	set_physics_process(false)
 	find_child(collider_name).queue_free()
 	emit_signal("dead")
+	GameState.enemies_killed += 1
 	ap.stop()
 	if death_ap and death_ap.has_animation("Death"):
 		death_ap.play("Death")

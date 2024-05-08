@@ -6,8 +6,8 @@ enum UpgradeName {
 }
 
 var UPGRADES = {
-	UpgradeName.BASIC_HP : func(): hp += 25,
-	UpgradeName.BASIC_STAMINA : func(): stamina += 25
+	UpgradeName.BASIC_HP : func(): maxHp += 25,
+	UpgradeName.BASIC_STAMINA : func(): maxStamina += 25
 }
 
 const COST = {
@@ -19,11 +19,15 @@ const string_to_upgrade = {"HP" : UpgradeName.BASIC_HP, "Stamina" : UpgradeName.
 
 var hp: int = 100:
 	set(val):
-		UIController.set_cur_hp(hp)
+		UIController.set_cur_hp(val)
 		hp = val
 var maxHp: int = 100:
 	set(val):
-		UIController.set_max_hp(hp)
+		UIController.set_max_hp(val)
+		var increase = val - maxHp
+		if increase > 0:
+			hp += increase
+			
 		maxHp = val
 var stamina: float = 100.0:
 	set(val):
@@ -32,12 +36,14 @@ var stamina: float = 100.0:
 var maxStamina: float = 100.0:
 	set(val):
 		UIController.set_max_stamina(val)
+		stamina += val - maxStamina
 		maxStamina = val
 var ammo = null:
 	set(val):
-		UIController.set_ammo(val)
+		UIController.set_ammo(ammo, val)
 		ammo = val
 var credits = 100
+var credits_earned = 0
 var equipped_weapon: WeaponAttributes.Name = WeaponAttributes.Name.NONE
 
 var move_speed : float = 5.0
