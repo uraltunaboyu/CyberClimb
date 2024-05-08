@@ -28,13 +28,18 @@ var credits = 100
 var equipped_weapon: WeaponAttributes.Name = WeaponAttributes.Name.NONE
 
 var move_speed : float = 5.0
+
+var wallrun_enabled: bool = true
 var wallrun_cost : float = 0.3
+
 
 var jump_cooldown = 1.0
 var jump_cost: float = 20.0
 var double_jump_cost: float = 33.0
 var jump_force : float = 5
 
+var airdash_enabled: bool = true
+var dash_enabled: bool = true
 var dash_speed: float = 9.0
 var dash_duration: float = 1.5
 var dash_cooldown_duration = 1.0
@@ -44,6 +49,7 @@ var stamina_recovery = 20.0
 var recovery_delay = 1.0
 var recovery_rate = 0.5
 
+var glide_enabled : bool = true
 var glide_gravity: float = 4
 var glide_speed_mult: float = 1.15
 

@@ -122,6 +122,8 @@ func is_dash_pressed() -> bool:
 	return Input.is_action_just_pressed("dash")
 	
 func can_wallrun() -> bool:
+	if PlayerState.wallrun_enabled == false:
+		return false
 	if not (playerRef.is_on_wall_only() and _is_far_from_floor()):
 		return false
 	if get_horizontal_magnitude(vel) < WALLRUN_SPEED_THRESHOLD:
@@ -153,6 +155,8 @@ func start_dash():
 	stamina -= PlayerState.dash_cost
 	
 func start_airdash():
+	if PlayerState.airdash_enabled == false:
+		return
 	# might change later
 	start_dash()
 	
@@ -296,7 +300,7 @@ func poll(velocity: Vector3):
 					currentState = MovementState.MOVING
 			elif is_dash_pressed() and can_dash():
 				start_airdash()
-			elif is_jump_pressed():
+			elif is_jump_pressed() and PlayerState.glide_enabled:
 				currentState = MovementState.GLIDING
 			elif can_wallrun():
 				currentState = MovementState.WALLRUNNING
@@ -310,7 +314,7 @@ func poll(velocity: Vector3):
 				start_airdash()
 			elif can_wallrun():
 				currentState = MovementState.WALLRUNNING
-			elif is_jump_pressed():
+			elif is_jump_pressed() and PlayerState.glide_enabled:
 				currentState = MovementState.GLIDING
 		MovementState.DASHING:
 			if !dashReady:

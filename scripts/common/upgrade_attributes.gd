@@ -14,7 +14,10 @@ class Upgrade:
 
 enum UpgradeName {
 	BASIC_HP,
-	BASIC_STAMINA
+	BASIC_STAMINA,
+	WALLRUN,
+	GLIDE,
+	AIRDASH
 }
 
 static var UPGRADES = {
@@ -28,9 +31,25 @@ static var UPGRADES = {
 		"Increase the amount of lungs you have by 20%! (Extra ribs may be required)",
 		50,
 		func(): PlayerState.stamina += 25),
+	UpgradeName.WALLRUN : Upgrade.new(
+		"Wallrun",
+		"Your feet are sticky and you are now able to run on walls!",
+		0.3,
+		func(): PlayerState.wallrun_enabled = true),
+	UpgradeName.GLIDE : Upgrade.new(
+		"Glide",
+		"Your grew wings and!you can now glide!",
+		0,
+		func(): PlayerState.glide_enabled = true),
+	UpgradeName.AIRDASH : Upgrade.new(
+		"Airdash",
+		"Your farts are now strong enough to propel you midair!",
+		0,
+		func(): PlayerState.glide_enabled = true),
 }
 
-const string_to_upgrade = {"HP" : UpgradeName.BASIC_HP, "Stamina" : UpgradeName.BASIC_STAMINA}
+const string_to_upgrade = {"HP" : UpgradeName.BASIC_HP, "Stamina" : UpgradeName.BASIC_STAMINA, 
+"Wallrun" : UpgradeName.WALLRUN, "Glide" : UpgradeName.GLIDE, "Airdash" : UpgradeName.AIRDASH}
 
 func upgrade_from_string(upgrade: String) -> UpgradeName:
 	return string_to_upgrade[upgrade]
