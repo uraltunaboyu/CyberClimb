@@ -10,7 +10,7 @@ func _initialize():
 	set_cur_hp(PlayerState.hp)
 	set_max_stamina(PlayerState.maxStamina)
 	set_cur_stamina(PlayerState.stamina)
-	set_ammo(PlayerState.ammo)
+	set_ammo(0, PlayerState.ammo)
 
 var all_health_tween: Tween
 var all_stamina_tween: Tween
@@ -39,14 +39,21 @@ func set_max_stamina(val):
 	all_stamina_tween = get_tree().create_tween()
 	all_stamina_tween.tween_property(_ui_node.staminaBar, "size:x", val * 2, 1)
 	
-func set_ammo(val):
+func set_ammo(prev_val, val):
 	if not _ui_node: return
 	if val:
 		_ui_node.ammoText.visible = true
-		_ui_node.ammoText.text = "Ammo: " + str(val)
+		var ammo_tween = get_tree().create_tween()
+		if prev_val:
+			ammo_tween.tween_method(set_ammo_value, prev_val, val, abs(val - prev_val) *.04)
+		else:
+			set_ammo_value(val)
 	else:
 		_ui_node.ammoText.visible = false
 
+func set_ammo_value(val):
+	_ui_node.ammoText.text = "Ammo: " + str(val)
+	
 func set_movement_state(val):
 	if Debug.DEBUG_MODE:
 		_ui_node.movementStateText.text = val

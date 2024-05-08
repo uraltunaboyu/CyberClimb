@@ -191,7 +191,7 @@ func _on_player_enter_saw(body):
 func die():
 	Log.Info("Boss is dead")
 	_disabled = true
-	PlayerState.credits += 100
+	PlayerState.credits_earned += 100
 	GameState.enemies_killed += 1
 	GameState.boss_dead = true
 	var death_overlay = death_overlay_scene.instantiate()

@@ -42,5 +42,5 @@ func _on_enemy_dead():
 
 func _next_room(reward):
 	if level_complete:
-		PlayerState.credits += 20
+		PlayerState.credits_earned += 20
 		GameState.room_transition(reward)
