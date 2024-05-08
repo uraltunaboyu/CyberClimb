@@ -33,6 +33,8 @@ func take_damage(damage:int, pos):
 	get_node("..").add_child(dmgTxt)
 	dmgTxt.set_and_animate(damage, hp_chunk, pos)
 	
+	display_damage(cur_health)
+	
 	if cur_health <= 0:
 		die()
 	
@@ -60,3 +62,6 @@ func die():
 	
 func remove():
 	queue_free()
+	
+func display_damage(new_health):
+	pass

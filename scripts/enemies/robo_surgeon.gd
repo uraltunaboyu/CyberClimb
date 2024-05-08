@@ -51,6 +51,7 @@ var _remaining_mag: int = MAGAZINE_SIZE:
 			
 var _disabled = false
 
+@onready var _health_bar: TextureProgressBar = get_tree().current_scene.find_child("BossHealth")
 @onready var _player_ref: CharacterBody3D = get_tree().get_first_node_in_group("Player")
 # TODO replace with actual syringe scene
 @onready var syringe_scene = preload("res://scenes/projectiles/bullet.tscn")
@@ -80,6 +81,8 @@ func _ready():
 	
 	max_health = 500
 	cur_health = max_health
+	_health_bar.max_value = max_health
+	_health_bar.value = cur_health
 	_state = BossState.IDLE
 	
 func _process(delta):
@@ -198,3 +201,6 @@ func die():
 	death_overlay.set_text("Victory!")
 	death_overlay.set_callback(GameState.reset)
 	add_sibling(death_overlay)
+
+func display_damage(new_health):
+	get_tree().create_tween().tween_property(_health_bar, "value", new_health, 1)
