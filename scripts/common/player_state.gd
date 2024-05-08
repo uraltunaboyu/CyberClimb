@@ -6,8 +6,8 @@ enum UpgradeName {
 }
 
 var UPGRADES = {
-	UpgradeName.BASIC_HP : func(): hp += 25,
-	UpgradeName.BASIC_STAMINA : func(): stamina += 25
+	UpgradeName.BASIC_HP : func(): maxHp += 25,
+	UpgradeName.BASIC_STAMINA : func(): maxStamina += 25
 }
 
 const COST = {
