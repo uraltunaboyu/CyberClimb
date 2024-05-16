@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ct4dek63v5j5j"]
+[gd_scene load_steps=5 format=3 uid="uid://ct4dek63v5j5j"]
 
 [ext_resource type="Script" path="res://scripts/credits.gd" id="1_3jpn6"]
-[ext_resource type="Texture2D" uid="uid://c8wg6ovme20oa" path="res://images/computer_pyramid_just_title.png" id="2_m5rnk"]
+[ext_resource type="Texture2D" uid="uid://cyvrer5bqox0n" path="res://images/computer_pyramid_just_title.png" id="2_m5rnk"]
 [ext_resource type="PackedScene" uid="uid://da0bl5cu7lpx0" path="res://scenes/main_menu.tscn" id="3_2aqof"]
+[ext_resource type="FontFile" uid="uid://xa4awmhc08ww" path="res://font/cyber-roman.ttf" id="3_6xf6a"]
 
 [node name="credits" type="Control"]
 layout_mode = 3
@@ -16,6 +17,7 @@ creditsFile = "res://FINALCREDITS.txt"
 speed = 120
 titleImage = ExtResource("2_m5rnk")
 loopVideo = false
+customFont = ExtResource("3_6xf6a")
 nextScene = ExtResource("3_2aqof")
 destroyOnEnd = true
 
