@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://d02juuvp2nwss"]
+[gd_scene load_steps=11 format=3 uid="uid://d02juuvp2nwss"]
 
 [ext_resource type="Script" path="res://scripts/hub.gd" id="1_lwoju"]
 [ext_resource type="PackedScene" uid="uid://cem0yrawhwf00" path="res://scenes/ui.tscn" id="2_0juo0"]
+[ext_resource type="PackedScene" uid="uid://djcbfusstvmp8" path="res://scenes/Ammo.tscn" id="2_gpios"]
 [ext_resource type="FontFile" path="res://font/new_dynamicfont.tres" id="3_2anbs"]
 [ext_resource type="PackedScene" uid="uid://ygq2q8lm2ubk" path="res://scenes/player.tscn" id="4_ibnnl"]
 [ext_resource type="PackedScene" uid="uid://drwej6dc1hk2i" path="res://scenes/button.tscn" id="5_wk8m3"]
@@ -52,6 +53,9 @@ light_color = Color(0.231373, 0.615686, 1, 1)
 light_energy = 4.49
 
 [node name="HubLevel" parent="." instance=ExtResource("7_h2jr2")]
+
+[node name="Ammo" parent="HubLevel" instance=ExtResource("2_gpios")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.81262, 9.20535)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4345, 12.1332, 4.83333)

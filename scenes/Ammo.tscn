@@ -1,9 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://djcbfusstvmp8"]
+[gd_scene load_steps=4 format=3 uid="uid://djcbfusstvmp8"]
 
-[ext_resource type="PackedScene" uid="uid://g3uharbjdoim" path="res://models/weapons/assault_rifle.glb" id="1_722eh"]
+[ext_resource type="Script" path="res://scenes/Ammo.gd" id="1_5jptu"]
+[ext_resource type="ArrayMesh" uid="uid://chmappnu2yccl" path="res://models/weapons/bullet.obj" id="2_st4n8"]
 
-[node name="Node3D" type="RigidBody3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_21285"]
+size = Vector3(0.428295, 0.640015, 0.504975)
+
+[node name="Ammo" type="Area3D"]
+collision_mask = 3
+script = ExtResource("1_5jptu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00616443, -0.0336155)
+shape = SubResource("BoxShape3D_21285")
+disabled = true
 
-[node name="ammo" parent="." instance=ExtResource("1_722eh")]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 0, 0)
+mesh = ExtResource("2_st4n8")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
