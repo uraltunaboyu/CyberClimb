@@ -99,6 +99,9 @@ func add_health(amount):
 func add_ammo(amount):
 	if primarySlot.equipped_gun:
 		primarySlot.add_ammo(int(amount))
+		
+func add_ammo_from_pickup():
+	add_ammo(30)
 	
 func add_weapon(weapon_name):
 	PlayerState.equipped_weapon = weapon_name
@@ -115,3 +118,9 @@ func load_state():
 	curHp = PlayerState.hp
 	maxHp = PlayerState.maxHp
 	primarySlot.load_state()
+
+func _on_rigid_body_3d_body_entered(body):
+	print("here")
+	if body.filename == "res://scenes/Ammo.tscn":
+		add_ammo_from_pickup()
+		body.queue_free()

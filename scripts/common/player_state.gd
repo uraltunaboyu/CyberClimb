@@ -1,21 +1,8 @@
 extends Node
 
-enum UpgradeName {
-	BASIC_HP,
-	BASIC_STAMINA
-}
-
-var UPGRADES = {
-	UpgradeName.BASIC_HP : func(): hp += 25,
-	UpgradeName.BASIC_STAMINA : func(): stamina += 25
-}
-
-const COST = {
-	UpgradeName.BASIC_HP : 50,
-	UpgradeName.BASIC_STAMINA : 50
-}
-
-const string_to_upgrade = {"HP" : UpgradeName.BASIC_HP, "Stamina" : UpgradeName.BASIC_STAMINA}
+const Upgrades = preload("res://scripts/common/upgrade_attributes.gd")
+const UpgradeName = Upgrades.UpgradeName
+var UPGRADES = Upgrades.UPGRADES
 
 var hp: int = 100:
 	set(val):
@@ -25,7 +12,7 @@ var maxHp: int = 100:
 	set(val):
 		UIController.set_max_hp(hp)
 		maxHp = val
-var stamina: float = 100.0:
+var stamina: float = 500.0:
 	set(val):
 		UIController.set_cur_stamina(val)
 		stamina = val
@@ -41,13 +28,18 @@ var credits = 100
 var equipped_weapon: WeaponAttributes.Name = WeaponAttributes.Name.NONE
 
 var move_speed : float = 5.0
+
+var wallrun_enabled: bool = false
 var wallrun_cost : float = 0.3
+
 
 var jump_cooldown = 1.0
 var jump_cost: float = 20.0
 var double_jump_cost: float = 33.0
 var jump_force : float = 5
 
+var airdash_enabled: bool = true
+var dash_enabled: bool = true
 var dash_speed: float = 9.0
 var dash_duration: float = 1.5
 var dash_cooldown_duration = 1.0
@@ -57,22 +49,27 @@ var stamina_recovery = 20.0
 var recovery_delay = 1.0
 var recovery_rate = 0.5
 
-var glide_gravity: float = 4
-var glide_speed_mult: float = 1.15
+var double_jump_enabled : bool = false
+
+#var glide_enabled : bool = true
+#var glide_gravity: float = 4
+#var glide_speed_mult: float = 1.15
 
 
 var _upgrades: Array[UpgradeName] = []
 
+func purchase(upgrade_name: UpgradeName):
+	var upgrade = UPGRADES[upgrade_name]
+	if credits >= upgrade.cost:
+		add_upgrade(upgrade_name)
+
 func add_upgrade(name: UpgradeName):
 	_upgrades.append(name)
-	UPGRADES[name].call()
+	UPGRADES[name].callback.call()
 	
 func apply_all_upgrades():
 	for upgrade in _upgrades:
-		UPGRADES[upgrade].call()
-
-func upgrade_from_string(upgrade: String) -> UpgradeName:
-	return string_to_upgrade[upgrade]
+		UPGRADES[upgrade].callback.call()
 
 func reset():
 	hp = maxHp
