@@ -12,7 +12,7 @@ var maxHp: int = 100:
 	set(val):
 		UIController.set_max_hp(hp)
 		maxHp = val
-var stamina: float = 100.0:
+var stamina: float = 500.0:
 	set(val):
 		UIController.set_cur_stamina(val)
 		stamina = val
@@ -29,7 +29,7 @@ var equipped_weapon: WeaponAttributes.Name = WeaponAttributes.Name.NONE
 
 var move_speed : float = 5.0
 
-var wallrun_enabled: bool = true
+var wallrun_enabled: bool = false
 var wallrun_cost : float = 0.3
 
 
@@ -49,9 +49,11 @@ var stamina_recovery = 20.0
 var recovery_delay = 1.0
 var recovery_rate = 0.5
 
-var glide_enabled : bool = true
-var glide_gravity: float = 4
-var glide_speed_mult: float = 1.15
+var double_jump_enabled : bool = false
+
+#var glide_enabled : bool = true
+#var glide_gravity: float = 4
+#var glide_speed_mult: float = 1.15
 
 
 var _upgrades: Array[UpgradeName] = []

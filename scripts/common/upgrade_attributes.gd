@@ -16,8 +16,7 @@ enum UpgradeName {
 	BASIC_HP,
 	BASIC_STAMINA,
 	WALLRUN,
-	GLIDE,
-	AIRDASH
+	DOUBLEJUMP
 }
 
 static var UPGRADES = {
@@ -36,20 +35,15 @@ static var UPGRADES = {
 		"Your feet are sticky and you are now able to run on walls!",
 		0.3,
 		func(): PlayerState.wallrun_enabled = true),
-	UpgradeName.GLIDE : Upgrade.new(
-		"Glide",
-		"Your grew wings and!you can now glide!",
-		0,
-		func(): PlayerState.glide_enabled = true),
-	UpgradeName.AIRDASH : Upgrade.new(
-		"Airdash",
+	UpgradeName.DOUBLEJUMP : Upgrade.new(
+		"Doublejump",
 		"Your farts are now strong enough to propel you midair!",
 		0,
-		func(): PlayerState.glide_enabled = true),
+		func(): PlayerState.double_jump_enabled = true),
 }
 
 const string_to_upgrade = {"HP" : UpgradeName.BASIC_HP, "Stamina" : UpgradeName.BASIC_STAMINA, 
-"Wallrun" : UpgradeName.WALLRUN, "Glide" : UpgradeName.GLIDE, "Airdash" : UpgradeName.AIRDASH}
+"Wallrun" : UpgradeName.WALLRUN, "Doublejump" : UpgradeName.DOUBLEJUMP}
 
 func upgrade_from_string(upgrade: String) -> UpgradeName:
 	return string_to_upgrade[upgrade]

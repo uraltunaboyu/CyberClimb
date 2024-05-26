@@ -6,9 +6,10 @@ enum MovementState {
 	DASHING,
 	JUMPING,
 	FALLING,
-	GLIDING,
+	#GLIDING,
+	DOUBLEJUMPING,
 	AIRDASHING,
-	WALLRUNNING
+	WALLRUNNING,
 }
 
 const MOVEMENT_STATE_NAMES = {
@@ -17,7 +18,8 @@ const MOVEMENT_STATE_NAMES = {
 	MovementState.DASHING : "DASHING",
 	MovementState.JUMPING : "JUMPING",
 	MovementState.FALLING : "FALLING",
-	MovementState.GLIDING : "GLIDING",
+	#MovementState.GLIDING : "GLIDING",
+	MovementState.DOUBLEJUMPING : "DOUBLEJUMPING",
 	MovementState.AIRDASHING : "AIRDASHING",
 	MovementState.WALLRUNNING : "WALLRUNNING"
 }
@@ -31,6 +33,7 @@ var wallDirection: int
 
 var jumpTimer: Timer
 var jumpReady = true
+var doublejumpReady = true
 
 # dash
 var dashReady = true
@@ -146,6 +149,9 @@ func can_dash() -> bool:
 func can_jump() -> bool:
 	return jumpReady and stamina >= PlayerState.jump_cost
 	
+func can_doublejump() -> bool:
+	return doublejumpReady and stamina >= PlayerState.jump_cost	
+	
 func start_dash_cooldown():
 	dashReady = false
 	dashCooldown.start()
@@ -217,24 +223,37 @@ func calculate_movement_vector(delta) -> Vector3:
 		vel.z = relativeDir.z * PlayerState.dash_speed
 	
 	# apply gravity. handles wether it is glide_gravity or regular
-	if currentState == MovementState.FALLING or currentState == MovementState.JUMPING:
+	if (currentState == MovementState.FALLING 
+		or currentState == MovementState.JUMPING 
+		or currentState == MovementState.DOUBLEJUMPING):
 		vel.y -= gravity * delta
 	elif currentState == MovementState.DASHING:
 		vel.y -= gravity * delta / 2
-	elif currentState == MovementState.GLIDING:
-		vel.y -= PlayerState.glide_gravity * delta
-		vel.x = vel.x * 2
-		vel.z = vel.z * 2
+	#elif currentState == MovementState.GLIDING:
+		#vel.y -= PlayerState.glide_gravity * delta
+		#vel.x = vel.x * 2
+		#vel.z = vel.z * 2
 	elif currentState == MovementState.WALLRUNNING:
 		vel.y = 0
 		
-	if currentState == MovementState.GLIDING:
-		vel.x = vel.x * PlayerState.glide_speed_mult
-		vel.z = vel.z * PlayerState.glide_speed_mult
+	#if currentState == MovementState.GLIDING:
+		#vel.x = vel.x * PlayerState.glide_speed_mult
+		#vel.z = vel.z * PlayerState.glide_speed_mult
 		
-	if prevState != MovementState.JUMPING and currentState == MovementState.JUMPING:
+	if (prevState != MovementState.JUMPING and
+	prevState != MovementState.FALLING 
+	 and currentState == MovementState.JUMPING):
 		vel.y = PlayerState.jump_force
 		jumpReady = false
+		doublejumpReady = true
+		jumpTimer.start()
+		
+	if ((prevState == MovementState.JUMPING or prevState == MovementState.FALLING)
+	 and jumpReady == false and doublejumpReady == true 
+	 and currentState == MovementState.DOUBLEJUMPING
+	 and PlayerState.double_jump_enabled):
+		doublejumpReady = false
+		vel.y = PlayerState.jump_force
 		jumpTimer.start()
 		
 	if prevState == MovementState.WALLRUNNING && currentState != MovementState.WALLRUNNING:
@@ -300,8 +319,8 @@ func poll(velocity: Vector3):
 					currentState = MovementState.MOVING
 			elif is_dash_pressed() and can_dash():
 				start_airdash()
-			elif is_jump_pressed() and PlayerState.glide_enabled:
-				currentState = MovementState.GLIDING
+			elif is_jump_pressed() and can_doublejump():
+				currentState = MovementState.DOUBLEJUMPING
 			elif can_wallrun():
 				currentState = MovementState.WALLRUNNING
 		MovementState.FALLING:
@@ -314,8 +333,8 @@ func poll(velocity: Vector3):
 				start_airdash()
 			elif can_wallrun():
 				currentState = MovementState.WALLRUNNING
-			elif is_jump_pressed() and PlayerState.glide_enabled:
-				currentState = MovementState.GLIDING
+			elif is_jump_pressed() and can_doublejump():
+				currentState = MovementState.DOUBLEJUMPING
 		MovementState.DASHING:
 			if !dashReady:
 				if get_horizontal_magnitude(velocity) == 0:
@@ -337,12 +356,16 @@ func poll(velocity: Vector3):
 					currentState = MovementState.FALLING
 			elif can_wallrun():
 				currentState = MovementState.WALLRUNNING
-		MovementState.GLIDING:
+		MovementState.DOUBLEJUMPING:
+			if velocity.y <= 0:
+				currentState = MovementState.FALLING
 			if playerRef.is_on_floor():
 				if get_horizontal_magnitude(velocity) == 0:
 					currentState = MovementState.STOPPED
 				else:
 					currentState = MovementState.MOVING
+			elif is_dash_pressed() and can_dash():
+				start_airdash()
 			elif can_wallrun():
 				currentState = MovementState.WALLRUNNING
 		MovementState.WALLRUNNING:

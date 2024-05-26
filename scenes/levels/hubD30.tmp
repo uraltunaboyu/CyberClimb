@@ -98,7 +98,7 @@ prompt_message = "Health Upgrade (50 Credits)"
 target_scene = "HP"
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Button"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.755592, 0.865006, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.865006, 0)
 light_color = Color(1, 0.231373, 0.231373, 1)
 light_energy = 4.49
 
@@ -115,31 +115,9 @@ light_energy = 4.49
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("9_aessc")
 
-[node name="Button6" parent="." instance=ExtResource("5_wk8m3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5581, 4.56054, 17.6749)
-prompt_message = "Unlock Wallrun"
-target_scene = "Wallrun"
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="Button6"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.892024, 0.0350676)
-light_color = Color(0.345098, 1, 0.231373, 1)
-light_energy = 4.49
-
-[node name="Button7" parent="." instance=ExtResource("5_wk8m3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5581, 4.56054, 15.0049)
-prompt_message = "Unlock Double Jump"
-target_scene = "Doublejump"
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="Button7"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.892024, 0.0350676)
-light_color = Color(0.345098, 1, 0.231373, 1)
-light_energy = 4.49
-
 [connection signal="interacted" from="AssaultRiflePedestal" to="." method="purchase_weapon"]
 [connection signal="interacted" from="BurstRiflePedestal" to="." method="purchase_weapon"]
 [connection signal="interacted" from="PistolPedestal" to="." method="purchase_weapon"]
 [connection signal="interacted" from="ShotgunPedestal" to="." method="purchase_weapon"]
 [connection signal="interacted" from="Button" to="." method="purchase_upgrade"]
 [connection signal="interacted" from="Button2" to="." method="purchase_upgrade"]
-[connection signal="interacted" from="Button6" to="." method="purchase_upgrade"]
-[connection signal="interacted" from="Button7" to="." method="purchase_upgrade"]

@@ -25,8 +25,8 @@ func purchase_weapon(name):
 		_player.add_weapon(weapon)
 
 func purchase_upgrade(name):
-	var upgrade = PlayerState.upgrade_from_string(name)
+	var upgrade = Upgrades.string_to_upgrade[name]
 	Log.Info("Attempting to purchase %s" % name)
-	if credits >= PlayerState.COST[upgrade]:
-		credits -= PlayerState.COST[upgrade]
-		_player.add_upgrade(upgrade)
+	#if credits >= PlayerState.COST[upgrade]:
+		#credits -= PlayerState.COST[upgrade]
+	_player.add_upgrade(upgrade)
